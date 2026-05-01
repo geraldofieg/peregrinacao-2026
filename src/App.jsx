@@ -28,13 +28,9 @@ const CHECKLIST_ITEMS = [
   { id:"seguro",     text:"Contratar Seguro Viagem com cobertura Schengen",                urgente: true  },
   { id:"euros",      text:"Comprar Euros em espécie para despesas pessoais",               urgente: false },
   { id:"banco",      text:"Avisar o banco sobre uso do cartão no exterior",                urgente: false },
-  { id:"cartao",     text:"Verificar limite e validade do cartão de crédito internacional", urgente: false },
-  { id:"vacinas",    text:"Verificar vacinas recomendadas para Europa",                    urgente: false },
   { id:"adaptador",  text:"Comprar adaptador de tomada (Europa — Tipo C/F)",               urgente: false },
   { id:"remedio",    text:"Separar medicamentos de uso contínuo + receitas médicas",       urgente: false },
   { id:"dados",      text:"Confirmar dados pessoais com a agência Beth Viagens",           urgente: false },
-  { id:"apps",       text:"Instalar aplicativos: tradutor offline, Google Maps, WhatsApp", urgente: false },
-  { id:"voucher",    text:"Receber vouchers da viagem (enviados 2 dias antes do embarque)", urgente: false },
 ];
 
 // ═══════════════════════════════════════════════════════════
