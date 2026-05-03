@@ -1,6 +1,57 @@
 import { useState, useEffect } from "react";
 
 // ═══════════════════════════════════════════════════════════
+//  HOTÉIS DA VIAGEM
+//  ⚠️ Substitua os campos "address" e "mapsQuery" pelos
+//  endereços reais quando forem confirmados pela agência.
+//  O campo "mapsQuery" é o que abre o Google Maps —
+//  pode ser o endereço completo ou o nome do hotel.
+// ═══════════════════════════════════════════════════════════
+const HOTELS = [
+  {
+    city: "Lisboa 🇵🇹",
+    checkIn:  "2026-10-31",
+    checkOut: "2026-11-03",   // último dia hospedado (03/Nov saem de manhã)
+    name: "Hotel Lisboa ★★★★",
+    address: "A confirmar — aguardando informação da agência",
+    mapsQuery: "",             // ← coloque aqui o endereço ou nome do hotel quando souber
+    icon: "🇵🇹",
+    color: "#1A2B5F",
+  },
+  {
+    city: "Roma 🇮🇹",
+    checkIn:  "2026-11-03",
+    checkOut: "2026-11-06",
+    name: "Hotel Roma ★★★★",
+    address: "A confirmar — aguardando informação da agência",
+    mapsQuery: "",
+    icon: "🇮🇹",
+    color: "#1A2B5F",
+  },
+  {
+    city: "Assis ⛪",
+    checkIn:  "2026-11-06",
+    checkOut: "2026-11-11",
+    name: "Convento de Assis",
+    address: "A confirmar — aguardando informação da agência",
+    mapsQuery: "",
+    icon: "⛪",
+    color: "#1A2B5F",
+  },
+];
+
+// Retorna o hotel atual com base na data de hoje
+function getCurrentHotel() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return HOTELS.find(h => {
+    const ci = new Date(h.checkIn  + "T00:00:00");
+    const co = new Date(h.checkOut + "T00:00:00");
+    return today >= ci && today <= co;
+  }) || null;
+}
+
+// ═══════════════════════════════════════════════════════════
 //  ROTEIRO
 // ═══════════════════════════════════════════════════════════
 const ITINERARY = [
@@ -20,101 +71,55 @@ const ITINERARY = [
 ];
 
 // ═══════════════════════════════════════════════════════════
-//  CHECKLIST DE PROVIDÊNCIAS
-//  Edite aqui os itens conforme necessário
+//  CHECKLIST
 // ═══════════════════════════════════════════════════════════
 const CHECKLIST_ITEMS = [
-  { id:"passport",   text:"Renovar / tirar passaporte (validade mínima: Maio/2027)",       urgente: true  },
-  { id:"seguro",     text:"Contratar Seguro Viagem com cobertura Schengen",                urgente: true  },
-  { id:"euros",      text:"Comprar Euros em espécie para despesas pessoais",               urgente: false },
-  { id:"banco",      text:"Avisar o banco sobre uso do cartão no exterior",                urgente: false },
-  { id:"adaptador",  text:"Comprar adaptador de tomada (Europa — Tipo C/F)",               urgente: false },
-  { id:"remedio",    text:"Separar medicamentos de uso contínuo + receitas médicas",       urgente: false },
-  { id:"dados",      text:"Confirmar dados pessoais com a agência Beth Viagens",           urgente: false },
+  { id:"passport",  text:"Renovar / tirar passaporte (validade mínima: Maio/2027)",        urgente:true  },
+  { id:"seguro",    text:"Contratar Seguro Viagem com cobertura Schengen",                 urgente:true  },
+  { id:"euros",     text:"Comprar Euros em espécie para despesas pessoais",                urgente:false },
+  { id:"banco",     text:"Avisar o banco sobre uso do cartão no exterior",                 urgente:false },
+  { id:"cartao",    text:"Verificar limite e validade do cartão de crédito internacional", urgente:false },
+  { id:"vacinas",   text:"Verificar vacinas recomendadas para Europa",                     urgente:false },
+  { id:"adaptador", text:"Comprar adaptador de tomada (Europa — Tipo C/F)",                urgente:false },
+  { id:"remedio",   text:"Separar medicamentos de uso contínuo + receitas médicas",        urgente:false },
+  { id:"dados",     text:"Confirmar dados pessoais com a agência Beth Viagens",            urgente:false },
+  { id:"apps",      text:"Instalar aplicativos: tradutor offline, Google Maps, WhatsApp",  urgente:false },
+  { id:"voucher",   text:"Receber vouchers da viagem (enviados 2 dias antes do embarque)", urgente:false },
 ];
 
 // ═══════════════════════════════════════════════════════════
-//  CLIMA HISTÓRICO (médias reais de outubro/novembro)
+//  CLIMA HISTÓRICO
 // ═══════════════════════════════════════════════════════════
 const HISTORICAL_CLIMATE = [
-  {
-    city: "🇵🇹 Lisboa",
-    period: "31 Out – 03 Nov",
-    maxC: 19, minC: 12,
-    rainDays: 9,
-    humidity: "76%",
-    desc: "Outono ameno e agradável. Dias ensolarados são comuns, mas chuvas passageiras acontecem. Leve casaco para a noite.",
-    tip: "💡 Vista-se em camadas — pela manhã pode fazer frio, mas o dia aquece.",
-  },
-  {
-    city: "🇵🇹 Fátima",
-    period: "01 Nov",
-    maxC: 17, minC: 9,
-    rainDays: 10,
-    humidity: "80%",
-    desc: "Ligeiramente mais fria e úmida que Lisboa por estar no interior. Noites frescas, especialmente para a Procissão das Velas.",
-    tip: "💡 Leve casaco para a Procissão das Velas à noite — pode fazer bastante frio.",
-  },
-  {
-    city: "🇮🇹 Roma",
-    period: "03 Nov – 06 Nov",
-    maxC: 17, minC: 10,
-    rainDays: 11,
-    humidity: "74%",
-    desc: "Outono romano é temperado. Chuvas aumentam em novembro mas raramente são longas. Muito agradável para caminhar.",
-    tip: "💡 Um guarda-chuva compacto pode ser útil. Roupas leves durante o dia, agasalho à noite.",
-  },
-  {
-    city: "🇮🇹 Assis",
-    period: "06 Nov – 11 Nov",
-    maxC: 14, minC: 5,
-    rainDays: 13,
-    humidity: "78%",
-    desc: "Mais fria e úmida que Roma por estar em altitude (424m). Névoa matinal é comum. Paisagem deslumbrante no outono.",
-    tip: "💡 Leve casaco grosso, cachecol e sapatos confortáveis para caminhar nas pedras medievais.",
-  },
-  {
-    city: "🇮🇹 La Verna",
-    period: "10 Nov",
-    maxC: 10, minC: 2,
-    rainDays: 14,
-    humidity: "82%",
-    desc: "Santuário em altitude elevada (1.128m). Novembro é frio e pode haver geada. Atmosfera mística e contemplativa.",
-    tip: "💡 Roupas de inverno recomendadas: casaco pesado, luvas e cachecol. Vale muito a pena!",
-  },
+  { city:"🇵🇹 Lisboa",  period:"31 Out – 03 Nov", maxC:19, minC:12, rainDays:9,  humidity:"76%", desc:"Outono ameno e agradável. Dias ensolarados são comuns, mas chuvas passageiras acontecem.", tip:"💡 Vista-se em camadas — pela manhã pode fazer frio, mas o dia aquece." },
+  { city:"🇵🇹 Fátima",  period:"01 Nov",          maxC:17, minC:9,  rainDays:10, humidity:"80%", desc:"Ligeiramente mais fria que Lisboa. Noites frescas, especialmente para a Procissão das Velas.", tip:"💡 Leve casaco para a Procissão das Velas à noite — pode fazer bastante frio." },
+  { city:"🇮🇹 Roma",    period:"03 Nov – 06 Nov", maxC:17, minC:10, rainDays:11, humidity:"74%", desc:"Outono romano temperado. Chuvas aumentam em novembro mas raramente são longas.", tip:"💡 Um guarda-chuva compacto pode ser útil. Roupas leves durante o dia, agasalho à noite." },
+  { city:"🇮🇹 Assis",   period:"06 Nov – 11 Nov", maxC:14, minC:5,  rainDays:13, humidity:"78%", desc:"Mais fria que Roma por estar em altitude (424m). Névoa matinal é comum. Paisagem deslumbrante.", tip:"💡 Leve casaco grosso, cachecol e sapatos confortáveis para caminhar nas pedras medievais." },
+  { city:"🇮🇹 La Verna",period:"10 Nov",           maxC:10, minC:2,  rainDays:14, humidity:"82%", desc:"Santuário em altitude elevada (1.128m). Novembro é frio e pode haver geada.", tip:"💡 Roupas de inverno recomendadas: casaco pesado, luvas e cachecol." },
 ];
 
-// ═══════════════════════════════════════════════════════════
-//  PREVISÃO DO TEMPO — coordenadas Open-Meteo
-// ═══════════════════════════════════════════════════════════
 const WEATHER_CITIES = {
-  goiania: { lat:-16.6864, lon:-49.2643, name:"Goiânia"  },
-  lisboa:  { lat:38.7169,  lon:-9.1399,  name:"Lisboa"   },
-  fatima:  { lat:39.6273,  lon:-8.6671,  name:"Fátima"   },
-  roma:    { lat:41.9028,  lon:12.4964,  name:"Roma"     },
-  assis:   { lat:43.0707,  lon:12.6156,  name:"Assis"    },
-  laverna: { lat:43.6967,  lon:11.9292,  name:"La Verna" },
+  goiania:{ lat:-16.6864, lon:-49.2643, name:"Goiânia"  },
+  lisboa: { lat:38.7169,  lon:-9.1399,  name:"Lisboa"   },
+  fatima: { lat:39.6273,  lon:-8.6671,  name:"Fátima"   },
+  roma:   { lat:41.9028,  lon:12.4964,  name:"Roma"     },
+  assis:  { lat:43.0707,  lon:12.6156,  name:"Assis"    },
+  laverna:{ lat:43.6967,  lon:11.9292,  name:"La Verna" },
 };
-const WMO = {
-  0:"☀️ Céu limpo", 1:"🌤️ Principalmente limpo", 2:"⛅ Parcialmente nublado",
-  3:"☁️ Nublado", 45:"🌫️ Névoa", 51:"🌦️ Garoa fraca", 53:"🌦️ Garoa",
-  61:"🌧️ Chuva fraca", 63:"🌧️ Chuva", 65:"🌧️ Chuva forte",
-  80:"🌦️ Pancadas", 82:"⛈️ Pancadas fortes", 95:"⛈️ Tempestade",
-};
+const WMO = { 0:"☀️ Céu limpo",1:"🌤️ Principalmente limpo",2:"⛅ Parcialmente nublado",3:"☁️ Nublado",45:"🌫️ Névoa",51:"🌦️ Garoa fraca",53:"🌦️ Garoa",61:"🌧️ Chuva fraca",63:"🌧️ Chuva",65:"🌧️ Chuva forte",80:"🌦️ Pancadas",82:"⛈️ Pancadas fortes",95:"⛈️ Tempestade" };
 
 // ═══════════════════════════════════════════════════════════
-//  CORES e TIPOGRAFIA — alto contraste para idosos
+//  CORES E TIPOGRAFIA
 // ═══════════════════════════════════════════════════════════
 const C = {
   navy:"#1A2B5F", navyL:"#263d8a", gold:"#B8840A", goldL:"#e6a820",
   cream:"#FBF7EE", creamD:"#EDE0C4", white:"#FFFFFF",
   brown:"#1A0F00", brownM:"#4A3520", green:"#1B5E20", red:"#B71C1C",
-  orange:"#E65100",
 };
 const T = {
-  pageTitle:    { fontFamily:"'Cinzel',serif", fontSize:26, fontWeight:700, color:C.navy,   lineHeight:1.2 },
-  sectionTitle: { fontFamily:"'Cinzel',serif", fontSize:20, fontWeight:700, color:C.navy,   lineHeight:1.3 },
-  label:        { fontFamily:"'Cinzel',serif", fontSize:13, fontWeight:700, color:C.gold,   letterSpacing:1.5, textTransform:"uppercase" },
+  pageTitle:    { fontFamily:"'Cinzel',serif", fontSize:26, fontWeight:700, color:C.navy,  lineHeight:1.2 },
+  sectionTitle: { fontFamily:"'Cinzel',serif", fontSize:20, fontWeight:700, color:C.navy,  lineHeight:1.3 },
+  label:        { fontFamily:"'Cinzel',serif", fontSize:13, fontWeight:700, color:C.gold,  letterSpacing:1.5, textTransform:"uppercase" },
   body:         { fontSize:18, lineHeight:1.75, color:C.brown, fontWeight:500 },
   sub:          { fontSize:16, color:C.brownM, lineHeight:1.6 },
 };
@@ -122,66 +127,48 @@ const T = {
 // ═══════════════════════════════════════════════════════════
 //  UTILITÁRIOS
 // ═══════════════════════════════════════════════════════════
-function getWx(code) {
-  if (code == null) return null;
-  return WMO[code] || WMO[Math.floor(code/10)*10] || "🌤️ Variável";
-}
-function fmtDate(s) {
-  const [,m,d] = s.split("-");
-  const mo = ["","Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-  return `${parseInt(d)} de ${mo[parseInt(m)]}`;
-}
-function todayStr() {
-  const t = new Date(); t.setHours(0,0,0,0);
-  return t.toISOString().split("T")[0];
-}
+function getWx(c){ if(c==null)return null; return WMO[c]||WMO[Math.floor(c/10)*10]||"🌤️ Variável"; }
+function fmtDate(s){ const[,m,d]=s.split("-"); const mo=["","Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]; return `${parseInt(d)} de ${mo[parseInt(m)]}`; }
+function todayStr(){ const t=new Date(); t.setHours(0,0,0,0); return t.toISOString().split("T")[0]; }
 
 // ═══════════════════════════════════════════════════════════
 //  COMPONENTES BASE
 // ═══════════════════════════════════════════════════════════
-function Card({ children, style={} }) {
+function Card({ children, style={} }){
   return <div style={{ background:C.white, borderRadius:18, padding:"20px 18px", marginBottom:16, boxShadow:"0 3px 18px rgba(0,0,0,0.09)", border:`1px solid ${C.creamD}`, ...style }}>{children}</div>;
 }
-function Divider() {
-  return <hr style={{ border:"none", borderTop:`1px solid ${C.creamD}`, margin:"12px 0" }} />;
-}
-function PrayerBox({ text }) {
-  return (
+function Divider(){ return <hr style={{ border:"none", borderTop:`1px solid ${C.creamD}`, margin:"12px 0" }} />; }
+function PrayerBox({ text }){
+  return(
     <div style={{ background:`linear-gradient(135deg,${C.navy},${C.navyL})`, borderRadius:14, padding:"18px 16px", marginTop:16 }}>
       <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:16, fontStyle:"italic", textAlign:"center", lineHeight:1.7 }}>🙏 {text}</div>
     </div>
   );
 }
-function DayBadge({ day }) {
-  return <span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"4px 14px", fontSize:14, fontFamily:"'Cinzel',serif", fontWeight:700 }}>Dia {day}</span>;
-}
-function SectionLabel({ children }) {
-  return <div style={{ ...T.label, display:"block", marginBottom:14 }}>{children}</div>;
-}
+function DayBadge({ day }){ return <span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"4px 14px", fontSize:14, fontFamily:"'Cinzel',serif", fontWeight:700 }}>Dia {day}</span>; }
+function SectionLabel({ children }){ return <div style={{ ...T.label, display:"block", marginBottom:14 }}>{children}</div>; }
 
-function WxBadge({ code, max, min, precip, compact=false }) {
-  const label = getWx(code);
-  if (!label) return <span style={{ ...T.sub, fontStyle:"italic" }}>Em breve…</span>;
-  if (compact) return (
+function WxBadge({ code, max, min, precip, compact=false }){
+  const label=getWx(code);
+  if(!label) return <span style={{ ...T.sub, fontStyle:"italic" }}>Em breve…</span>;
+  if(compact) return(
     <div style={{ textAlign:"right" }}>
       <div style={{ fontSize:15, color:C.brown, fontWeight:600 }}>{label}</div>
       <div style={{ fontSize:18, color:C.gold, fontWeight:700 }}>{Math.round(max)}° / {Math.round(min)}°</div>
-      {precip>20 && <div style={{ fontSize:14, color:"#1565C0" }}>💧 {precip}%</div>}
+      {precip>20&&<div style={{ fontSize:14, color:"#1565C0" }}>💧 {precip}%</div>}
     </div>
   );
-  return (
+  return(
     <div style={{ background:"rgba(255,255,255,0.15)", borderRadius:12, padding:"14px 16px", marginTop:12, textAlign:"center" }}>
       <div style={{ color:C.white, fontSize:18, marginBottom:6, fontWeight:600 }}>{label}</div>
-      <div style={{ color:C.goldL, fontSize:36, fontWeight:700, fontFamily:"'Cinzel',serif" }}>
-        {Math.round(max)}°<span style={{ fontSize:22, color:"rgba(255,255,255,0.6)" }}> / {Math.round(min)}°</span>
-      </div>
-      {precip>20 && <div style={{ color:"rgba(255,255,255,0.75)", fontSize:15, marginTop:6 }}>💧 {precip}% de chance de chuva</div>}
+      <div style={{ color:C.goldL, fontSize:36, fontWeight:700, fontFamily:"'Cinzel',serif" }}>{Math.round(max)}°<span style={{ fontSize:22, color:"rgba(255,255,255,0.6)" }}> / {Math.round(min)}°</span></div>
+      {precip>20&&<div style={{ color:"rgba(255,255,255,0.75)", fontSize:15, marginTop:6 }}>💧 {precip}% de chance de chuva</div>}
     </div>
   );
 }
 
-function DayCard({ d, expanded, onToggle }) {
-  return (
+function DayCard({ d, expanded, onToggle }){
+  return(
     <div onClick={onToggle} style={{ background:C.white, borderRadius:18, padding:"18px 16px", marginBottom:14, boxShadow:"0 3px 18px rgba(0,0,0,0.09)", border:`2px solid ${expanded?C.gold:C.creamD}`, cursor:"pointer" }}>
       <div style={{ display:"flex", alignItems:"center", gap:14, marginBottom:expanded?16:0 }}>
         <span style={{ fontSize:38, flexShrink:0 }}>{d.icon}</span>
@@ -195,7 +182,7 @@ function DayCard({ d, expanded, onToggle }) {
         </div>
         <span style={{ color:C.gold, fontSize:22, flexShrink:0, fontWeight:700 }}>{expanded?"▲":"▼"}</span>
       </div>
-      {expanded && (
+      {expanded&&(
         <>
           <div style={{ display:"flex", flexWrap:"wrap", gap:8, marginBottom:16 }}>
             {d.highlights.map((h,i)=><span key={i} style={{ background:C.creamD, borderRadius:20, padding:"6px 14px", fontSize:15, color:C.brownM, fontWeight:600 }}>{h}</span>)}
@@ -206,7 +193,7 @@ function DayCard({ d, expanded, onToggle }) {
                 <span style={{ ...T.label, fontSize:13, minWidth:56, paddingTop:3, display:"block" }}>{lab}</span>
                 <span style={{ ...T.body, flex:1 }}>{em} {txt}</span>
               </div>
-              {i<arr.length-1 && <Divider />}
+              {i<arr.length-1&&<Divider />}
             </div>
           ))}
           <PrayerBox text={d.prayer} />
@@ -217,54 +204,126 @@ function DayCard({ d, expanded, onToggle }) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  PÁGINA: HOJE
-//  Inclui contagem regressiva, destinos e checklist persistente
+//  BOTÃO FLUTUANTE — VOLTAR AO HOTEL
+//  Aparece apenas durante os dias da viagem.
+//  Abre o Google Maps com a rota até o hotel atual.
 // ═══════════════════════════════════════════════════════════
-function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggleCheck }) {
+function BotaoHotel({ hotel }) {
+  const [mostrarInfo, setMostrarInfo] = useState(false);
 
-  const total    = CHECKLIST_ITEMS.length;
-  const done     = CHECKLIST_ITEMS.filter(i => checked[i.id]).length;
-  const pct      = Math.round((done / total) * 100);
-  const allDone  = done === total;
+  function abrirMaps() {
+    if (!hotel) return;
+
+    // Se o endereço ainda não foi definido, avisa o usuário
+    if (!hotel.mapsQuery) {
+      setMostrarInfo(true);
+      return;
+    }
+
+    // Monta a URL do Google Maps com rota a pé até o hotel.
+    // O Google Maps usa o GPS do celular como ponto de partida automaticamente.
+    const destino = encodeURIComponent(hotel.mapsQuery);
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${destino}&travelmode=walking`;
+    window.open(url, "_blank");
+  }
+
+  if (!hotel) return null;
+
+  return (
+    <>
+      {/* Botão flutuante */}
+      <button
+        onClick={abrirMaps}
+        style={{
+          position: "fixed",
+          bottom: 100,          // fica acima da barra de navegação
+          right: 16,
+          zIndex: 200,
+          background: `linear-gradient(135deg, #1B5E20, #2E7D32)`,
+          color: C.white,
+          border: "none",
+          borderRadius: 20,
+          padding: "14px 18px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 4,
+          boxShadow: "0 6px 24px rgba(0,0,0,0.35)",
+          cursor: "pointer",
+          minWidth: 80,
+        }}
+      >
+        <span style={{ fontSize: 28 }}>🏠</span>
+        <span style={{ fontSize: 11, fontFamily:"'Cinzel',serif", fontWeight:700, letterSpacing:0.5, lineHeight:1.3, textAlign:"center" }}>
+          Voltar ao<br/>Hotel
+        </span>
+      </button>
+
+      {/* Modal de aviso quando endereço ainda não foi definido */}
+      {mostrarInfo && (
+        <div
+          onClick={() => setMostrarInfo(false)}
+          style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.55)", zIndex:300, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{ background:C.white, borderRadius:20, padding:"28px 22px", maxWidth:340, width:"100%", textAlign:"center", boxShadow:"0 8px 40px rgba(0,0,0,0.3)" }}
+          >
+            <div style={{ fontSize:48, marginBottom:14 }}>📍</div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:20, fontWeight:700, color:C.navy, marginBottom:12 }}>
+              {hotel.name}
+            </div>
+            <div style={{ ...T.body, fontSize:16, color:C.brownM, marginBottom:20, lineHeight:1.65 }}>
+              O endereço deste hotel ainda está sendo confirmado pela agência. Assim que for informado, o botão abrirá o Google Maps automaticamente!
+            </div>
+            <button
+              onClick={() => setMostrarInfo(false)}
+              style={{ background:C.navy, color:C.white, border:"none", borderRadius:14, padding:"13px 30px", fontSize:17, fontFamily:"'Cinzel',serif", fontWeight:700, cursor:"pointer" }}
+            >
+              Entendido
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+//  PÁGINA: HOJE
+// ═══════════════════════════════════════════════════════════
+function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggleCheck }){
+  const total   = CHECKLIST_ITEMS.length;
+  const done    = CHECKLIST_ITEMS.filter(i=>checked[i.id]).length;
+  const pct     = Math.round((done/total)*100);
+  const allDone = done===total;
 
   const ChecklistBlock = () => (
     <Card>
-      {/* Cabeçalho com progresso */}
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
         <SectionLabel>✅ Providências antes da viagem</SectionLabel>
-        <span style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color: allDone ? C.green : C.gold }}>{done}/{total}</span>
+        <span style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:allDone?C.green:C.gold }}>{done}/{total}</span>
       </div>
-
-      {/* Barra de progresso */}
       <div style={{ background:C.creamD, borderRadius:10, height:12, marginBottom:16, overflow:"hidden" }}>
-        <div style={{ background: allDone ? C.green : C.gold, height:"100%", width:`${pct}%`, borderRadius:10, transition:"width 0.4s ease" }} />
+        <div style={{ background:allDone?C.green:C.gold, height:"100%", width:`${pct}%`, borderRadius:10, transition:"width 0.4s ease" }} />
       </div>
-      {allDone && (
+      {allDone&&(
         <div style={{ background:"#E8F5E9", borderRadius:10, padding:"10px 14px", marginBottom:14, textAlign:"center", border:`2px solid ${C.green}` }}>
           <span style={{ color:C.green, fontSize:17, fontWeight:700 }}>🎉 Tudo pronto para a viagem!</span>
         </div>
       )}
-
-      {/* Itens urgentes primeiro */}
-      {[true, false].map(isUrgent => {
-        const items = CHECKLIST_ITEMS.filter(i => i.urgente === isUrgent);
-        return (
+      {[true,false].map(isUrgent=>{
+        const items=CHECKLIST_ITEMS.filter(i=>i.urgente===isUrgent);
+        return(
           <div key={String(isUrgent)}>
-            {isUrgent && <div style={{ fontSize:13, fontWeight:700, color:C.red, letterSpacing:1, textTransform:"uppercase", marginBottom:8 }}>⚠️ Prioritário</div>}
-            {!isUrgent && <div style={{ fontSize:13, fontWeight:700, color:C.brownM, letterSpacing:1, textTransform:"uppercase", margin:"14px 0 8px" }}>Demais providências</div>}
-            {items.map((item, i, arr) => (
-              <div
-                key={item.id}
-                onClick={() => toggleCheck(item.id)}
-                style={{ display:"flex", gap:14, padding:"13px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start", cursor:"pointer" }}
-              >
-                {/* Checkbox visual */}
-                <div style={{ width:28, height:28, borderRadius:8, border:`2.5px solid ${checked[item.id] ? C.green : (isUrgent && !checked[item.id] ? C.red : C.creamD)}`, background:checked[item.id]?C.green:"transparent", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, marginTop:2, transition:"all 0.2s" }}>
-                  {checked[item.id] && <span style={{ color:C.white, fontSize:16, fontWeight:700, lineHeight:1 }}>✓</span>}
+            {isUrgent&&<div style={{ fontSize:13, fontWeight:700, color:C.red, letterSpacing:1, textTransform:"uppercase", marginBottom:8 }}>⚠️ Prioritário</div>}
+            {!isUrgent&&<div style={{ fontSize:13, fontWeight:700, color:C.brownM, letterSpacing:1, textTransform:"uppercase", margin:"14px 0 8px" }}>Demais providências</div>}
+            {items.map((item,i,arr)=>(
+              <div key={item.id} onClick={()=>toggleCheck(item.id)} style={{ display:"flex", gap:14, padding:"13px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start", cursor:"pointer" }}>
+                <div style={{ width:28, height:28, borderRadius:8, border:`2.5px solid ${checked[item.id]?C.green:(isUrgent&&!checked[item.id]?C.red:C.creamD)}`, background:checked[item.id]?C.green:"transparent", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, marginTop:2, transition:"all 0.2s" }}>
+                  {checked[item.id]&&<span style={{ color:C.white, fontSize:16, fontWeight:700, lineHeight:1 }}>✓</span>}
                 </div>
-                <span style={{ ...T.body, fontSize:17, textDecoration:checked[item.id]?"line-through":"none", color:checked[item.id]?C.brownM:C.brown, lineHeight:1.55 }}>
-                  {item.text}
-                </span>
+                <span style={{ ...T.body, fontSize:17, textDecoration:checked[item.id]?"line-through":"none", color:checked[item.id]?C.brownM:C.brown, lineHeight:1.55 }}>{item.text}</span>
               </div>
             ))}
           </div>
@@ -274,10 +333,9 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
     </Card>
   );
 
-  // ── Viagem encerrada ──
-  if (tripOver) return (
+  if(tripOver) return(
     <div style={{ padding:"20px 16px" }}>
-      <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"36px 22px", border:`2px solid ${C.gold}`, textAlign:"center", marginBottom:16 }}>
+      <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"36px 22px", border:`2px solid ${C.gold}`, textAlign:"center" }}>
         <div style={{ fontSize:64, marginBottom:14 }}>🕊️</div>
         <div style={{ ...T.pageTitle, color:C.goldL, marginBottom:14 }}>Peregrinação Concluída!</div>
         <p style={{ color:"rgba(255,255,255,0.85)", fontSize:18, lineHeight:1.8 }}>Que as graças recebidas nesta jornada sagrada acompanhem sempre vocês.</p>
@@ -286,8 +344,7 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
     </div>
   );
 
-  // ── Contagem regressiva ──
-  if (daysUntilTrip > 0) return (
+  if(daysUntilTrip>0) return(
     <div style={{ padding:"20px 16px" }}>
       <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"30px 20px", border:`2px solid ${C.gold}`, textAlign:"center", marginBottom:16 }}>
         <div style={{ fontSize:50, marginBottom:10 }}>✈️</div>
@@ -296,11 +353,7 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
         <div style={{ color:"rgba(255,255,255,0.75)", fontSize:20, marginTop:8, fontWeight:600 }}>dias para a peregrinação</div>
         <div style={{ color:"rgba(255,255,255,0.45)", fontSize:16, marginTop:6 }}>Partida: 30 de outubro de 2026</div>
       </div>
-
-      {/* Checklist de providências — destaque na home */}
       <ChecklistBlock />
-
-      {/* Destinos */}
       <Card>
         <SectionLabel>🗺️ Destinos da Viagem</SectionLabel>
         {[
@@ -320,14 +373,11 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
     </div>
   );
 
-  // ── Durante a viagem ──
-  const cw = weather[currentDay?.city];
-  let todayW = null;
-  if (currentDay && cw) {
-    const idx = cw.time?.indexOf(todayStr());
-    if (idx>=0) todayW = { max:cw.temperature_2m_max?.[idx], min:cw.temperature_2m_min?.[idx], code:cw.weathercode?.[idx], precip:cw.precipitation_probability_max?.[idx] };
-  }
-  if (!currentDay) return (
+  // Durante a viagem
+  const cw=weather[currentDay?.city]; let todayW=null;
+  if(currentDay&&cw){ const idx=cw.time?.indexOf(todayStr()); if(idx>=0) todayW={ max:cw.temperature_2m_max?.[idx], min:cw.temperature_2m_min?.[idx], code:cw.weathercode?.[idx], precip:cw.precipitation_probability_max?.[idx] }; }
+
+  if(!currentDay) return(
     <div style={{ padding:"20px 16px" }}>
       <Card style={{ textAlign:"center", padding:"40px 20px" }}>
         <div style={{ fontSize:48, marginBottom:10 }}>🕊️</div>
@@ -337,7 +387,7 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
     </div>
   );
 
-  return (
+  return(
     <div style={{ padding:"20px 16px" }}>
       <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"24px 20px", border:`2px solid ${C.gold}`, marginBottom:16 }}>
         <div style={{ textAlign:"center", marginBottom:todayW?12:0 }}>
@@ -346,7 +396,7 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
           <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:22, lineHeight:1.3, marginBottom:6 }}>{currentDay.location}</div>
           <div style={{ color:"rgba(255,255,255,0.55)", fontSize:16 }}>{currentDay.weekday} · {fmtDate(currentDay.date)}</div>
         </div>
-        {todayW && <WxBadge {...todayW} />}
+        {todayW&&<WxBadge {...todayW} />}
       </div>
       <Card>
         <SectionLabel>⭐ Destaques de Hoje</SectionLabel>
@@ -360,7 +410,7 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
               <span style={{ ...T.label, fontSize:13, minWidth:56, paddingTop:3, display:"block" }}>{lab}</span>
               <span style={{ ...T.body, flex:1 }}>{em} {txt}</span>
             </div>
-            {i<arr.length-1 && <Divider />}
+            {i<arr.length-1&&<Divider />}
           </div>
         ))}
         <PrayerBox text={currentDay.prayer} />
@@ -372,8 +422,8 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
 // ═══════════════════════════════════════════════════════════
 //  PÁGINA: ROTEIRO
 // ═══════════════════════════════════════════════════════════
-function PageRoteiro({ expandedDay, setExpandedDay }) {
-  return (
+function PageRoteiro({ expandedDay, setExpandedDay }){
+  return(
     <div style={{ padding:"20px 16px" }}>
       <div style={{ marginBottom:18 }}>
         <div style={T.pageTitle}>Roteiro Completo</div>
@@ -387,54 +437,35 @@ function PageRoteiro({ expandedDay, setExpandedDay }) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  PÁGINA: CLIMA (com abas: Previsão / Histórico)
+//  PÁGINA: CLIMA
 // ═══════════════════════════════════════════════════════════
-function PageClima({ weather }) {
-  const [tab, setTab] = useState("previsao");
+function PageClima({ weather }){
+  const [tab,setTab]=useState("previsao");
+  const cityDayMap={};
+  ITINERARY.forEach(d=>{ if(!cityDayMap[d.city])cityDayMap[d.city]=[]; if(!cityDayMap[d.city].find(x=>x.date===d.date))cityDayMap[d.city].push({date:d.date,day:d.day}); });
+  const flag=k=>({goiania:"🇧🇷",lisboa:"🇵🇹",fatima:"🇵🇹",roma:"🇮🇹",assis:"🇮🇹",laverna:"🇮🇹"}[k]||"🌍");
 
-  const cityDayMap = {};
-  ITINERARY.forEach(d=>{
-    if (!cityDayMap[d.city]) cityDayMap[d.city]=[];
-    if (!cityDayMap[d.city].find(x=>x.date===d.date)) cityDayMap[d.city].push({ date:d.date, day:d.day });
-  });
-  const flag = k=>({ goiania:"🇧🇷", lisboa:"🇵🇹", fatima:"🇵🇹", roma:"🇮🇹", assis:"🇮🇹", laverna:"🇮🇹" }[k]||"🌍");
-
-  return (
+  return(
     <div style={{ padding:"20px 16px" }}>
-      <div style={{ marginBottom:16 }}>
-        <div style={T.pageTitle}>Clima</div>
-      </div>
-
-      {/* Abas */}
+      <div style={{ marginBottom:16 }}><div style={T.pageTitle}>Clima</div></div>
       <div style={{ display:"flex", gap:8, marginBottom:18 }}>
-        {[
-          { id:"previsao", label:"🌦️ Previsão" },
-          { id:"historico", label:"📊 Histórico" },
-        ].map(t=>(
-          <button key={t.id} onClick={()=>setTab(t.id)} style={{ flex:1, padding:"12px 8px", borderRadius:14, border:`2px solid ${tab===t.id?C.gold:C.creamD}`, background:tab===t.id?C.gold:C.white, color:tab===t.id?C.white:C.brownM, fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, cursor:"pointer" }}>
-            {t.label}
-          </button>
+        {[{id:"previsao",label:"🌦️ Previsão"},{id:"historico",label:"📊 Histórico"}].map(t=>(
+          <button key={t.id} onClick={()=>setTab(t.id)} style={{ flex:1, padding:"12px 8px", borderRadius:14, border:`2px solid ${tab===t.id?C.gold:C.creamD}`, background:tab===t.id?C.gold:C.white, color:tab===t.id?C.white:C.brownM, fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, cursor:"pointer" }}>{t.label}</button>
         ))}
       </div>
-
-      {/* ABA: PREVISÃO DO TEMPO REAL */}
-      {tab === "previsao" && (
+      {tab==="previsao"&&(
         <>
           <Card style={{ background:"#EEF2FF", border:"none" }}>
-            <div style={{ ...T.body, fontSize:16, lineHeight:1.7, color:C.navy }}>
-              🛰️ Dados atualizados automaticamente via Open-Meteo (serviço gratuito). A previsão exata fica disponível quando faltar <strong>até 16 dias</strong> para cada data.
-            </div>
+            <div style={{ ...T.body, fontSize:16, lineHeight:1.7, color:C.navy }}>🛰️ Dados atualizados automaticamente via Open-Meteo. A previsão exata fica disponível quando faltar <strong>até 16 dias</strong> para cada data.</div>
           </Card>
           {Object.entries(cityDayMap).map(([cityKey,days])=>{
-            const info = WEATHER_CITIES[cityKey];
-            const cw   = weather[cityKey];
-            return (
+            const info=WEATHER_CITIES[cityKey]; const cw=weather[cityKey];
+            return(
               <Card key={cityKey}>
                 <div style={{ ...T.sectionTitle, marginBottom:14 }}>{flag(cityKey)} {info?.name}</div>
                 {days.map((di,i)=>{
-                  let w=null;
-                  if(cw){const idx=cw.time?.indexOf(di.date);if(idx>=0)w={max:cw.temperature_2m_max?.[idx],min:cw.temperature_2m_min?.[idx],code:cw.weathercode?.[idx],precip:cw.precipitation_probability_max?.[idx]};}
-                  return (
+                  let w=null; if(cw){const idx=cw.time?.indexOf(di.date);if(idx>=0)w={max:cw.temperature_2m_max?.[idx],min:cw.temperature_2m_min?.[idx],code:cw.weathercode?.[idx],precip:cw.precipitation_probability_max?.[idx]};}
+                  return(
                     <div key={di.date} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"12px 0", borderBottom:i<days.length-1?`1px solid ${C.creamD}`:"none" }}>
                       <div><DayBadge day={di.day} /><div style={{ ...T.sub, fontSize:15, marginTop:4 }}>{fmtDate(di.date)}</div></div>
                       {w?<WxBadge {...w} compact/>:<span style={{ ...T.sub, fontSize:15, fontStyle:"italic" }}>Em breve…</span>}
@@ -446,23 +477,15 @@ function PageClima({ weather }) {
           })}
         </>
       )}
-
-      {/* ABA: HISTÓRICO / EXPECTATIVA */}
-      {tab === "historico" && (
+      {tab==="historico"&&(
         <>
-          <Card style={{ background:"#FFF8E1", border:`1px solid #FFD54F` }}>
-            <div style={{ ...T.body, fontSize:16, lineHeight:1.7, color:"#5D4037" }}>
-              📊 Estas são as <strong>médias históricas reais</strong> para o final de outubro e novembro em cada destino, baseadas em dados climáticos dos últimos anos. Use como referência para o que esperar e como se preparar.
-            </div>
+          <Card style={{ background:"#FFF8E1", border:"1px solid #FFD54F" }}>
+            <div style={{ ...T.body, fontSize:16, lineHeight:1.7, color:"#5D4037" }}>📊 Médias históricas reais para o final de outubro e novembro em cada destino. Use para se preparar com a roupa certa.</div>
           </Card>
-
           {HISTORICAL_CLIMATE.map((h,i)=>(
             <Card key={i}>
-              {/* Título */}
               <div style={{ ...T.sectionTitle, marginBottom:4 }}>{h.city}</div>
               <div style={{ ...T.sub, fontSize:15, marginBottom:14 }}>📅 {h.period}</div>
-
-              {/* Temperatura */}
               <div style={{ display:"flex", gap:10, marginBottom:14 }}>
                 <div style={{ flex:1, background:`linear-gradient(135deg,${C.navy},${C.navyL})`, borderRadius:14, padding:"14px 10px", textAlign:"center" }}>
                   <div style={{ color:"rgba(255,255,255,0.6)", fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1, marginBottom:4 }}>MÁXIMA</div>
@@ -473,28 +496,12 @@ function PageClima({ weather }) {
                   <div style={{ color:C.navy, fontSize:32, fontWeight:700, fontFamily:"'Cinzel',serif" }}>{h.minC}°C</div>
                 </div>
               </div>
-
-              {/* Chuva e umidade */}
               <div style={{ display:"flex", gap:10, marginBottom:14 }}>
-                <div style={{ flex:1, background:"#E3F2FD", borderRadius:12, padding:"12px 10px", textAlign:"center" }}>
-                  <div style={{ fontSize:24, marginBottom:4 }}>🌧️</div>
-                  <div style={{ fontWeight:700, fontSize:17, color:"#1565C0" }}>{h.rainDays} dias</div>
-                  <div style={{ fontSize:13, color:"#1565C0" }}>de chuva no mês</div>
-                </div>
-                <div style={{ flex:1, background:"#F3E5F5", borderRadius:12, padding:"12px 10px", textAlign:"center" }}>
-                  <div style={{ fontSize:24, marginBottom:4 }}>💧</div>
-                  <div style={{ fontWeight:700, fontSize:17, color:"#6A1B9A" }}>{h.humidity}</div>
-                  <div style={{ fontSize:13, color:"#6A1B9A" }}>umidade média</div>
-                </div>
+                <div style={{ flex:1, background:"#E3F2FD", borderRadius:12, padding:"12px 10px", textAlign:"center" }}><div style={{ fontSize:24, marginBottom:4 }}>🌧️</div><div style={{ fontWeight:700, fontSize:17, color:"#1565C0" }}>{h.rainDays} dias</div><div style={{ fontSize:13, color:"#1565C0" }}>de chuva no mês</div></div>
+                <div style={{ flex:1, background:"#F3E5F5", borderRadius:12, padding:"12px 10px", textAlign:"center" }}><div style={{ fontSize:24, marginBottom:4 }}>💧</div><div style={{ fontWeight:700, fontSize:17, color:"#6A1B9A" }}>{h.humidity}</div><div style={{ fontSize:13, color:"#6A1B9A" }}>umidade média</div></div>
               </div>
-
-              {/* Descrição */}
               <div style={{ ...T.body, fontSize:16, marginBottom:12, lineHeight:1.65 }}>{h.desc}</div>
-
-              {/* Dica */}
-              <div style={{ background:"#FFFDE7", borderRadius:10, padding:"12px 14px", borderLeft:`4px solid ${C.gold}` }}>
-                <div style={{ ...T.body, fontSize:16, lineHeight:1.6 }}>{h.tip}</div>
-              </div>
+              <div style={{ background:"#FFFDE7", borderRadius:10, padding:"12px 14px", borderLeft:`4px solid ${C.gold}` }}><div style={{ ...T.body, fontSize:16, lineHeight:1.6 }}>{h.tip}</div></div>
             </Card>
           ))}
         </>
@@ -506,18 +513,12 @@ function PageClima({ weather }) {
 // ═══════════════════════════════════════════════════════════
 //  PÁGINA: PACOTE
 // ═══════════════════════════════════════════════════════════
-function PagePacote() {
-  const [tab, setTab] = useState("incluso");
-  const TABS = [
-    { id:"incluso", label:"✅ Incluso"      },
-    { id:"nao",     label:"⚠️ Não Incluso" },
-    { id:"voos",    label:"✈️ Voos"         },
-    { id:"hoteis",  label:"🏨 Hotéis"       },
-  ];
-  const INCLUSO = ["Direção espiritual: Frei Edgar Manso e Frei Matheus Morais","Agente de viagem acompanhante desde o Brasil","Ônibus privativo Goiânia → Brasília → Goiânia","Passagem aérea: Brasília ↔ Lisboa / Roma ↔ Brasília","Taxa de embarque","11 noites de hospedagem com café da manhã","Taxas dos hotéis (city taxes)","Transfer aeroportos de Lisboa e Roma","Transfer chegada em Assis + Transfer Assis → Roma","City tour panorâmico em Lisboa","City tour em Fátima + Casa dos Pastorinhos + Procissão das Velas","City tour panorâmico em Roma","Catequese Papal (se o Papa estiver em Roma)","Santuários: Fonte Colombo, Della Foresta, Bustone, Greccio","City tour para La Verna e visita a Cássia","Gorjetas (maleteiro e guias)","1 mala 23kg + 1 bordo 10kg + 1 item pessoal","Reserva de convites para Catequese Papal","Guias acompanhantes em Lisboa, Fátima e Assis","Camiseta personalizada da peregrinação"];
-  const NAO = ["Seguro Viagem ⚠️ — OBRIGATÓRIO no Espaço Schengen","Despesas com passaporte e documentação","Bilhete de trem Roma → Assis","Guias locais e ingressos nos monumentos","Refeições e bebidas não mencionadas no programa","Lavanderia, telefonemas e táxis","Despesas pessoais","Bagagens além das mencionadas no programa"];
-
-  return (
+function PagePacote(){
+  const [tab,setTab]=useState("incluso");
+  const TABS=[{id:"incluso",label:"✅ Incluso"},{id:"nao",label:"⚠️ Não Incluso"},{id:"voos",label:"✈️ Voos"},{id:"hoteis",label:"🏨 Hotéis"}];
+  const INCLUSO=["Direção espiritual: Frei Edgar Manso e Frei Matheus Morais","Agente de viagem acompanhante desde o Brasil","Ônibus privativo Goiânia → Brasília → Goiânia","Passagem aérea: Brasília ↔ Lisboa / Roma ↔ Brasília","Taxa de embarque","11 noites de hospedagem com café da manhã","Taxas dos hotéis (city taxes)","Transfer aeroportos de Lisboa e Roma","Transfer chegada em Assis + Transfer Assis → Roma","City tour panorâmico em Lisboa","City tour em Fátima + Casa dos Pastorinhos + Procissão das Velas","City tour panorâmico em Roma","Catequese Papal (se o Papa estiver em Roma)","Santuários: Fonte Colombo, Della Foresta, Bustone, Greccio","City tour para La Verna e visita a Cássia","Gorjetas (maleteiro e guias)","1 mala 23kg + 1 bordo 10kg + 1 item pessoal","Reserva de convites para Catequese Papal","Guias acompanhantes em Lisboa, Fátima e Assis","Camiseta personalizada da peregrinação"];
+  const NAO=["Seguro Viagem ⚠️ — OBRIGATÓRIO no Espaço Schengen","Despesas com passaporte e documentação","Bilhete de trem Roma → Assis","Guias locais e ingressos nos monumentos","Refeições e bebidas não mencionadas no programa","Lavanderia, telefonemas e táxis","Despesas pessoais","Bagagens além das mencionadas no programa"];
+  return(
     <div style={{ padding:"20px 16px" }}>
       <div style={{ marginBottom:14 }}>
         <div style={T.pageTitle}>O Pacote</div>
@@ -525,69 +526,34 @@ function PagePacote() {
         <div style={{ ...T.sub, fontSize:15, marginTop:4 }}>Entrada R$ 2.405 + 10× R$ 1.963,80 sem juros</div>
       </div>
       <div style={{ display:"flex", gap:8, marginBottom:16, overflowX:"auto", paddingBottom:4 }}>
-        {TABS.map(t=>(
-          <button key={t.id} onClick={()=>setTab(t.id)} style={{ flexShrink:0, padding:"10px 16px", borderRadius:24, border:`2px solid ${tab===t.id?C.gold:C.creamD}`, background:tab===t.id?C.gold:C.white, color:tab===t.id?C.white:C.brownM, fontFamily:"'Cinzel',serif", fontSize:13, fontWeight:700, cursor:"pointer" }}>
-            {t.label}
-          </button>
-        ))}
+        {TABS.map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{ flexShrink:0, padding:"10px 16px", borderRadius:24, border:`2px solid ${tab===t.id?C.gold:C.creamD}`, background:tab===t.id?C.gold:C.white, color:tab===t.id?C.white:C.brownM, fontFamily:"'Cinzel',serif", fontSize:13, fontWeight:700, cursor:"pointer" }}>{t.label}</button>)}
       </div>
-      {tab==="incluso" && <Card><SectionLabel>✅ Serviços Inclusos</SectionLabel>{INCLUSO.map((item,i,arr)=><div key={i} style={{ display:"flex", gap:12, padding:"11px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}><span style={{ color:C.green, fontSize:20, flexShrink:0, fontWeight:700 }}>✓</span><span style={{ ...T.body, fontSize:17 }}>{item}</span></div>)}</Card>}
-      {tab==="nao" && <Card><SectionLabel>⚠️ Não Incluso</SectionLabel>{NAO.map((item,i,arr)=><div key={i} style={{ display:"flex", gap:12, padding:"11px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}><span style={{ color:C.red, fontSize:20, flexShrink:0, fontWeight:700 }}>✗</span><span style={{ ...T.body, fontSize:17 }}>{item}</span></div>)}<div style={{ background:"#FDECEA", borderRadius:12, padding:"16px 14px", marginTop:16, borderLeft:`5px solid ${C.red}` }}><div style={{ fontSize:18, color:C.red, fontWeight:700, marginBottom:6 }}>⚠️ Seguro Viagem é obrigatório!</div><div style={{ ...T.body, fontSize:17 }}>O Espaço Schengen (Portugal e Itália) exige comprovação de seguro. Sem ele, pode haver recusa de embarque.</div></div></Card>}
-      {tab==="voos" && <><Card><SectionLabel>✈️ Voos Inclusos</SectionLabel>{[{rota:"Brasília → Lisboa",dia:"30/Out · Dia 1",obs:"Saída de Goiânia de ônibus privativo"},{rota:"Lisboa → Roma",dia:"03/Nov · Dia 5",obs:"Pela manhã, após café da manhã"},{rota:"Roma → Brasília",dia:"11/Nov · Dia 13",obs:"Chegada em Brasília: 12/Nov às 16h40"}].map((f,i,arr)=><div key={i} style={{ padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}><div style={{ ...T.sectionTitle, fontSize:18 }}>✈️ {f.rota}</div><div style={{ color:C.gold, fontSize:16, fontWeight:700, marginTop:4 }}>{f.dia}</div><div style={{ ...T.sub, fontSize:16, marginTop:2 }}>{f.obs}</div></div>)}</Card><Card><SectionLabel>🧳 Bagagem Inclusa</SectionLabel>{["🟢  1 mala despachada — até 23kg","🟢  1 bagagem de bordo — até 10kg","🟢  1 item pessoal — bolsa ou mochila pequena","🔴  Malas extras: não incluso"].map((t,i,arr)=><div key={i} style={{ ...T.body, fontSize:17, padding:"10px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>{t}</div>)}</Card></>}
-      {tab==="hoteis" && [{city:"🇵🇹 Lisboa",nights:"4 noites",stars:"Hotel ****",dates:"31/Out – 03/Nov"},{city:"🇮🇹 Roma",nights:"3 noites",stars:"Hotel ****",dates:"03/Nov – 06/Nov"},{city:"⛪ Assis",nights:"5 noites",stars:"Convento",dates:"06/Nov – 11/Nov",obs:"Experiência única!"}].map((h,i)=><Card key={i}><div style={{ ...T.sectionTitle, marginBottom:10 }}>{h.city}</div><div style={{ display:"flex", gap:8, marginBottom:10, flexWrap:"wrap" }}><span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"5px 14px", fontSize:15, fontFamily:"'Cinzel',serif", fontWeight:700 }}>{h.nights}</span><span style={{ background:C.creamD, borderRadius:20, padding:"5px 14px", fontSize:15, color:C.brownM, fontWeight:600 }}>{h.stars}</span></div><div style={{ ...T.body, fontSize:17 }}>📅 {h.dates}</div><div style={{ ...T.body, fontSize:17, marginTop:6 }}>☕ Café da manhã incluso {h.obs?`— ${h.obs}`:""}</div></Card>)}
+      {tab==="incluso"&&<Card><SectionLabel>✅ Serviços Inclusos</SectionLabel>{INCLUSO.map((item,i,arr)=><div key={i} style={{ display:"flex", gap:12, padding:"11px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}><span style={{ color:C.green, fontSize:20, flexShrink:0, fontWeight:700 }}>✓</span><span style={{ ...T.body, fontSize:17 }}>{item}</span></div>)}</Card>}
+      {tab==="nao"&&<Card><SectionLabel>⚠️ Não Incluso</SectionLabel>{NAO.map((item,i,arr)=><div key={i} style={{ display:"flex", gap:12, padding:"11px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}><span style={{ color:C.red, fontSize:20, flexShrink:0, fontWeight:700 }}>✗</span><span style={{ ...T.body, fontSize:17 }}>{item}</span></div>)}<div style={{ background:"#FDECEA", borderRadius:12, padding:"16px 14px", marginTop:16, borderLeft:`5px solid ${C.red}` }}><div style={{ fontSize:18, color:C.red, fontWeight:700, marginBottom:6 }}>⚠️ Seguro Viagem é obrigatório!</div><div style={{ ...T.body, fontSize:17 }}>O Espaço Schengen exige comprovação de seguro. Sem ele, pode haver recusa de embarque.</div></div></Card>}
+      {tab==="voos"&&<><Card><SectionLabel>✈️ Voos Inclusos</SectionLabel>{[{rota:"Brasília → Lisboa",dia:"30/Out · Dia 1",obs:"Saída de Goiânia de ônibus privativo"},{rota:"Lisboa → Roma",dia:"03/Nov · Dia 5",obs:"Pela manhã, após café da manhã"},{rota:"Roma → Brasília",dia:"11/Nov · Dia 13",obs:"Chegada em Brasília: 12/Nov às 16h40"}].map((f,i,arr)=><div key={i} style={{ padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}><div style={{ ...T.sectionTitle, fontSize:18 }}>✈️ {f.rota}</div><div style={{ color:C.gold, fontSize:16, fontWeight:700, marginTop:4 }}>{f.dia}</div><div style={{ ...T.sub, fontSize:16, marginTop:2 }}>{f.obs}</div></div>)}</Card><Card><SectionLabel>🧳 Bagagem Inclusa</SectionLabel>{["🟢  1 mala despachada — até 23kg","🟢  1 bagagem de bordo — até 10kg","🟢  1 item pessoal — bolsa ou mochila pequena","🔴  Malas extras: não incluso"].map((t,i,arr)=><div key={i} style={{ ...T.body, fontSize:17, padding:"10px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>{t}</div>)}</Card></>}
+      {tab==="hoteis"&&[{city:"🇵🇹 Lisboa",nights:"4 noites",stars:"Hotel ****",dates:"31/Out – 03/Nov"},{city:"🇮🇹 Roma",nights:"3 noites",stars:"Hotel ****",dates:"03/Nov – 06/Nov"},{city:"⛪ Assis",nights:"5 noites",stars:"Convento",dates:"06/Nov – 11/Nov",obs:"Experiência única!"}].map((h,i)=><Card key={i}><div style={{ ...T.sectionTitle, marginBottom:10 }}>{h.city}</div><div style={{ display:"flex", gap:8, marginBottom:10, flexWrap:"wrap" }}><span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"5px 14px", fontSize:15, fontFamily:"'Cinzel',serif", fontWeight:700 }}>{h.nights}</span><span style={{ background:C.creamD, borderRadius:20, padding:"5px 14px", fontSize:15, color:C.brownM, fontWeight:600 }}>{h.stars}</span></div><div style={{ ...T.body, fontSize:17 }}>📅 {h.dates}</div><div style={{ ...T.body, fontSize:17, marginTop:6 }}>☕ Café da manhã incluso {h.obs?`— ${h.obs}`:""}</div></Card>)}
     </div>
   );
 }
 
 // ═══════════════════════════════════════════════════════════
 //  PÁGINA: SALAS VIP
-//  Pronta para receber informações dos cartões e aeroportos
 // ═══════════════════════════════════════════════════════════
-function PageSalasVip() {
-  return (
+function PageSalasVip(){
+  return(
     <div style={{ padding:"20px 16px" }}>
       <div style={{ marginBottom:16 }}>
         <div style={T.pageTitle}>Salas VIP</div>
         <div style={{ ...T.sub, marginTop:4 }}>Acesso nos aeroportos da rota</div>
       </div>
-
-      {/* Aviso de seção em construção */}
       <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"26px 20px", border:`2px solid ${C.gold}`, textAlign:"center", marginBottom:16 }}>
         <div style={{ fontSize:48, marginBottom:12 }}>🛋️</div>
         <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:20, fontWeight:700, marginBottom:10 }}>Em Preparação</div>
-        <div style={{ color:"rgba(255,255,255,0.75)", fontSize:17, lineHeight:1.75 }}>
-          As informações sobre salas VIP estão sendo levantadas e serão adicionadas em breve, com base nos cartões de crédito disponíveis e nos aeroportos da rota.
-        </div>
+        <div style={{ color:"rgba(255,255,255,0.75)", fontSize:17, lineHeight:1.75 }}>As informações sobre salas VIP estão sendo levantadas e serão adicionadas em breve.</div>
       </div>
-
-      {/* O que será preenchido */}
-      <Card>
-        <SectionLabel>📋 O que será informado aqui</SectionLabel>
-        {[
-          { icon:"💳", titulo:"Cartões de crédito",   desc:"Quais cartões possuem benefício de sala VIP e quantos acessos estão disponíveis." },
-          { icon:"✈️", titulo:"Aeroportos da rota",   desc:"Brasília (BSB) → Lisboa (LIS) → Roma (FCO) → Assis → Roma (FCO) → Brasília (BSB)." },
-          { icon:"🏢", titulo:"Salas disponíveis",    desc:"Quais salas VIP cada aeroporto oferece e quais são acessíveis pelos cartões." },
-          { icon:"⏱️", titulo:"Tempo de conexão",     desc:"Após confirmar horários dos voos, verificaremos se há tempo suficiente para aproveitar a sala." },
-          { icon:"🤝", titulo:"Programas parceiros",  desc:"Loungekey, DragonPass, Priority Pass e outros programas de parceria serão verificados." },
-        ].map((item,i,arr)=>(
-          <div key={i} style={{ display:"flex", gap:14, padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}>
-            <span style={{ fontSize:28, flexShrink:0 }}>{item.icon}</span>
-            <div>
-              <div style={{ fontFamily:"'Cinzel',serif", fontSize:17, fontWeight:700, color:C.navy, marginBottom:4 }}>{item.titulo}</div>
-              <div style={{ ...T.sub, fontSize:16 }}>{item.desc}</div>
-            </div>
-          </div>
-        ))}
-      </Card>
-
-      {/* Aeroportos da rota — placeholder */}
       <Card>
         <SectionLabel>🗺️ Aeroportos da Rota</SectionLabel>
-        {[
-          { code:"BSB", name:"Aeroporto de Brasília", city:"Brasília, Brasil 🇧🇷", role:"Partida (30/Out) e Chegada (12/Nov)" },
-          { code:"LIS", name:"Aeroporto Humberto Delgado", city:"Lisboa, Portugal 🇵🇹", role:"Chegada (31/Out) e Partida (03/Nov)" },
-          { code:"FCO", name:"Aeroporto Leonardo da Vinci", city:"Roma, Itália 🇮🇹", role:"Chegada (03/Nov) e Partida (11/Nov)" },
-        ].map((ap,i,arr)=>(
+        {[{code:"BSB",name:"Aeroporto de Brasília",city:"Brasília, Brasil 🇧🇷",role:"Partida (30/Out) e Chegada (12/Nov)"},{code:"LIS",name:"Aeroporto Humberto Delgado",city:"Lisboa, Portugal 🇵🇹",role:"Chegada (31/Out) e Partida (03/Nov)"},{code:"FCO",name:"Aeroporto Leonardo da Vinci",city:"Roma, Itália 🇮🇹",role:"Chegada (03/Nov) e Partida (11/Nov)"}].map((ap,i,arr)=>(
           <div key={i} style={{ padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>
             <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:4 }}>
               <span style={{ background:C.navy, color:C.goldL, borderRadius:8, padding:"4px 10px", fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700 }}>{ap.code}</span>
@@ -601,13 +567,6 @@ function PageSalasVip() {
           </div>
         ))}
       </Card>
-
-      <div style={{ background:"#E8F5E9", borderRadius:14, padding:"16px", border:`1px solid #A5D6A7` }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.green, marginBottom:6 }}>✉️ Como atualizar</div>
-        <div style={{ ...T.body, fontSize:16, lineHeight:1.7 }}>
-          Envie os cartões de crédito disponíveis (bandeira e nome do programa) e os horários dos voos confirmados. As informações serão adicionadas aqui.
-        </div>
-      </div>
     </div>
   );
 }
@@ -615,8 +574,8 @@ function PageSalasVip() {
 // ═══════════════════════════════════════════════════════════
 //  PÁGINA: CONTATO
 // ═══════════════════════════════════════════════════════════
-function PageContato() {
-  return (
+function PageContato(){
+  return(
     <div style={{ padding:"20px 16px" }}>
       <div style={{ marginBottom:18 }}>
         <div style={T.pageTitle}>Contato</div>
@@ -626,17 +585,11 @@ function PageContato() {
         <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:20, fontWeight:700, marginBottom:16 }}>🏢 Beth Viagens e Turismo</div>
         <a href="tel:+5562984296855" style={{ display:"flex", gap:14, alignItems:"center", background:"rgba(255,255,255,0.12)", borderRadius:14, padding:"16px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.4)", marginBottom:12 }}>
           <span style={{ fontSize:36 }}>📱</span>
-          <div>
-            <div style={{ color:C.goldL, fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>WHATSAPP / TELEFONE</div>
-            <div style={{ color:C.white, fontSize:22, fontWeight:700, marginTop:2 }}>(62) 98429-6855</div>
-          </div>
+          <div><div style={{ color:C.goldL, fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>WHATSAPP / TELEFONE</div><div style={{ color:C.white, fontSize:22, fontWeight:700, marginTop:2 }}>(62) 98429-6855</div></div>
         </a>
         <a href="mailto:bethviagens.comercial@gmail.com" style={{ display:"flex", gap:14, alignItems:"center", background:"rgba(255,255,255,0.12)", borderRadius:14, padding:"16px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.4)" }}>
           <span style={{ fontSize:36 }}>📧</span>
-          <div>
-            <div style={{ color:C.goldL, fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>E-MAIL</div>
-            <div style={{ color:"rgba(255,255,255,0.9)", fontSize:17, marginTop:2 }}>bethviagens.comercial@gmail.com</div>
-          </div>
+          <div><div style={{ color:C.goldL, fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>E-MAIL</div><div style={{ color:"rgba(255,255,255,0.9)", fontSize:17, marginTop:2 }}>bethviagens.comercial@gmail.com</div></div>
         </a>
       </div>
       <Card>
@@ -681,42 +634,35 @@ function PageContato() {
 // ═══════════════════════════════════════════════════════════
 //  APP PRINCIPAL
 // ═══════════════════════════════════════════════════════════
-export default function App() {
-  const [page, setPage]            = useState("hoje");
-  const [expandedDay, setExpanded] = useState(null);
-  const [weather, setWeather]      = useState({});
-  const [checked, setChecked]      = useState({});
+export default function App(){
+  const [page,setPage]            = useState("hoje");
+  const [expandedDay,setExpanded] = useState(null);
+  const [weather,setWeather]      = useState({});
+  const [checked,setChecked]      = useState({});
 
-  // Carrega checklist do localStorage
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("peregrinacao_checklist");
-      if (saved) setChecked(JSON.parse(saved));
-    } catch (_) {}
-  }, []);
+  useEffect(()=>{
+    try{ const s=localStorage.getItem("peregrinacao_checklist"); if(s) setChecked(JSON.parse(s)); }catch(_){}
+  },[]);
 
-  // Busca clima ao montar
-  useEffect(() => {
-    async function fetchWeather() {
-      const results = {};
-      for (const [key, city] of Object.entries(WEATHER_CITIES)) {
-        try {
-          const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&start_date=2026-10-30&end_date=2026-11-12`;
-          const res  = await fetch(url);
-          const data = await res.json();
-          if (data.daily) results[key] = data.daily;
-        } catch (_) {}
+  useEffect(()=>{
+    async function fetchWeather(){
+      const results={};
+      for(const [key,city] of Object.entries(WEATHER_CITIES)){
+        try{
+          const url=`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&start_date=2026-10-30&end_date=2026-11-12`;
+          const res=await fetch(url); const data=await res.json();
+          if(data.daily) results[key]=data.daily;
+        }catch(_){}
       }
       setWeather(results);
     }
     fetchWeather();
-  }, []);
+  },[]);
 
-  // Marca/desmarca item e salva no localStorage
-  function toggleCheck(id) {
-    setChecked(prev => {
-      const next = { ...prev, [id]: !prev[id] };
-      try { localStorage.setItem("peregrinacao_checklist", JSON.stringify(next)); } catch(_){}
+  function toggleCheck(id){
+    setChecked(prev=>{
+      const next={...prev,[id]:!prev[id]};
+      try{ localStorage.setItem("peregrinacao_checklist",JSON.stringify(next)); }catch(_){}
       return next;
     });
   }
@@ -724,20 +670,22 @@ export default function App() {
   const today         = new Date(); today.setHours(0,0,0,0);
   const tripStart     = new Date("2026-10-30T00:00:00");
   const tripEnd       = new Date("2026-11-12T00:00:00");
-  const daysUntilTrip = Math.ceil((tripStart - today) / 86400000);
-  const currentDay    = ITINERARY.find(d => d.date === todayStr()) || null;
-  const tripOver      = today > tripEnd;
+  const daysUntilTrip = Math.ceil((tripStart-today)/86400000);
+  const currentDay    = ITINERARY.find(d=>d.date===todayStr())||null;
+  const tripOver      = today>tripEnd;
+  const duringTrip    = today>=tripStart && today<=tripEnd;
+  const hotelAtual    = duringTrip ? getCurrentHotel() : null;
 
-  const NAV = [
-    { id:"hoje",    icon:"🏠", label:"Hoje"    },
-    { id:"roteiro", icon:"📅", label:"Roteiro" },
-    { id:"clima",   icon:"⛅", label:"Clima"   },
-    { id:"pacote",  icon:"📋", label:"Pacote"  },
-    { id:"vip",     icon:"🛋️", label:"Salas"   },
-    { id:"contato", icon:"📞", label:"Contato" },
+  const NAV=[
+    {id:"hoje",    icon:"🏠", label:"Hoje"   },
+    {id:"roteiro", icon:"📅", label:"Roteiro"},
+    {id:"clima",   icon:"⛅", label:"Clima"  },
+    {id:"pacote",  icon:"📋", label:"Pacote" },
+    {id:"vip",     icon:"🛋️", label:"Salas"  },
+    {id:"contato", icon:"📞", label:"Contato"},
   ];
 
-  return (
+  return(
     <div style={{ minHeight:"100vh", background:C.cream, fontFamily:"'EB Garamond',Georgia,serif", color:C.brown, paddingBottom:90, maxWidth:540, margin:"0 auto" }}>
 
       <header style={{ background:`linear-gradient(160deg,${C.navy} 0%,${C.navyL} 100%)`, padding:"20px 20px 16px", boxShadow:"0 4px 24px rgba(27,43,94,0.35)", position:"sticky", top:0, zIndex:50 }}>
@@ -752,6 +700,9 @@ export default function App() {
       {page==="pacote"  && <PagePacote />}
       {page==="vip"     && <PageSalasVip />}
       {page==="contato" && <PageContato />}
+
+      {/* Botão flutuante — aparece apenas durante a viagem, em qualquer aba */}
+      <BotaoHotel hotel={hotelAtual} />
 
       <nav style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:540, background:C.navy, display:"flex", borderTop:`3px solid ${C.gold}`, zIndex:100 }}>
         {NAV.map(n=>(
