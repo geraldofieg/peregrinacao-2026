@@ -208,16 +208,20 @@ function DayCard({ d, expanded, onToggle }){
 //  Aparece apenas durante os dias da viagem.
 //  Abre o Google Maps com a rota até o hotel atual.
 // ═══════════════════════════════════════════════════════════
-function BotaoHotel({ hotel, antesViagem }) {
+function BotaoHotel({ hotel }) {
   const [mostrarInfo, setMostrarInfo] = useState(false);
 
   function abrirMaps() {
     if (!hotel) return;
-    // Antes da viagem ou sem endereço confirmado: mostra explicação
-    if (antesViagem || !hotel.mapsQuery) {
+
+    // Se o endereço ainda não foi definido, avisa o usuário
+    if (!hotel.mapsQuery) {
       setMostrarInfo(true);
       return;
     }
+
+    // Monta a URL do Google Maps com rota a pé até o hotel.
+    // O Google Maps usa o GPS do celular como ponto de partida automaticamente.
     const destino = encodeURIComponent(hotel.mapsQuery);
     const url = `https://www.google.com/maps/dir/?api=1&destination=${destino}&travelmode=walking`;
     window.open(url, "_blank");
@@ -232,10 +236,10 @@ function BotaoHotel({ hotel, antesViagem }) {
         onClick={abrirMaps}
         style={{
           position: "fixed",
-          bottom: 100,
+          bottom: 100,          // fica acima da barra de navegação
           right: 16,
           zIndex: 200,
-          background: "linear-gradient(135deg, #1B5E20, #2E7D32)",
+          background: `linear-gradient(135deg, #1B5E20, #2E7D32)`,
           color: C.white,
           border: "none",
           borderRadius: 20,
@@ -255,55 +259,29 @@ function BotaoHotel({ hotel, antesViagem }) {
         </span>
       </button>
 
-      {/* Modal — explicação antes da viagem */}
+      {/* Modal de aviso quando endereço ainda não foi definido */}
       {mostrarInfo && (
         <div
           onClick={() => setMostrarInfo(false)}
-          style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.6)", zIndex:300, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}
+          style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.55)", zIndex:300, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}
         >
           <div
             onClick={e => e.stopPropagation()}
             style={{ background:C.white, borderRadius:20, padding:"28px 22px", maxWidth:340, width:"100%", textAlign:"center", boxShadow:"0 8px 40px rgba(0,0,0,0.3)" }}
           >
-            {antesViagem ? (
-              <>
-                <div style={{ fontSize:52, marginBottom:14 }}>🗺️</div>
-                <div style={{ fontFamily:"'Cinzel',serif", fontSize:21, fontWeight:700, color:C.navy, marginBottom:14 }}>
-                  Como funciona este botão
-                </div>
-                <div style={{ fontSize:17, color:C.brown, lineHeight:1.75, marginBottom:10 }}>
-                  Durante a viagem, ao tocar aqui, o <strong>Google Maps</strong> abrirá automaticamente com a rota a pé de onde vocês estiverem até o hotel do dia.
-                </div>
-                <div style={{ fontSize:17, color:C.brown, lineHeight:1.75, marginBottom:20 }}>
-                  O botão reconhece em qual cidade vocês estão a cada dia e aponta sempre para a hospedagem certa — seja em <strong>Lisboa</strong>, <strong>Roma</strong> ou <strong>Assis</strong>.
-                </div>
-                <div style={{ background:C.creamD, borderRadius:12, padding:"12px 14px", marginBottom:22, fontSize:16, color:C.brownM, lineHeight:1.6 }}>
-                  💡 Assim vocês podem sair para passear com tranquilidade e voltar para o hotel sem se preocupar!
-                </div>
-                <button
-                  onClick={() => setMostrarInfo(false)}
-                  style={{ background:C.navy, color:C.white, border:"none", borderRadius:14, padding:"14px 32px", fontSize:17, fontFamily:"'Cinzel',serif", fontWeight:700, cursor:"pointer" }}
-                >
-                  Entendido! 🙏
-                </button>
-              </>
-            ) : (
-              <>
-                <div style={{ fontSize:48, marginBottom:14 }}>📍</div>
-                <div style={{ fontFamily:"'Cinzel',serif", fontSize:20, fontWeight:700, color:C.navy, marginBottom:12 }}>
-                  {hotel.name}
-                </div>
-                <div style={{ fontSize:17, color:C.brownM, marginBottom:20, lineHeight:1.65 }}>
-                  O endereço deste hotel ainda está sendo confirmado pela agência. Em breve o botão abrirá o Google Maps automaticamente!
-                </div>
-                <button
-                  onClick={() => setMostrarInfo(false)}
-                  style={{ background:C.navy, color:C.white, border:"none", borderRadius:14, padding:"13px 30px", fontSize:17, fontFamily:"'Cinzel',serif", fontWeight:700, cursor:"pointer" }}
-                >
-                  Entendido
-                </button>
-              </>
-            )}
+            <div style={{ fontSize:48, marginBottom:14 }}>📍</div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:20, fontWeight:700, color:C.navy, marginBottom:12 }}>
+              {hotel.name}
+            </div>
+            <div style={{ ...T.body, fontSize:16, color:C.brownM, marginBottom:20, lineHeight:1.65 }}>
+              O endereço deste hotel ainda está sendo confirmado pela agência. Assim que for informado, o botão abrirá o Google Maps automaticamente!
+            </div>
+            <button
+              onClick={() => setMostrarInfo(false)}
+              style={{ background:C.navy, color:C.white, border:"none", borderRadius:14, padding:"13px 30px", fontSize:17, fontFamily:"'Cinzel',serif", fontWeight:700, cursor:"pointer" }}
+            >
+              Entendido
+            </button>
           </div>
         </div>
       )}
@@ -696,7 +674,7 @@ export default function App(){
   const currentDay    = ITINERARY.find(d=>d.date===todayStr())||null;
   const tripOver      = today>tripEnd;
   const duringTrip    = today>=tripStart && today<=tripEnd;
-  const hotelAtual    = duringTrip ? getCurrentHotel() : HOTELS[0];
+  const hotelAtual    = duringTrip ? getCurrentHotel() : null;
 
   const NAV=[
     {id:"hoje",    icon:"🏠", label:"Hoje"   },
@@ -723,8 +701,8 @@ export default function App(){
       {page==="vip"     && <PageSalasVip />}
       {page==="contato" && <PageContato />}
 
-      {/* Botão flutuante — visível sempre, em qualquer aba */}
-      <BotaoHotel hotel={hotelAtual} antesViagem={daysUntilTrip > 0} />
+      {/* Botão flutuante — aparece apenas durante a viagem, em qualquer aba */}
+      <BotaoHotel hotel={hotelAtual} />
 
       <nav style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:540, background:C.navy, display:"flex", borderTop:`3px solid ${C.gold}`, zIndex:100 }}>
         {NAV.map(n=>(
