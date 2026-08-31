@@ -559,6 +559,206 @@ function PagePacote(){
 }
 
 // ═══════════════════════════════════════════════════════════
+//  PÁGINA: VOOS
+// ═══════════════════════════════════════════════════════════
+function PageVoos(){
+  const [expandido, setExpandido] = useState(null);
+
+  const VOOS = [
+    {
+      num:1, icon:"🛫", voo:"TP 58",
+      trecho:"Brasília → Lisboa",
+      origem:  { code:"BSB", name:"Brasília J. Kubitschek Intl", terminal:"Terminal 1" },
+      destino: { code:"LIS", name:"Lisboa Lisbon Airport",       terminal:"Terminal 1" },
+      partida: { data:"30 Out 2026", hora:"18:30" },
+      chegada: { data:"31 Out 2026", hora:"06:40" },
+      aviao:"Boeing 339", classe:"G — Econômica", duracao:"~10h10",
+    },
+    {
+      num:2, icon:"✈️", voo:"TP 834",
+      trecho:"Lisboa → Roma",
+      origem:  { code:"LIS", name:"Lisboa Lisbon Airport", terminal:"Terminal 1" },
+      destino: { code:"FCO", name:"Roma Fiumicino",        terminal:"Terminal 1" },
+      partida: { data:"03 Nov 2026", hora:"11:45" },
+      chegada: { data:"03 Nov 2026", hora:"15:50" },
+      aviao:"Airbus 321", classe:"G — Econômica", duracao:"~2h05",
+    },
+    {
+      num:3, icon:"✈️", voo:"TP 839",
+      trecho:"Roma → Lisboa",
+      origem:  { code:"FCO", name:"Roma Fiumicino",       terminal:"Terminal 1" },
+      destino: { code:"LIS", name:"Lisboa Lisbon Airport", terminal:"Terminal 1" },
+      partida: { data:"12 Nov 2026", hora:"05:55" },
+      chegada: { data:"12 Nov 2026", hora:"08:10" },
+      aviao:"Airbus 321", classe:"G — Econômica", duracao:"~2h15",
+      conexao:{ local:"Lisboa (LIS)", duracao:"1h45", proximoVoo:"09:55" },
+    },
+    {
+      num:4, icon:"🛬", voo:"TP 57",
+      trecho:"Lisboa → Brasília",
+      origem:  { code:"LIS", name:"Lisboa Lisbon Airport",        terminal:"Terminal 1" },
+      destino: { code:"BSB", name:"Brasília J. Kubitschek Intl",  terminal:"—" },
+      partida: { data:"12 Nov 2026", hora:"09:55" },
+      chegada: { data:"12 Nov 2026", hora:"16:45" },
+      aviao:"Boeing 339", classe:"G — Econômica", duracao:"~8h50",
+    },
+  ];
+
+  return(
+    <div style={{ padding:"20px 16px" }}>
+      <div style={{ marginBottom:16 }}>
+        <div style={T.pageTitle}>Voos</div>
+        <div style={{ ...T.sub, marginTop:4 }}>TAP Air Portugal · Localizador: ZRFUUD</div>
+      </div>
+
+      {/* Passageiros e localizador */}
+      <Card>
+        <SectionLabel>👥 Passageiros</SectionLabel>
+        {[
+          { nome:"Mary Ruth Rodrigues Jacobina", bilhete:"047 9293397805" },
+          { nome:"Jason Jose Percilio",          bilhete:"047 9293397804" },
+        ].map((p,i,arr)=>(
+          <div key={i} style={{ display:"flex", gap:12, padding:"12px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"center" }}>
+            <span style={{ fontSize:26 }}>👤</span>
+            <div>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy }}>{p.nome}</div>
+              <div style={{ ...T.sub, fontSize:14, marginTop:2 }}>Bilhete: {p.bilhete}</div>
+            </div>
+          </div>
+        ))}
+        <div style={{ marginTop:12, background:C.creamD, borderRadius:12, padding:"12px 14px", display:"flex", gap:10, alignItems:"center" }}>
+          <span style={{ fontSize:22 }}>🔑</span>
+          <div>
+            <div style={{ fontSize:14, color:C.brownM }}>Localizador de reserva</div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:22, fontWeight:700, color:C.navy, letterSpacing:2 }}>ZRFUUD</div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Resumo visual da rota */}
+      <Card>
+        <SectionLabel>🗺️ Rota completa</SectionLabel>
+        <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:4, flexWrap:"wrap", padding:"8px 0" }}>
+          {["BSB","LIS","FCO","LIS","BSB"].map((code,i,arr)=>(
+            <div key={i} style={{ display:"flex", alignItems:"center", gap:4 }}>
+              <div style={{ background: i===0||i===arr.length-1 ? C.navy : C.gold, color:C.white, borderRadius:8, padding:"6px 10px", fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700 }}>{code}</div>
+              {i<arr.length-1 && <span style={{ color:C.brownM, fontSize:14 }}>→</span>}
+            </div>
+          ))}
+        </div>
+        <div style={{ ...T.sub, fontSize:14, textAlign:"center", marginTop:8 }}>30 Out · 03 Nov · 12 Nov · 12 Nov · 12 Nov</div>
+      </Card>
+
+      {/* Cards dos voos */}
+      {VOOS.map((v,i)=>{
+        const open = expandido === i;
+        return(
+          <div key={i}>
+            <div onClick={()=>setExpandido(open?null:i)} style={{ background:C.white, borderRadius:18, padding:"18px 16px", marginBottom:v.conexao?0:14, boxShadow:"0 3px 18px rgba(0,0,0,0.09)", border:`2px solid ${open?C.gold:C.creamD}`, cursor:"pointer" }}>
+              {/* Cabeçalho */}
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:14 }}>
+                <div>
+                  <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:4 }}>
+                    <span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"3px 12px", fontSize:13, fontFamily:"'Cinzel',serif", fontWeight:700 }}>Voo {v.num} de 4</span>
+                    <span style={{ ...T.sub, fontSize:14 }}>{v.voo}</span>
+                  </div>
+                  <div style={{ fontFamily:"'Cinzel',serif", fontSize:18, fontWeight:700, color:C.navy }}>{v.trecho}</div>
+                </div>
+                <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+                  <span style={{ fontSize:30 }}>{v.icon}</span>
+                  <span style={{ color:C.gold, fontSize:18, fontWeight:700 }}>{open?"▲":"▼"}</span>
+                </div>
+              </div>
+
+              {/* Horários — sempre visíveis */}
+              <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+                <div style={{ flex:1, background:`linear-gradient(135deg,${C.navy},${C.navyL})`, borderRadius:12, padding:"12px 10px", textAlign:"center" }}>
+                  <div style={{ color:"rgba(255,255,255,0.6)", fontSize:11, fontFamily:"'Cinzel',serif", letterSpacing:1 }}>PARTIDA</div>
+                  <div style={{ color:C.goldL, fontSize:26, fontWeight:700, fontFamily:"'Cinzel',serif", lineHeight:1.1 }}>{v.partida.hora}</div>
+                  <div style={{ color:"rgba(255,255,255,0.75)", fontSize:13, marginTop:2 }}>{v.partida.data}</div>
+                  <div style={{ color:C.goldL, fontSize:16, fontWeight:700, marginTop:4 }}>{v.origem.code}</div>
+                </div>
+                <div style={{ textAlign:"center" }}>
+                  <div style={{ fontSize:11, color:C.brownM, marginBottom:2 }}>{v.duracao}</div>
+                  <div style={{ fontSize:20, color:C.creamD, fontWeight:700 }}>→</div>
+                </div>
+                <div style={{ flex:1, background:C.creamD, borderRadius:12, padding:"12px 10px", textAlign:"center" }}>
+                  <div style={{ color:C.brownM, fontSize:11, fontFamily:"'Cinzel',serif", letterSpacing:1 }}>CHEGADA</div>
+                  <div style={{ color:C.navy, fontSize:26, fontWeight:700, fontFamily:"'Cinzel',serif", lineHeight:1.1 }}>{v.chegada.hora}</div>
+                  <div style={{ color:C.brownM, fontSize:13, marginTop:2 }}>{v.chegada.data}</div>
+                  <div style={{ color:C.navy, fontSize:16, fontWeight:700, marginTop:4 }}>{v.destino.code}</div>
+                </div>
+              </div>
+
+              {/* Detalhes expandidos */}
+              {open && (
+                <div style={{ marginTop:14 }}>
+                  {[
+                    { label:"Origem",   value:`${v.origem.name} · ${v.origem.terminal}` },
+                    { label:"Destino",  value:`${v.destino.name} · ${v.destino.terminal}` },
+                    { label:"Aeronave", value:v.aviao },
+                    { label:"Classe",   value:v.classe },
+                  ].map((d,di,darr)=>(
+                    <div key={di} style={{ display:"flex", gap:10, padding:"8px 0", borderBottom:di<darr.length-1?`1px solid ${C.creamD}`:"none" }}>
+                      <span style={{ ...T.label, fontSize:11, minWidth:64, paddingTop:2 }}>{d.label}</span>
+                      <span style={{ ...T.body, fontSize:16, flex:1 }}>{d.value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Bloco de conexão entre voo 3 e 4 */}
+            {v.conexao && (
+              <div style={{ background:"#FFF8E1", borderRadius:14, padding:"14px 16px", margin:"0 0 14px 0", border:"1px solid #FFD54F", display:"flex", gap:12, alignItems:"flex-start" }}>
+                <span style={{ fontSize:28, flexShrink:0 }}>🔄</span>
+                <div>
+                  <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:"#5D4037", marginBottom:4 }}>Conexão em {v.conexao.local}</div>
+                  <div style={{ ...T.body, fontSize:16, color:"#5D4037", lineHeight:1.65 }}>
+                    Duração: <strong>{v.conexao.duracao}</strong> · Próximo voo às <strong>{v.conexao.proximoVoo}</strong>
+                  </div>
+                  <div style={{ fontSize:14, color:"#B71C1C", marginTop:6, fontWeight:600 }}>
+                    ⚠️ Tempo curto — ao desembarcar, siga direto para o portão do próximo voo.
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Bagagem */}
+      <Card>
+        <SectionLabel>🧳 Bagagem — por passageiro</SectionLabel>
+        {[
+          { icon:"🎒", tipo:"Mochila / item pessoal", detalhe:"1 peça · incluso" },
+          { icon:"🧳", tipo:"Bagagem de mão",          detalhe:"1 peça · incluso" },
+          { icon:"💼", tipo:"Bagagem despachada",      detalhe:"1 peça · até 23kg · incluso" },
+        ].map((b,i,arr)=>(
+          <div key={i} style={{ display:"flex", gap:12, padding:"12px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"center" }}>
+            <span style={{ fontSize:26 }}>{b.icon}</span>
+            <div>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy }}>{b.tipo}</div>
+              <div style={{ ...T.sub, fontSize:15, marginTop:2 }}>{b.detalhe}</div>
+            </div>
+          </div>
+        ))}
+      </Card>
+
+      {/* Alerta voo madrugada */}
+      <Card style={{ background:"#FDECEA", border:`1px solid ${C.red}` }}>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.red, marginBottom:8 }}>
+          ⏰ Atenção: voo de retorno é de madrugada!
+        </div>
+        <div style={{ ...T.body, fontSize:16, lineHeight:1.75 }}>
+          O voo de Roma (TP 839) parte às <strong>05:55 do dia 12/Nov</strong>. Será necessário estar no aeroporto de Fiumicino antes das 03:55. Combinado o transfer com a agência.
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
 //  DADOS DAS SALAS VIP E RESTAURANTES
 // ═══════════════════════════════════════════════════════════
 const LOUNGES = [
@@ -747,6 +947,136 @@ function PageSalasVip(){
 }
 
 // ═══════════════════════════════════════════════════════════
+//  PÁGINA: SEGURO VIAGEM
+// ═══════════════════════════════════════════════════════════
+function PageSeguro(){
+  const COBERTURAS = [
+    { icon:"🏥", titulo:"Emergência médica",      valor:"Até US$ 175.000",    detalhe:"Acidentes, doenças, epidemias e pandemias. Inclui hospitalização, cirurgias e repatriação médica." },
+    { icon:"👫", titulo:"Cônjuge dependente",     valor:"Incluído",           detalhe:"O esposo é coberto como dependente desde que as regras de pagamento da passagem sejam atendidas." },
+    { icon:"🧳", titulo:"Bagagem",                valor:"Auxílio financeiro", detalhe:"Indenização em caso de atraso, extravio ou perda definitiva da bagagem." },
+    { icon:"✈️", titulo:"Cancelamento de viagem", valor:"Coberto",            detalhe:"Reembolso de despesas não recuperáveis em caso de cancelamento por motivos previstos na apólice." },
+    { icon:"🚗", titulo:"Locação de veículos",    valor:"Coberto",            detalhe:"Proteção em caso de danos ao veículo alugado durante a viagem." },
+    { icon:"📅", titulo:"Duração da cobertura",   valor:"Até 60 dias",        detalhe:"Por viagem internacional consecutiva. A apólice principal pode valer 12 meses para múltiplos trechos." },
+  ];
+
+  const PASSOS = [
+    { num:"1", titulo:"Pague a passagem com o cartão", desc:'Use o Ourocard Visa Infinite do Banco do Brasil para pagar integralmente a passagem aérea — ou use os pontos do próprio cartão cobrindo as taxas de emissão.' },
+    { num:"2", titulo:"Acesse o Portal de Benefícios Visa", desc:'Acesse o site visabenefitslac.axa-assistance.us antes de embarcar. Faça login com os dados do cartão Visa Infinite.' },
+    { num:"3", titulo:"Emita o bilhete de seguro", desc:'Dentro do portal, localize o benefício "Seguro de Viagem" e emita o bilhete para a viagem. Inclua o esposo como dependente (cônjuge).' },
+    { num:"4", titulo:"Salve o comprovante", desc:'Baixe e salve o PDF do bilhete de seguro. Você também pode tirar uma foto da tela. Guarde fácil de acessar durante a viagem.' },
+    { num:"5", titulo:"Em caso de emergência, ligue", desc:'Use o número da AXA Assistance impresso no bilhete. Eles orientam o que fazer, indicam hospitais credenciados e autorizam atendimento.' },
+  ];
+
+  return(
+    <div style={{ padding:"20px 16px" }}>
+      <div style={{ marginBottom:16 }}>
+        <div style={T.pageTitle}>Seguro Viagem</div>
+        <div style={{ ...T.sub, marginTop:4 }}>Benefício gratuito do Visa Infinite — Banco do Brasil</div>
+      </div>
+
+      {/* Card principal — emergência em destaque */}
+      <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"22px 18px", border:`2px solid ${C.gold}`, marginBottom:16 }}>
+        <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:18, fontWeight:700, marginBottom:16 }}>🆘 Em caso de emergência</div>
+
+        {/* Telefone destaque */}
+        <a href="tel:+18008472911" style={{ display:"flex", gap:14, alignItems:"center", background:"rgba(183,28,28,0.3)", borderRadius:14, padding:"16px", textDecoration:"none", border:"1px solid rgba(255,100,100,0.5)", marginBottom:10 }}>
+          <span style={{ fontSize:36 }}>📞</span>
+          <div>
+            <div style={{ color:"#FF8A80", fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>EMERGÊNCIA INTERNACIONAL</div>
+            <div style={{ color:C.white, fontSize:22, fontWeight:700, marginTop:2 }}>+1 (800) 847-2911</div>
+            <div style={{ color:"rgba(255,255,255,0.6)", fontSize:13, marginTop:2 }}>AXA Assistance · Visa · 24h · gratuito</div>
+          </div>
+        </a>
+        <a href="tel:08009239234" style={{ display:"flex", gap:14, alignItems:"center", background:"rgba(255,255,255,0.1)", borderRadius:14, padding:"14px 16px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.3)" }}>
+          <span style={{ fontSize:30 }}>📞</span>
+          <div>
+            <div style={{ color:C.goldL, fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>DO BRASIL (ligação gratuita)</div>
+            <div style={{ color:C.white, fontSize:20, fontWeight:700, marginTop:2 }}>0800-892-3434</div>
+            <div style={{ color:"rgba(255,255,255,0.55)", fontSize:13, marginTop:2 }}>AXA Assistance Brasil · 24h</div>
+          </div>
+        </a>
+
+        <div style={{ marginTop:12, background:"rgba(255,255,255,0.07)", borderRadius:10, padding:"12px 14px" }}>
+          <div style={{ color:"rgba(255,255,255,0.75)", fontSize:15, lineHeight:1.7 }}>
+            ⚠️ Confirme os números exatos no bilhete de seguro emitido pelo portal. Os números acima são os oficiais da Visa/AXA mas o bilhete pode ter um número específico para sua apólice.
+          </div>
+        </div>
+      </div>
+
+      {/* Cobertura inclui o padrasto */}
+      <Card style={{ background:"#E8F5E9", border:`1px solid #A5D6A7` }}>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.green, marginBottom:8 }}>
+          👫 O padrasto também está coberto!
+        </div>
+        <div style={{ ...T.body, fontSize:16, lineHeight:1.75 }}>
+          Como cônjuge da titular do cartão, o esposo tem direito à cobertura como dependente — desde que a passagem tenha sido paga com o Ourocard Visa Infinite e o bilhete tenha sido emitido antes do embarque incluindo-o.
+        </div>
+      </Card>
+
+      {/* Passo a passo — ANTES DE VIAJAR */}
+      <Card>
+        <SectionLabel>📋 O que fazer ANTES de embarcar</SectionLabel>
+        {PASSOS.map((p, i, arr) => (
+          <div key={i} style={{ display:"flex", gap:14, padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}>
+            <div style={{ width:34, height:34, borderRadius:10, background:C.navy, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+              <span style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:16, fontWeight:700 }}>{p.num}</span>
+            </div>
+            <div>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy, marginBottom:4 }}>{p.titulo}</div>
+              <div style={{ ...T.body, fontSize:16, lineHeight:1.7 }}>{p.desc}</div>
+            </div>
+          </div>
+        ))}
+
+        {/* Link para o portal */}
+        <a
+          href="https://visabenefitslac.axa-assistance.us/benefits/I_C_BR"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginTop:16, background:C.navy, color:C.goldL, borderRadius:12, padding:"14px", textDecoration:"none", fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700 }}
+        >
+          🔗 Abrir Portal de Benefícios Visa
+        </a>
+      </Card>
+
+      {/* Tabela de coberturas */}
+      <Card>
+        <SectionLabel>🛡️ Coberturas incluídas</SectionLabel>
+        {COBERTURAS.map((cob, i, arr) => (
+          <div key={i} style={{ padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:10, marginBottom:6 }}>
+              <div style={{ display:"flex", gap:10, alignItems:"center" }}>
+                <span style={{ fontSize:22 }}>{cob.icon}</span>
+                <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.navy }}>{cob.titulo}</div>
+              </div>
+              <span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"3px 12px", fontSize:13, fontFamily:"'Cinzel',serif", fontWeight:700, flexShrink:0, whiteSpace:"nowrap" }}>{cob.valor}</span>
+            </div>
+            <div style={{ ...T.body, fontSize:15, lineHeight:1.65, color:C.brownM, paddingLeft:32 }}>{cob.detalhe}</div>
+          </div>
+        ))}
+      </Card>
+
+      {/* Regras importantes */}
+      <Card style={{ background:"#FFF8E1", border:"1px solid #FFD54F" }}>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:"#5D4037", marginBottom:10 }}>⚠️ Regras importantes</div>
+        {[
+          "A passagem aérea deve ser paga integralmente com o Ourocard Visa Infinite.",
+          "Também é válido usar pontos do próprio cartão, desde que as taxas sejam pagas com ele.",
+          "O bilhete de seguro DEVE ser emitido pelo portal antes de embarcar.",
+          "Cobertura válida por até 60 dias consecutivos por viagem internacional.",
+          "Confirme com o Banco do Brasil se a passagem da viagem se enquadra nas regras de elegibilidade.",
+        ].map((r, i) => (
+          <div key={i} style={{ display:"flex", gap:10, padding:"8px 0", borderBottom:i<4?`1px solid #FFE082`:"none", alignItems:"flex-start" }}>
+            <span style={{ color:"#F57F17", fontSize:18, flexShrink:0, fontWeight:700 }}>!</span>
+            <span style={{ ...T.body, fontSize:16, lineHeight:1.65 }}>{r}</span>
+          </div>
+        ))}
+      </Card>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
 //  PÁGINA: CONTATO
 // ═══════════════════════════════════════════════════════════
 function PageContato(){
@@ -854,9 +1184,11 @@ export default function App(){
   const NAV=[
     {id:"hoje",    icon:"🏠", label:"Hoje"   },
     {id:"roteiro", icon:"📅", label:"Roteiro"},
+    {id:"voos",    icon:"✈️", label:"Voos"   },
     {id:"clima",   icon:"⛅", label:"Clima"  },
     {id:"pacote",  icon:"📋", label:"Pacote" },
     {id:"vip",     icon:"🛋️", label:"Salas"  },
+    {id:"seguro",  icon:"🛡️", label:"Seguro" },
     {id:"contato", icon:"📞", label:"Contato"},
   ];
 
@@ -871,9 +1203,11 @@ export default function App(){
 
       {page==="hoje"    && <PageHoje currentDay={currentDay} daysUntilTrip={daysUntilTrip} tripOver={tripOver} weather={weather} checked={checked} toggleCheck={toggleCheck} />}
       {page==="roteiro" && <PageRoteiro expandedDay={expandedDay} setExpandedDay={setExpanded} />}
+      {page==="voos"    && <PageVoos />}
       {page==="clima"   && <PageClima weather={weather} />}
       {page==="pacote"  && <PagePacote />}
       {page==="vip"     && <PageSalasVip />}
+      {page==="seguro"  && <PageSeguro />}
       {page==="contato" && <PageContato />}
 
       {/* Botão flutuante — visível sempre, em qualquer aba */}
@@ -881,9 +1215,9 @@ export default function App(){
 
       <nav style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:540, background:C.navy, display:"flex", borderTop:`3px solid ${C.gold}`, zIndex:100 }}>
         {NAV.map(n=>(
-          <button key={n.id} onClick={()=>setPage(n.id)} style={{ flex:1, padding:"11px 1px 9px", background:page===n.id?"rgba(232,168,32,0.2)":"none", border:"none", cursor:"pointer", display:"flex", flexDirection:"column", alignItems:"center", gap:2 }}>
-            <span style={{ fontSize:21 }}>{n.icon}</span>
-            <span style={{ fontSize:9, color:page===n.id?C.goldL:"rgba(255,255,255,0.55)", fontFamily:"'Cinzel',serif", letterSpacing:0.3, fontWeight:page===n.id?700:500 }}>{n.label}</span>
+          <button key={n.id} onClick={()=>setPage(n.id)} style={{ flex:1, padding:"9px 0 7px", background:page===n.id?"rgba(232,168,32,0.2)":"none", border:"none", cursor:"pointer", display:"flex", flexDirection:"column", alignItems:"center", gap:1 }}>
+            <span style={{ fontSize:18 }}>{n.icon}</span>
+            <span style={{ fontSize:7.5, color:page===n.id?C.goldL:"rgba(255,255,255,0.55)", fontFamily:"'Cinzel',serif", letterSpacing:0.1, fontWeight:page===n.id?700:500 }}>{n.label}</span>
           </button>
         ))}
       </nav>
