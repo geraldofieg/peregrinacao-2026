@@ -572,7 +572,10 @@ function PageVoos(){
       destino: { code:"LIS", name:"Lisboa Lisbon Airport",       terminal:"Terminal 1" },
       partida: { data:"30 Out 2026", hora:"18:30" },
       chegada: { data:"31 Out 2026", hora:"06:40" },
+      embarque:"17:30",   // portões fecham 1h antes — voo internacional longo
+      chegarAeroporto:"15:30",  // 3h antes — internacional com despacho de bagagem
       aviao:"Boeing 339", classe:"G — Econômica", duracao:"~10h10",
+      alerta:"Voo internacional longo (noite). Chegue ao aeroporto às 15h30 — 3 horas antes.",
     },
     {
       num:2, icon:"✈️", voo:"TP 834",
@@ -581,26 +584,36 @@ function PageVoos(){
       destino: { code:"FCO", name:"Roma Fiumicino",        terminal:"Terminal 1" },
       partida: { data:"03 Nov 2026", hora:"11:45" },
       chegada: { data:"03 Nov 2026", hora:"15:50" },
+      embarque:"11:00",
+      chegarAeroporto:"09:45", // 2h antes — europeu com passaporte fora da UE
       aviao:"Airbus 321", classe:"G — Econômica", duracao:"~2h05",
+      alerta:"Voo europeu. Chegue ao aeroporto às 09h45 — 2 horas antes. Lembre do controle de segurança.",
     },
     {
       num:3, icon:"✈️", voo:"TP 839",
       trecho:"Roma → Lisboa",
-      origem:  { code:"FCO", name:"Roma Fiumicino",       terminal:"Terminal 1" },
+      origem:  { code:"FCO", name:"Roma Fiumicino",        terminal:"Terminal 1" },
       destino: { code:"LIS", name:"Lisboa Lisbon Airport", terminal:"Terminal 1" },
       partida: { data:"12 Nov 2026", hora:"05:55" },
       chegada: { data:"12 Nov 2026", hora:"08:10" },
+      embarque:"05:15",
+      chegarAeroporto:"03:55", // 2h antes — madrugada!
       aviao:"Airbus 321", classe:"G — Econômica", duracao:"~2h15",
       conexao:{ local:"Lisboa (LIS)", duracao:"1h45", proximoVoo:"09:55" },
+      alerta:"⚠️ VOO DE MADRUGADA! Partida às 05:55. É preciso estar no aeroporto às 03h55. Combinar transfer com a agência na véspera.",
+      alertaUrgente: true,
     },
     {
       num:4, icon:"🛬", voo:"TP 57",
       trecho:"Lisboa → Brasília",
-      origem:  { code:"LIS", name:"Lisboa Lisbon Airport",        terminal:"Terminal 1" },
-      destino: { code:"BSB", name:"Brasília J. Kubitschek Intl",  terminal:"—" },
+      origem:  { code:"LIS", name:"Lisboa Lisbon Airport",       terminal:"Terminal 1" },
+      destino: { code:"BSB", name:"Brasília J. Kubitschek Intl", terminal:"—" },
       partida: { data:"12 Nov 2026", hora:"09:55" },
       chegada: { data:"12 Nov 2026", hora:"16:45" },
+      embarque:"09:15",
+      chegarAeroporto:"Vindo da conexão — já estão no aeroporto",
       aviao:"Boeing 339", classe:"G — Econômica", duracao:"~8h50",
+      alerta:"Conexão de 1h45 em Lisboa. Ao desembarcar do TP 839, siga direto ao portão do TP 57.",
     },
   ];
 
@@ -690,6 +703,39 @@ function PageVoos(){
                 </div>
               </div>
 
+              {/* Linha do tempo: chegada ao aeroporto → embarque → decolagem */}
+              <div style={{ marginTop:14, background: v.alertaUrgente?"#FDECEA":"#EEF2FF", borderRadius:12, padding:"12px 14px", border:`1.5px solid ${v.alertaUrgente?C.red:"#7986CB"}` }}>
+                <div style={{ fontFamily:"'Cinzel',serif", fontSize:12, fontWeight:700, color: v.alertaUrgente?C.red:"#3949AB", letterSpacing:1, textTransform:"uppercase", marginBottom:10 }}>
+                  {v.alertaUrgente?"⚠️ Atenção especial":"🕐 Horários importantes"}
+                </div>
+                <div style={{ display:"flex", alignItems:"center", gap:0 }}>
+                  {/* Aeroporto */}
+                  <div style={{ textAlign:"center", flex:1 }}>
+                    <div style={{ fontSize:20, marginBottom:4 }}>🏢</div>
+                    <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color: v.alertaUrgente?C.red:"#1A237E" }}>{v.chegarAeroporto}</div>
+                    <div style={{ fontSize:11, color: v.alertaUrgente?C.red:"#3949AB", marginTop:2, lineHeight:1.4 }}>Chegar ao{"\n"}aeroporto</div>
+                  </div>
+                  <div style={{ color:C.brownM, fontSize:16, flex:"0 0 auto", paddingBottom:16 }}>→</div>
+                  {/* Embarque */}
+                  <div style={{ textAlign:"center", flex:1 }}>
+                    <div style={{ fontSize:20, marginBottom:4 }}>🚪</div>
+                    <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color: v.alertaUrgente?C.red:"#1A237E" }}>{v.embarque}</div>
+                    <div style={{ fontSize:11, color: v.alertaUrgente?C.red:"#3949AB", marginTop:2, lineHeight:1.4 }}>Início do{"\n"}embarque</div>
+                  </div>
+                  <div style={{ color:C.brownM, fontSize:16, flex:"0 0 auto", paddingBottom:16 }}>→</div>
+                  {/* Decolagem */}
+                  <div style={{ textAlign:"center", flex:1 }}>
+                    <div style={{ fontSize:20, marginBottom:4 }}>{v.icon}</div>
+                    <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color: v.alertaUrgente?C.red:"#1A237E" }}>{v.partida.hora}</div>
+                    <div style={{ fontSize:11, color: v.alertaUrgente?C.red:"#3949AB", marginTop:2, lineHeight:1.4 }}>Decolagem</div>
+                  </div>
+                </div>
+                {/* Alerta textual */}
+                <div style={{ marginTop:10, paddingTop:10, borderTop:`1px solid ${v.alertaUrgente?"rgba(183,28,28,0.3)":"rgba(57,73,171,0.2)"}`, fontSize:14, color:v.alertaUrgente?C.red:"#283593", lineHeight:1.65, fontWeight: v.alertaUrgente?600:400 }}>
+                  {v.alerta}
+                </div>
+              </div>
+
               {/* Detalhes expandidos */}
               {open && (
                 <div style={{ marginTop:14 }}>
@@ -743,16 +789,6 @@ function PageVoos(){
             </div>
           </div>
         ))}
-      </Card>
-
-      {/* Alerta voo madrugada */}
-      <Card style={{ background:"#FDECEA", border:`1px solid ${C.red}` }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.red, marginBottom:8 }}>
-          ⏰ Atenção: voo de retorno é de madrugada!
-        </div>
-        <div style={{ ...T.body, fontSize:16, lineHeight:1.75 }}>
-          O voo de Roma (TP 839) parte às <strong>05:55 do dia 12/Nov</strong>. Será necessário estar no aeroporto de Fiumicino antes das 03:55. Combinado o transfer com a agência.
-        </div>
       </Card>
     </div>
   );
