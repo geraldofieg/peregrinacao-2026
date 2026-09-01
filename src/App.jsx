@@ -986,128 +986,252 @@ function PageSalasVip(){
 //  PÁGINA: SEGURO VIAGEM
 // ═══════════════════════════════════════════════════════════
 function PageSeguro(){
-  const COBERTURAS = [
-    { icon:"🏥", titulo:"Emergência médica",      valor:"Até US$ 175.000",    detalhe:"Acidentes, doenças, epidemias e pandemias. Inclui hospitalização, cirurgias e repatriação médica." },
-    { icon:"👫", titulo:"Cônjuge dependente",     valor:"Incluído",           detalhe:"O esposo é coberto como dependente desde que as regras de pagamento da passagem sejam atendidas." },
-    { icon:"🧳", titulo:"Bagagem",                valor:"Auxílio financeiro", detalhe:"Indenização em caso de atraso, extravio ou perda definitiva da bagagem." },
-    { icon:"✈️", titulo:"Cancelamento de viagem", valor:"Coberto",            detalhe:"Reembolso de despesas não recuperáveis em caso de cancelamento por motivos previstos na apólice." },
-    { icon:"🚗", titulo:"Locação de veículos",    valor:"Coberto",            detalhe:"Proteção em caso de danos ao veículo alugado durante a viagem." },
-    { icon:"📅", titulo:"Duração da cobertura",   valor:"Até 60 dias",        detalhe:"Por viagem internacional consecutiva. A apólice principal pode valer 12 meses para múltiplos trechos." },
-  ];
+  const [aba, setAba] = useState("emergencia");
 
-  const PASSOS = [
-    { num:"1", titulo:"Pague a passagem com o cartão", desc:'Use o Ourocard Visa Infinite do Banco do Brasil para pagar integralmente a passagem aérea — ou use os pontos do próprio cartão cobrindo as taxas de emissão.' },
-    { num:"2", titulo:"Acesse o Portal de Benefícios Visa", desc:'Acesse o site visabenefitslac.axa-assistance.us antes de embarcar. Faça login com os dados do cartão Visa Infinite.' },
-    { num:"3", titulo:"Emita o bilhete de seguro", desc:'Dentro do portal, localize o benefício "Seguro de Viagem" e emita o bilhete para a viagem. Inclua o esposo como dependente (cônjuge).' },
-    { num:"4", titulo:"Salve o comprovante", desc:'Baixe e salve o PDF do bilhete de seguro. Você também pode tirar uma foto da tela. Guarde fácil de acessar durante a viagem.' },
-    { num:"5", titulo:"Em caso de emergência, ligue", desc:'Use o número da AXA Assistance impresso no bilhete. Eles orientam o que fazer, indicam hospitais credenciados e autorizam atendimento.' },
+  const COBERTURAS = [
+    { icon:"🏥", titulo:"Despesas médicas e hospitalares",       valor:"US$ 175.000", detalhe:"Acidentes ou doenças súbitas, incluindo COVID-19 e SARS-CoV-2. Cobre hospitalização, cirurgias e tratamentos." },
+    { icon:"🦷", titulo:"Despesas odontológicas",                valor:"US$ 7.500",   detalhe:"Atendimento odontológico de emergência durante a viagem." },
+    { icon:"🚑", titulo:"Regresso Sanitário (Repatriação Médica)",valor:"US$ 100.000", detalhe:"Transporte médico de volta ao Brasil caso necessário por razões de saúde." },
+    { icon:"✈️", titulo:"Translado Médico (Remoção Médica)",     valor:"US$ 100.000", detalhe:"Transporte para outro local/hospital mais adequado ao tratamento." },
+    { icon:"⚰️", titulo:"Translado de Corpo (Repatriação Funerária)", valor:"US$ 100.000", detalhe:"Despesas de transporte funerário de volta ao Brasil." },
+    { icon:"🏠", titulo:"Retorno antecipado da pessoa elegível", valor:"US$ 30.000",  detalhe:"Retorno ao Brasil por emergência familiar ou hospitalar." },
+    { icon:"🏨", titulo:"Prorrogação de estadia",                valor:"US$ 2.000",   detalhe:"Extensão da hospedagem em caso de impossibilidade de retorno." },
+    { icon:"👥", titulo:"Acompanhante em hospitalização",        valor:"US$ 12.000",  detalhe:"Despesas de um acompanhante em caso de hospitalização prolongada." },
+    { icon:"💵", titulo:"Benefício em dinheiro — internação",    valor:"US$ 6.000",   detalhe:"Auxílio financeiro diário para paciente internado." },
+    { icon:"💺", titulo:"Retorno em classe executiva",           valor:"US$ 7.500",   detalhe:"Upgrade de retorno por necessidade médica documentada." },
+    { icon:"🐾", titulo:"Hospedagem de pet",                     valor:"US$ 650",     detalhe:"Despesas de canil ou hospedagem do animal em caso de hospitalização." },
+    { icon:"🚕", titulo:"Transporte VIP",                        valor:"US$ 2.500",   detalhe:"Transporte especial por necessidade médica durante a viagem." },
+    { icon:"🩹", titulo:"Despesas complementares — acidente",    valor:"US$ 300",     detalhe:"Despesas adicionais em caso de acidente." },
+    { icon:"🧳", titulo:"Atraso de bagagem",                     valor:"US$ 600",     detalhe:"Indenização após 4h de atraso na entrega da bagagem." },
+    { icon:"💼", titulo:"Perda ou roubo de bagagem",             valor:"US$ 3.500",   detalhe:"Em viagem por transporte público autorizado." },
+    { icon:"⏰", titulo:"Atraso de embarque",                    valor:"US$ 200",     detalhe:"Após 4 horas de atraso no embarque." },
+    { icon:"❌", titulo:"Cancelamento de viagem",                valor:"US$ 4.500",   detalhe:"A partir da emissão do bilhete até a data do embarque." },
+    { icon:"🔗", titulo:"Perda de conexão aérea",                valor:"US$ 300",     detalhe:"Em caso de perda de conexão por motivos cobertos." },
   ];
 
   return(
     <div style={{ padding:"20px 16px" }}>
-      <div style={{ marginBottom:16 }}>
+      <div style={{ marginBottom:14 }}>
         <div style={T.pageTitle}>Seguro Viagem</div>
-        <div style={{ ...T.sub, marginTop:4 }}>Benefício gratuito do Visa Infinite — Banco do Brasil</div>
+        <div style={{ ...T.sub, marginTop:4 }}>AIG Seguros Brasil S.A. · Garantido pela Visa · Gratuito</div>
       </div>
 
-      {/* Card principal — emergência em destaque */}
-      <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"22px 18px", border:`2px solid ${C.gold}`, marginBottom:16 }}>
-        <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:18, fontWeight:700, marginBottom:16 }}>🆘 Em caso de emergência</div>
-
-        {/* Telefone destaque */}
-        <a href="tel:+18008472911" style={{ display:"flex", gap:14, alignItems:"center", background:"rgba(183,28,28,0.3)", borderRadius:14, padding:"16px", textDecoration:"none", border:"1px solid rgba(255,100,100,0.5)", marginBottom:10 }}>
-          <span style={{ fontSize:36 }}>📞</span>
-          <div>
-            <div style={{ color:"#FF8A80", fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>EMERGÊNCIA INTERNACIONAL</div>
-            <div style={{ color:C.white, fontSize:22, fontWeight:700, marginTop:2 }}>+1 (800) 847-2911</div>
-            <div style={{ color:"rgba(255,255,255,0.6)", fontSize:13, marginTop:2 }}>AXA Assistance · Visa · 24h · gratuito</div>
-          </div>
-        </a>
-        <a href="tel:08009239234" style={{ display:"flex", gap:14, alignItems:"center", background:"rgba(255,255,255,0.1)", borderRadius:14, padding:"14px 16px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.3)" }}>
-          <span style={{ fontSize:30 }}>📞</span>
-          <div>
-            <div style={{ color:C.goldL, fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>DO BRASIL (ligação gratuita)</div>
-            <div style={{ color:C.white, fontSize:20, fontWeight:700, marginTop:2 }}>0800-892-3434</div>
-            <div style={{ color:"rgba(255,255,255,0.55)", fontSize:13, marginTop:2 }}>AXA Assistance Brasil · 24h</div>
-          </div>
-        </a>
-
-        <div style={{ marginTop:12, background:"rgba(255,255,255,0.07)", borderRadius:10, padding:"12px 14px" }}>
-          <div style={{ color:"rgba(255,255,255,0.75)", fontSize:15, lineHeight:1.7 }}>
-            ⚠️ Confirme os números exatos no bilhete de seguro emitido pelo portal. Os números acima são os oficiais da Visa/AXA mas o bilhete pode ter um número específico para sua apólice.
-          </div>
-        </div>
-      </div>
-
-      {/* Cobertura inclui o padrasto */}
-      <Card style={{ background:"#E8F5E9", border:`1px solid #A5D6A7` }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.green, marginBottom:8 }}>
-          👫 O padrasto também está coberto!
-        </div>
-        <div style={{ ...T.body, fontSize:16, lineHeight:1.75 }}>
-          Como cônjuge da titular do cartão, o esposo tem direito à cobertura como dependente — desde que a passagem tenha sido paga com o Ourocard Visa Infinite e o bilhete tenha sido emitido antes do embarque incluindo-o.
-        </div>
-      </Card>
-
-      {/* Passo a passo — ANTES DE VIAJAR */}
+      {/* Bilhete da Mary — dados reais */}
       <Card>
-        <SectionLabel>📋 O que fazer ANTES de embarcar</SectionLabel>
-        {PASSOS.map((p, i, arr) => (
-          <div key={i} style={{ display:"flex", gap:14, padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}>
-            <div style={{ width:34, height:34, borderRadius:10, background:C.navy, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
-              <span style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:16, fontWeight:700 }}>{p.num}</span>
-            </div>
+        <SectionLabel>📄 Bilhetes de Seguro</SectionLabel>
+
+        {/* Mary — bilhete emitido */}
+        <div style={{ background:`linear-gradient(135deg,${C.navy},${C.navyL})`, borderRadius:14, padding:"16px 14px", marginBottom:10 }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:10 }}>
             <div>
-              <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy, marginBottom:4 }}>{p.titulo}</div>
-              <div style={{ ...T.body, fontSize:16, lineHeight:1.7 }}>{p.desc}</div>
+              <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700 }}>👤 Mary Ruth Jacobina</div>
+              <div style={{ color:"rgba(255,255,255,0.6)", fontSize:13, marginTop:3 }}>Titular do seguro</div>
+            </div>
+            <span style={{ background:"#1B5E20", color:"white", borderRadius:20, padding:"4px 12px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700 }}>✓ Emitido</span>
+          </div>
+          <div style={{ background:"rgba(255,255,255,0.08)", borderRadius:10, padding:"10px 12px" }}>
+            <div style={{ color:"rgba(255,255,255,0.55)", fontSize:12, letterSpacing:1, fontFamily:"'Cinzel',serif", marginBottom:4 }}>Nº DO BILHETE</div>
+            <div style={{ color:C.white, fontSize:15, fontWeight:700 }}>16011-0001-69-2610220786</div>
+            <div style={{ color:"rgba(255,255,255,0.5)", fontSize:13, marginTop:2 }}>CER-7374404</div>
+          </div>
+          <div style={{ display:"flex", gap:8, marginTop:8 }}>
+            <div style={{ flex:1, background:"rgba(255,255,255,0.08)", borderRadius:8, padding:"8px 10px" }}>
+              <div style={{ color:"rgba(255,255,255,0.5)", fontSize:11 }}>Início</div>
+              <div style={{ color:C.white, fontSize:14, fontWeight:700 }}>31/08/2026</div>
+            </div>
+            <div style={{ flex:1, background:"rgba(255,255,255,0.08)", borderRadius:8, padding:"8px 10px" }}>
+              <div style={{ color:"rgba(255,255,255,0.5)", fontSize:11 }}>Término</div>
+              <div style={{ color:C.white, fontSize:14, fontWeight:700 }}>31/08/2027</div>
             </div>
           </div>
-        ))}
+          {/* Download PDF */}
+          <a href="/documentos/bilhete_mary.pdf" target="_blank" rel="noopener noreferrer"
+            style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginTop:10, background:"rgba(232,168,32,0.2)", border:`1px solid ${C.gold}`, color:C.goldL, borderRadius:10, padding:"11px", textDecoration:"none", fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700 }}>
+            📥 Baixar PDF do Bilhete — Mary
+          </a>
+        </div>
 
-        {/* Link para o portal */}
-        <a
-          href="https://visabenefitslac.axa-assistance.us/benefits/I_C_BR"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginTop:16, background:C.navy, color:C.goldL, borderRadius:12, padding:"14px", textDecoration:"none", fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700 }}
-        >
-          🔗 Abrir Portal de Benefícios Visa
-        </a>
-      </Card>
-
-      {/* Tabela de coberturas */}
-      <Card>
-        <SectionLabel>🛡️ Coberturas incluídas</SectionLabel>
-        {COBERTURAS.map((cob, i, arr) => (
-          <div key={i} style={{ padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>
-            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:10, marginBottom:6 }}>
-              <div style={{ display:"flex", gap:10, alignItems:"center" }}>
-                <span style={{ fontSize:22 }}>{cob.icon}</span>
-                <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.navy }}>{cob.titulo}</div>
-              </div>
-              <span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"3px 12px", fontSize:13, fontFamily:"'Cinzel',serif", fontWeight:700, flexShrink:0, whiteSpace:"nowrap" }}>{cob.valor}</span>
+        {/* Jason — bilhete pendente */}
+        <div style={{ background:C.creamD, borderRadius:14, padding:"16px 14px" }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:8 }}>
+            <div>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.navy }}>👤 Jason Jose Percilio</div>
+              <div style={{ color:C.brownM, fontSize:13, marginTop:3 }}>Cônjuge / Dependente</div>
             </div>
-            <div style={{ ...T.body, fontSize:15, lineHeight:1.65, color:C.brownM, paddingLeft:32 }}>{cob.detalhe}</div>
+            <span style={{ background:"#E65100", color:"white", borderRadius:20, padding:"4px 12px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700 }}>⏳ Pendente</span>
           </div>
-        ))}
+          <div style={{ fontSize:15, color:C.brownM, lineHeight:1.65 }}>
+            Bilhete de seguro ainda não emitido. Como cônjuge da titular, Jason tem direito à mesma cobertura.
+          </div>
+        </div>
       </Card>
 
-      {/* Regras importantes */}
-      <Card style={{ background:"#FFF8E1", border:"1px solid #FFD54F" }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:"#5D4037", marginBottom:10 }}>⚠️ Regras importantes</div>
+      {/* Abas */}
+      <div style={{ display:"flex", gap:6, marginBottom:16, overflowX:"auto", paddingBottom:2 }}>
         {[
-          "A passagem aérea deve ser paga integralmente com o Ourocard Visa Infinite.",
-          "Também é válido usar pontos do próprio cartão, desde que as taxas sejam pagas com ele.",
-          "O bilhete de seguro DEVE ser emitido pelo portal antes de embarcar.",
-          "Cobertura válida por até 60 dias consecutivos por viagem internacional.",
-          "Confirme com o Banco do Brasil se a passagem da viagem se enquadra nas regras de elegibilidade.",
-        ].map((r, i) => (
-          <div key={i} style={{ display:"flex", gap:10, padding:"8px 0", borderBottom:i<4?`1px solid #FFE082`:"none", alignItems:"flex-start" }}>
-            <span style={{ color:"#F57F17", fontSize:18, flexShrink:0, fontWeight:700 }}>!</span>
-            <span style={{ ...T.body, fontSize:16, lineHeight:1.65 }}>{r}</span>
-          </div>
+          {id:"emergencia", label:"🆘 Emergência"},
+          {id:"coberturas", label:"🛡️ Coberturas"},
+          {id:"quempaga",   label:"💰 Quem paga?"},
+        ].map(t=>(
+          <button key={t.id} onClick={()=>setAba(t.id)} style={{ flexShrink:0, flex:1, padding:"11px 8px", borderRadius:14, border:`2px solid ${aba===t.id?C.gold:C.creamD}`, background:aba===t.id?C.gold:C.white, color:aba===t.id?C.white:C.brownM, fontFamily:"'Cinzel',serif", fontSize:13, fontWeight:700, cursor:"pointer" }}>
+            {t.label}
+          </button>
         ))}
-      </Card>
+      </div>
+
+      {/* ABA: EMERGÊNCIA */}
+      {aba === "emergencia" && (
+        <>
+          {/* Números reais do bilhete */}
+          <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"20px 18px", border:`2px solid ${C.red}`, marginBottom:14 }}>
+            <div style={{ fontFamily:"'Cinzel',serif", color:"#FF8A80", fontSize:16, fontWeight:700, marginBottom:14 }}>
+              🆘 Sentiu-se mal? Ligue AGORA!
+            </div>
+
+            {/* Portugal / Itália — número principal */}
+            <div style={{ background:"rgba(183,28,28,0.3)", borderRadius:14, padding:"14px", marginBottom:10, border:"1px solid rgba(255,100,100,0.4)" }}>
+              <div style={{ color:"#FF8A80", fontSize:12, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700, marginBottom:6 }}>📍 ESTANDO EM PORTUGAL OU ITÁLIA</div>
+              <a href="tel:+13039671098" style={{ display:"flex", gap:12, alignItems:"center", textDecoration:"none" }}>
+                <span style={{ fontSize:32 }}>📞</span>
+                <div>
+                  <div style={{ color:C.white, fontSize:24, fontWeight:700, fontFamily:"'Cinzel',serif" }}>+1 303 967 1098</div>
+                  <div style={{ color:"rgba(255,255,255,0.65)", fontSize:13, marginTop:2 }}>Opção 1 → português · Opção 3 → benefícios Visa</div>
+                  <div style={{ color:"rgba(255,255,255,0.5)", fontSize:12, marginTop:1 }}>24h · Chamada a cobrar via operadora internacional</div>
+                </div>
+              </a>
+            </div>
+
+            {/* Brasil */}
+            <a href="tel:08008913679" style={{ display:"flex", gap:12, alignItems:"center", background:"rgba(255,255,255,0.08)", borderRadius:12, padding:"12px 14px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.25)", marginBottom:8 }}>
+              <span style={{ fontSize:26 }}>📞</span>
+              <div>
+                <div style={{ color:C.goldL, fontSize:12, fontFamily:"'Cinzel',serif", letterSpacing:1, fontWeight:700 }}>DO BRASIL · GRATUITO</div>
+                <div style={{ color:C.white, fontSize:20, fontWeight:700, marginTop:2 }}>0800 891 3679</div>
+                <div style={{ color:"rgba(255,255,255,0.5)", fontSize:12, marginTop:1 }}>24h em português</div>
+              </div>
+            </a>
+
+            {/* E-mail */}
+            <a href="mailto:benefits@ap-visa.com" style={{ display:"flex", gap:12, alignItems:"center", background:"rgba(255,255,255,0.08)", borderRadius:12, padding:"12px 14px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.25)" }}>
+              <span style={{ fontSize:26 }}>📧</span>
+              <div>
+                <div style={{ color:C.goldL, fontSize:12, fontFamily:"'Cinzel',serif", letterSpacing:1, fontWeight:700 }}>E-MAIL</div>
+                <div style={{ color:C.white, fontSize:16, marginTop:2 }}>benefits@ap-visa.com</div>
+              </div>
+            </a>
+          </div>
+
+          {/* Passo a passo de emergência */}
+          <Card>
+            <SectionLabel>📋 O que fazer em caso de emergência</SectionLabel>
+            {[
+              { num:"1", cor:C.red,   titulo:"Ligue imediatamente para a central", desc:"Use o número +1 303 967 1098. Eles falam português e atendem 24 horas. Informe que possui o Seguro Viagem Visa Infinite." },
+              { num:"2", cor:C.navy,  titulo:"Eles vão orientar você", desc:"A central indica o hospital ou clínica credenciada mais próxima. Siga as orientações — não vá a qualquer hospital sem antes ligar." },
+              { num:"3", cor:C.navy,  titulo:"Autorização de atendimento", desc:"Quando há rede credenciada no destino, o seguro paga diretamente o hospital. Você não paga nada na hora." },
+              { num:"4", cor:"#E65100", titulo:"Se não houver rede credenciada", desc:"Você paga e depois solicita o reembolso. Guarde TODAS as notas fiscais, receitas e documentos médicos." },
+              { num:"5", cor:C.navy,  titulo:"Atenção com cobranças duplas", desc:'Se o hospital cobrar tanto você quanto o seguro, entre em contato com a central ou envie e-mail para: visa_iemsclaims@axa-assistance.us' },
+            ].map((p,i,arr)=>(
+              <div key={i} style={{ display:"flex", gap:14, padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}>
+                <div style={{ width:34, height:34, borderRadius:10, background:p.cor, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                  <span style={{ fontFamily:"'Cinzel',serif", color:"white", fontSize:16, fontWeight:700 }}>{p.num}</span>
+                </div>
+                <div>
+                  <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy, marginBottom:4 }}>{p.titulo}</div>
+                  <div style={{ ...T.body, fontSize:16, lineHeight:1.7 }}>{p.desc}</div>
+                </div>
+              </div>
+            ))}
+          </Card>
+
+          {/* SAC AIG */}
+          <Card style={{ background:"#FFF8E1", border:"1px solid #FFD54F" }}>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:"#5D4037", marginBottom:8 }}>📞 Outros contatos da AIG (2ª a 6ª, 9h–18h)</div>
+            {[
+              { label:"SAC AIG",         tel:"0800 726 6130" },
+              { label:"Ouvidoria AIG",   tel:"0800 724 0219" },
+              { label:"Def. Auditivos",  tel:"0800 724 0149" },
+            ].map((c,i)=>(
+              <div key={i} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"8px 0", borderBottom:i<2?`1px solid #FFE082`:"none" }}>
+                <span style={{ fontSize:15, color:"#5D4037" }}>{c.label}</span>
+                <a href={`tel:${c.tel.replace(/\s/g,"")}`} style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:"#5D4037", textDecoration:"none" }}>{c.tel}</a>
+              </div>
+            ))}
+          </Card>
+        </>
+      )}
+
+      {/* ABA: COBERTURAS */}
+      {aba === "coberturas" && (
+        <Card>
+          <SectionLabel>🛡️ Todas as coberturas · Cartão Infinite</SectionLabel>
+          <div style={{ background:"#E8F5E9", borderRadius:10, padding:"10px 12px", marginBottom:14, border:`1px solid #A5D6A7` }}>
+            <div style={{ fontSize:15, color:C.green, fontWeight:700 }}>✅ Prêmio pago integralmente pela Visa · Gratuito para a segurada</div>
+            <div style={{ fontSize:14, color:C.brownM, marginTop:4 }}>Vigência: 31/08/2026 a 31/08/2027 · Válido por até 60 dias consecutivos por viagem</div>
+          </div>
+          {COBERTURAS.map((cob,i,arr)=>(
+            <div key={i} style={{ padding:"12px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8, marginBottom:4 }}>
+                <div style={{ display:"flex", gap:8, alignItems:"center", flex:1 }}>
+                  <span style={{ fontSize:20, flexShrink:0 }}>{cob.icon}</span>
+                  <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:C.navy, lineHeight:1.35 }}>{cob.titulo}</div>
+                </div>
+                <span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"3px 10px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700, flexShrink:0, whiteSpace:"nowrap" }}>{cob.valor}</span>
+              </div>
+              <div style={{ fontSize:14, color:C.brownM, lineHeight:1.6, paddingLeft:28 }}>{cob.detalhe}</div>
+            </div>
+          ))}
+        </Card>
+      )}
+
+      {/* ABA: QUEM PAGA? */}
+      {aba === "quempaga" && (
+        <>
+          <Card style={{ background:"#E8F5E9", border:`1px solid #A5D6A7` }}>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.green, marginBottom:10 }}>
+              ✅ Quando o seguro paga direto (sem você desembolsar)
+            </div>
+            <div style={{ ...T.body, fontSize:16, lineHeight:1.8 }}>
+              Quando existe uma <strong>clínica ou hospital credenciado</strong> no local, a AIG paga diretamente ao prestador. Você não precisa pagar nada na hora — apenas apresentar o bilhete de seguro e um documento de identidade.
+            </div>
+            <div style={{ marginTop:12, background:"rgba(27,94,32,0.1)", borderRadius:10, padding:"10px 12px" }}>
+              <div style={{ fontSize:15, color:C.green, fontWeight:700 }}>👉 Por isso é tão importante LIGAR PRIMEIRO para a central!</div>
+              <div style={{ fontSize:14, color:C.brownM, marginTop:4 }}>Eles indicam o hospital credenciado mais próximo e autorizam o atendimento.</div>
+            </div>
+          </Card>
+
+          <Card style={{ background:"#FFF3E0", border:"1px solid #FFCC02" }}>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:"#E65100", marginBottom:10 }}>
+              ⚠️ Quando você paga e depois pede reembolso
+            </div>
+            <div style={{ ...T.body, fontSize:16, lineHeight:1.8, color:"#5D4037" }}>
+              Se não houver rede credenciada no local, você paga o atendimento e solicita o reembolso depois de volta ao Brasil.
+            </div>
+            <div style={{ marginTop:12 }}>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:"#E65100", marginBottom:8 }}>📁 Guarde obrigatoriamente:</div>
+              {["Todos os recibos e notas fiscais do atendimento","Receitas e relatórios médicos","Comprovante de pagamento (cartão ou dinheiro)","Registros de internação ou alta hospitalar"].map((d,i)=>(
+                <div key={i} style={{ display:"flex", gap:8, padding:"6px 0", fontSize:15, color:"#5D4037", borderBottom:i<3?`1px solid #FFE082`:"none" }}>
+                  <span style={{ color:"#E65100", fontWeight:700 }}>•</span>{d}
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy, marginBottom:10 }}>
+              💰 O seguro de viagem é diferente do seguro saúde
+            </div>
+            <div style={{ ...T.body, fontSize:16, lineHeight:1.8 }}>
+              O Seguro Viagem cobre <strong>emergências</strong> durante a viagem — não é um plano de saúde permanente. Serve para situações inesperadas: acidentes, doenças súbitas, hospitalização de urgência.
+            </div>
+            <div style={{ marginTop:12, background:C.creamD, borderRadius:10, padding:"10px 12px" }}>
+              <div style={{ fontSize:15, color:C.brownM, lineHeight:1.65 }}>
+                ✅ Cobre: acidente, infarto, derrame, COVID-19, fraturas, apendicite, infecções graves<br/>
+                ❌ Não cobre: consultas de rotina, doenças preexistentes sem emergência, procedimentos eletivos
+              </div>
+            </div>
+          </Card>
+        </>
+      )}
     </div>
   );
 }
