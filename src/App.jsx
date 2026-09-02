@@ -55,19 +55,19 @@ function getCurrentHotel() {
 //  ROTEIRO
 // ═══════════════════════════════════════════════════════════
 const ITINERARY = [
-  { day:1,  date:"2026-10-30", weekday:"Sexta-feira",   location:"Goiânia / Brasília → Lisboa", city:"goiania", icon:"✈️", morning:"Partida de Goiânia em horário combinado. Transfer em ônibus privativo para Brasília. Embarque para Lisboa.", afternoon:"Em viagem intercontinental.", evening:"Em voo — descanse bem para a chegada!", highlights:["Início da peregrinação 🙏","Voo Brasília → Lisboa"], prayer:"Senhor, abençoa nossa partida e guia nossos passos nesta jornada de fé." },
-  { day:2,  date:"2026-10-31", weekday:"Sábado",        location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"🛬", morning:"Chegada ao Aeroporto de Lisboa. Imigração. Transfer para o hotel. Check-in e descanso.", afternoon:"Tarde livre — compras ou explorar Lisboa.", evening:"Noite livre.", highlights:["Chegada em Lisboa 🇵🇹","Check-in no hotel ****"], prayer:"Bem-vindos a Lisboa! Obrigado, Senhor, por nos trazer com segurança." },
-  { day:3,  date:"2026-11-01", weekday:"Domingo",       location:"Lisboa → Fátima 🕊️", city:"fatima", icon:"🕊️", morning:"Peregrinação para Fátima com guia. Basílica Santíssima Trindade e atividades religiosas.", afternoon:"City tour no Santuário de Fátima e Casa dos Pastorinhos.", evening:"Santa Missa e Procissão das Velas. Retorno para Lisboa.", highlights:["Santuário de Fátima 🕊️","Casa dos Pastorinhos","Santa Missa","Procissão das Velas 🕯️"], prayer:"Nossa Senhora de Fátima, intercede por nós e abençoa esta peregrinação." },
-  { day:4,  date:"2026-11-02", weekday:"Segunda-feira", location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"⛪", morning:"Santa Missa na Igreja de Santo Antônio. Visita à Sé Catedral de Lisboa.", afternoon:"City tour: Torre de Belém, Mosteiro dos Jerônimos, Pasteis de Belém, Castelo de São Jorge, Alfama.", evening:"Noite livre.", highlights:["Igreja de Santo Antônio ⛪","Sé Catedral de Lisboa","Torre de Belém 🏰","Mosteiro dos Jerônimos"], prayer:"Santo Antônio de Lisboa e de Pádua, rogai por nós!" },
-  { day:5,  date:"2026-11-03", weekday:"Terça-feira",   location:"Lisboa → Roma ✈️", city:"roma", icon:"✈️", morning:"Café da manhã. Transfer para o aeroporto de Lisboa. Voo para Roma.", afternoon:"Chegada em Roma. Transfer para o hotel. Check-in e descanso.", evening:"Noite livre. Bem-vindos à Cidade Eterna!", highlights:["Voo Lisboa → Roma ✈️","Check-in em Roma 🇮🇹"], prayer:"Senhor, guia nossa jornada até a Cidade Eterna." },
-  { day:6,  date:"2026-11-04", weekday:"Quarta-feira",  location:"Roma / Vaticano 🇻🇦", city:"roma", icon:"✝️", morning:"Transfer para o Vaticano. Catequese Papal — se o Papa estiver em Roma.", afternoon:"Passeio a pé: Praça Navona, Fontana di Trevi e Pantheon Romano.", evening:"Noite livre.", highlights:["Catequese Papal 🇻🇦","Praça Navona","Fontana di Trevi ⛲","Pantheon"], prayer:"Santo Padre, abençoa nossa peregrinação ao Jubileu Franciscano." },
-  { day:7,  date:"2026-11-05", weekday:"Quinta-feira",  location:"Roma, Itália 🇮🇹", city:"roma", icon:"🏛️", morning:"City tour: Basílica de São Pedro, Museus do Vaticano, Coliseu, Fontana di Trevi, Panteão, Praça da Espanha.", afternoon:"Tarde livre — compras ou explorar Roma.", evening:"Noite livre.", highlights:["Basílica de São Pedro ✝️","Coliseu 🏛️","Museus do Vaticano"], prayer:"São Pedro, guarda nossa fé e fortalece nosso caminho." },
-  { day:8,  date:"2026-11-06", weekday:"Sexta-feira",   location:"Roma → Assis 🚂", city:"assis", icon:"🚂", morning:"Após o café da manhã, trem para Assis. Transfer para o convento. Acomodação e descanso.", afternoon:"Tarde livre — ruas medievais de Assis. Momentos de oração.", evening:"Noite livre. Bem-vindos a Assis!", highlights:["Trem Roma → Assis 🚂","Hospedagem em Convento ⛪"], prayer:"São Francisco de Assis, rogai por nós. Paz e Bem! 🕊️" },
-  { day:9,  date:"2026-11-07", weekday:"Sábado",        location:"Assis, Itália 🌿", city:"assis", icon:"🌿", morning:"Santa Missa na Porciúncula.", afternoon:"Às 15h: Basílica de Santa Clara, Catedral de São Rufino, Igrejinha de São Damião.", evening:"Noite livre.", highlights:["Missa na Porciúncula 🕊️","Basílica de Santa Clara","Catedral de São Rufino","Igreja de São Damião"], prayer:"Francisco e Clara, ensinai-nos a simplicidade e o amor." },
-  { day:10, date:"2026-11-08", weekday:"Domingo",       location:"Assis, Itália ⛪", city:"assis", icon:"⛪", morning:"Santa Missa na Basílica de São Francisco.", afternoon:"Tarde livre. Sugestão opcional: vinícola local.", evening:"Noite livre.", highlights:["Missa na Basílica de São Francisco 🙏"], prayer:"São Francisco, que nossa fé floresça como a tua." },
-  { day:11, date:"2026-11-09", weekday:"Segunda-feira", location:"Santuários da Região 🙏", city:"assis", icon:"🙏", morning:"City tour: Fonte Colombo, Santuário Della Foresta, Convento de Bustone e Greccio.", afternoon:"Retorno para Assis.", evening:"Noite livre.", highlights:["Fonte Colombo","Santuário Della Foresta","Convento de Bustone","Greccio 🌟"], prayer:"Que os passos de Francisco iluminem nossa peregrinação." },
-  { day:12, date:"2026-11-10", weekday:"Terça-feira",   location:"La Verna, Itália ⛰️", city:"laverna", icon:"⛰️", morning:"Visita ao Santuário de La Verna — onde São Francisco recebeu as Estigmas.", afternoon:"Continuação da visita a La Verna. Retorno.", evening:"Noite livre.", highlights:["Santuário de La Verna ⛰️","Local das Estigmas de São Francisco 🌟"], prayer:"Senhor, que recebamos as chagas do teu amor como Francisco." },
-  { day:13, date:"2026-11-11", weekday:"Quarta-feira",  location:"Cássia → Roma → Brasil 🏠", city:"assis", icon:"🏠", morning:"Café da manhã. Visita a Cássia. Transfer para o aeroporto de Roma. Embarque para o Brasil.", afternoon:"Em voo de retorno.", evening:"Chegada em Brasília: 12/Nov às 16h40. Transfer → Goiânia.", highlights:["Visita a Cássia 🙏","Voo Roma → Brasil ✈️","Chegada em Brasília: 12/Nov às 16h40 🇧🇷"], prayer:"Senhor, obrigado por esta peregrinação abençoada. Paz e Bem! 🕊️" },
+  { day:1,  date:"2026-10-30", weekday:"Sexta-feira",   location:"Goiânia / Brasília → Lisboa", city:"goiania", icon:"✈️", morning:"Em horário previamente combinado, encontro para darmos início à nossa emocionante viagem rumo a Portugal e Itália.", afternoon:"Em viagem intercontinental.", evening:"Em voo — descanse bem para a chegada!", highlights:["Início da peregrinação 🙏","Voo Brasília → Lisboa"], prayer:"Senhor, abençoa nossa partida e guia nossos passos nesta jornada de fé." },
+  { day:2,  date:"2026-10-31", weekday:"Sábado",        location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"🛬", morning:"Chegada ao Aeroporto Internacional de Lisboa. Trâmites de imigração, traslado para o hotel, almoço (não incluso). Check-in e descanso. Bem-vindos a Lisboa!", afternoon:"Tarde livre — atividades pessoais, compras ou explorar a cidade no seu ritmo.", evening:"Noite livre.", highlights:["Chegada em Lisboa 🇵🇹","Check-in no hotel"], prayer:"Bem-vindos a Lisboa! Obrigado, Senhor, por nos trazer com segurança." },
+  { day:3,  date:"2026-11-01", weekday:"Domingo",       location:"Lisboa → Fátima (127km) 🕊️", city:"fatima", icon:"🕊️", morning:"Após o café da manhã, peregrinação para Fátima com guia acompanhante — local da aparição da Virgem Maria às crianças pastorinhas Lúcia, Francisco e Jacinta em 13 de maio de 1917. Visita à Basílica Santíssima Trindade e atividades religiosas do Santuário.", afternoon:"Após o almoço (não incluso), city tour guiado no Santuário de Fátima e Casa dos Pastorinhos.", evening:"Santa Missa e Procissão das Velas na Capelinha das Aparições, onde o rosário é rezado em diversos idiomas. Retorno para Lisboa.", highlights:["Santuário de Fátima 🕊️","Casa dos Pastorinhos","Santa Missa","Procissão das Velas 🕯️"], prayer:"Nossa Senhora de Fátima, intercede por nós e abençoa esta peregrinação." },
+  { day:4,  date:"2026-11-02", weekday:"Segunda-feira", location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"⛪", morning:"Café da manhã. Santa Missa na Igreja de Santo Antônio — construída no local onde o Santo nasceu, visita gratuita. Visita à Sé Patriarcal de Lisboa (Basílica de Santa Maria Maior), a igreja mais antiga da capital portuguesa, com subida ao coro alto. Almoço livre (não incluso).", afternoon:"City tour com guia local: Baixa Pombalina, Alfama, Torre de Belém, Mosteiro dos Jerônimos, Pasteis de Belém, Praça do Comércio, Rua Augusta, Elevador de Santa Justa, Castelo de São Jorge e Miradouro de Santa Luzia.", evening:"Noite livre.", highlights:["Igreja de Santo Antônio ⛪","Sé de Lisboa","Torre de Belém 🏰","Mosteiro dos Jerônimos","Alfama"], prayer:"Santo Antônio de Lisboa e de Pádua, rogai por nós!" },
+  { day:5,  date:"2026-11-03", weekday:"Terça-feira",   location:"Lisboa → Roma ✈️", city:"roma", icon:"✈️", morning:"Após o café da manhã, em horário combinado, transfer para o aeroporto de Lisboa com destino a Roma.", afternoon:"Traslado para o hotel, almoço (não incluso), check-in e descanso. Bem-vindos a Roma!", evening:"Noite livre.", highlights:["Voo Lisboa → Roma ✈️","Check-in em Roma 🇮🇹"], prayer:"Senhor, guia nossa jornada até a Cidade Eterna." },
+  { day:6,  date:"2026-11-04", weekday:"Quarta-feira",  location:"Roma / Vaticano 🇻🇦", city:"roma", icon:"✝️", morning:"Após o café da manhã, transfer para o Vaticano para assistir à Catequese Papal (se o Papa estiver em Roma). Almoço não incluso.", afternoon:"Tarde livre para atividades pessoais. Sugestões opcionais: Basílica de São Pedro com Porta Santa, Basílica de São Paulo Fora dos Muros, São Sebastião Fora dos Muros, Basílica de São João de Latrão, Basílica de Santa Maria Maior, Igreja de Santo Afonso de Ligório.", evening:"Noite livre.", highlights:["Catequese Papal 🇻🇦","Porta Santa","Basílicas opcionais"], prayer:"Santo Padre, abençoa nossa peregrinação ao Jubileu Franciscano." },
+  { day:7,  date:"2026-11-05", weekday:"Quinta-feira",  location:"Roma, Itália 🇮🇹", city:"roma", icon:"🏛️", morning:"Café da manhã no hotel. Em horário combinado, city tour panorâmico: Basílica de São Pedro, Vaticano, Coliseu, Fontana di Trevi, Panteão, Escadaria da Praça da Espanha e Praça Navona (visitas externas).", afternoon:"Tarde livre — compras ou explorar Roma no seu ritmo.", evening:"Noite livre.", highlights:["Basílica de São Pedro ✝️","Coliseu 🏛️","Fontana di Trevi ⛲","Praça Navona"], prayer:"São Pedro, guarda nossa fé e fortalece nosso caminho." },
+  { day:8,  date:"2026-11-06", weekday:"Sexta-feira",   location:"Roma → Assis 🚂", city:"assis", icon:"🚂", morning:"Após o café da manhã, saída para a estação de trem rumo a Assis. Traslado para o hotel, almoço livre (não incluso). Acomodação e descanso. Bem-vindos a Assis!", afternoon:"Tarde livre para atividades pessoais. Sugestões: participar de momentos de oração, caminhar pelas ruas medievais de Assis.", evening:"Noite livre.", highlights:["Trem Roma → Assis 🚂","Hospedagem em Convento ⛪"], prayer:"São Francisco de Assis, rogai por nós. Paz e Bem! 🕊️" },
+  { day:9,  date:"2026-11-07", weekday:"Sábado",        location:"Assis, Itália 🌿", city:"assis", icon:"🌿", morning:"Após o café da manhã, Santa Missa na Porciúncula. Almoço livre (não incluso).", afternoon:"Às 15h: visita à Basílica de Santa Clara, Carlos Acutis, Catedral de São Rufino e Igrejinha de São Damião.", evening:"Noite livre.", highlights:["Missa na Porciúncula 🕊️","Basílica de Santa Clara","Carlos Acutis","São Damião"], prayer:"Francisco e Clara, ensinai-nos a simplicidade e o amor." },
+  { day:10, date:"2026-11-08", weekday:"Domingo",       location:"Assis, Itália ⛪", city:"assis", icon:"⛪", morning:"Após o café da manhã, Missa na Basílica de São Francisco de Assis. Almoço livre (não incluso).", afternoon:"Tarde livre para atividades pessoais. Sugestão opcional: visitar uma vinícola local.", evening:"Noite livre.", highlights:["Missa na Basílica de São Francisco 🙏"], prayer:"São Francisco, que nossa fé floresça como a tua." },
+  { day:11, date:"2026-11-09", weekday:"Segunda-feira", location:"Santuários da Região 🙏", city:"assis", icon:"🙏", morning:"Após o café da manhã, em horário combinado, city tour para o Santuário de Fonte Colombo, Santuário Della Foresta, Convento San Giacomo Vaggio Bustone e Greccio. Almoço no local (não incluso).", afternoon:"Continuação do passeio pelos santuários.", evening:"Noite livre.", highlights:["Fonte Colombo","Santuário Della Foresta","Convento Vaggio Bustone","Greccio 🌟"], prayer:"Que os passos de Francisco iluminem nossa peregrinação." },
+  { day:12, date:"2026-11-10", weekday:"Terça-feira",   location:"La Verna, Itália ⛰️", city:"laverna", icon:"⛰️", morning:"Após o café da manhã, visita ao Santuário de La Verna — lugar sagrado onde São Francisco recebeu as Estigmas.", afternoon:"Almoço no local (não incluso). Continuação da visita a La Verna.", evening:"Noite livre.", highlights:["Santuário de La Verna ⛰️","Local das Estigmas de São Francisco 🌟"], prayer:"Senhor, que recebamos as chagas do teu amor como Francisco." },
+  { day:13, date:"2026-11-11", weekday:"Quarta-feira",  location:"Cássia → Roma → Brasil 🏠", city:"assis", icon:"🏠", morning:"Café da manhã no horário combinado. Saída para Cássia. Almoço não incluso.", afternoon:"Traslado para o aeroporto de Roma com destino ao Brasil.", evening:"Chegada prevista em Brasília no dia 12/Nov às 16h40. Transfer Brasília → Goiânia. Fim dos serviços contratados. Os acompanhantes do grupo sempre estarão disponíveis para orientar caso seja necessário.", highlights:["Visita a Cássia 🙏","Voo Roma → Brasil ✈️","Chegada em Brasília: 12/Nov às 16h40 🇧🇷"], prayer:"Senhor, obrigado por esta peregrinação abençoada. Paz e Bem! 🕊️" },
 ];
 
 // ═══════════════════════════════════════════════════════════
@@ -986,9 +986,9 @@ function PageSalasVip(){
 //  PÁGINA: SEGURO VIAGEM
 // ═══════════════════════════════════════════════════════════
 function PageSeguro(){
-  const [aba, setAba] = useState("emergencia");
+  const [pessoa, setPessoa] = useState("mary");
 
-  const COBERTURAS = [
+  const COBERTURAS_MARY = [
     { icon:"🏥", titulo:"Despesas médicas e hospitalares",       valor:"US$ 175.000", detalhe:"Acidentes ou doenças súbitas, incluindo COVID-19 e SARS-CoV-2. Cobre hospitalização, cirurgias e tratamentos." },
     { icon:"🦷", titulo:"Despesas odontológicas",                valor:"US$ 7.500",   detalhe:"Atendimento odontológico de emergência durante a viagem." },
     { icon:"🚑", titulo:"Regresso Sanitário (Repatriação Médica)",valor:"US$ 100.000", detalhe:"Transporte médico de volta ao Brasil caso necessário por razões de saúde." },
@@ -1009,86 +1009,98 @@ function PageSeguro(){
     { icon:"🔗", titulo:"Perda de conexão aérea",                valor:"US$ 300",     detalhe:"Em caso de perda de conexão por motivos cobertos." },
   ];
 
+  const COBERTURAS_JASON = [
+    { icon:"🏥", titulo:"Despesas médicas e hospitalares",  valor:"US$ 150.000", detalhe:"Inclui COVID-19, doenças preexistentes, esportes amadores e gestantes até a 28ª semana." },
+    { icon:"🦷", titulo:"Despesas odontológicas",           valor:"US$ 2.000",   detalhe:"Atendimento odontológico de emergência." },
+    { icon:"💊", titulo:"Despesas farmacêuticas",           valor:"US$ 1.500",   detalhe:"Reembolso de medicamentos prescritos durante a viagem." },
+    { icon:"💼", titulo:"Perda de bagagem",                 valor:"US$ 1.500",   detalhe:"Indenização em caso de perda total da bagagem." },
+    { icon:"🧳", titulo:"Atraso de bagagem",                valor:"US$ 200",     detalhe:"Somente na ida, reembolso após 8h de atraso." },
+    { icon:"🩹", titulo:"Danos a malas",                    valor:"US$ 120",     detalhe:"Reembolso por avarias na bagagem." },
+    { icon:"⏰", titulo:"Cancelamento ou atraso de voo",    valor:"US$ 300",     detalhe:"Reembolso após 8h de atraso do voo." },
+    { icon:"❌", titulo:"Cancelamento de viagem",           valor:"US$ 1.500",   detalhe:"Reembolso de despesas não recuperáveis." },
+    { icon:"🚫", titulo:"Interrupção de viagem",            valor:"US$ 2.000",   detalhe:"Reembolso em caso de necessidade de interromper a viagem." },
+    { icon:"🏠", titulo:"Retorno antecipado do segurado",   valor:"US$ 1.500",   detalhe:"Retorno ao Brasil por motivo de força maior." },
+    { icon:"👥", titulo:"Retorno antecipado de acompanhante", valor:"US$ 1.500", detalhe:"Retorno do acompanhante junto ao segurado." },
+    { icon:"🏨", titulo:"Prorrogação de estadia",           valor:"US$ 3.000",   detalhe:"Extensão de hospedagem por necessidade médica." },
+    { icon:"🛌", titulo:"Acompanhante — hospitalização prolongada", valor:"US$ 2.000", detalhe:"Despesas de um acompanhante durante internação longa." },
+    { icon:"🏩", titulo:"Hospedagem de acompanhante",       valor:"US$ 3.000",   detalhe:"Custeio de hospedagem para quem acompanha o segurado internado." },
+    { icon:"🚑", titulo:"Regresso sanitário",               valor:"US$ 30.000",  detalhe:"Transporte médico de volta ao Brasil." },
+    { icon:"✈️", titulo:"Traslado médico",                  valor:"US$ 30.000",  detalhe:"Transporte para hospital mais adequado ao tratamento." },
+    { icon:"♿", titulo:"Invalidez permanente (acidente)",  valor:"R$ 30.000",   detalhe:"Total ou parcial, por acidente durante a viagem." },
+    { icon:"🕊️", titulo:"Morte acidental em viagem",        valor:"R$ 30.000",   detalhe:"Indenização aos beneficiários." },
+    { icon:"⚰️", titulo:"Traslado de corpo",                valor:"US$ 30.000",  detalhe:"Despesas de transporte funerário de volta ao Brasil." },
+    { icon:"⚖️", titulo:"Fiança e despesas legais",         valor:"US$ 2.500",   detalhe:"Cobertura de fiança em caso de necessidade jurídica no exterior." },
+    { icon:"🧑‍⚖️", titulo:"Assistência jurídica",            valor:"US$ 1.000",   detalhe:"Apoio jurídico durante a viagem." },
+    { icon:"💻", titulo:"Roubo/furto de notebook",          valor:"US$ 800",     detalhe:"Reembolso em caso de roubo ou furto qualificado." },
+    { icon:"🐾", titulo:"Seguro Pet",                       valor:"US$ 500",     detalhe:"Despesas veterinárias do animal de estimação em casa." },
+  ];
+
   return(
     <div style={{ padding:"20px 16px" }}>
       <div style={{ marginBottom:14 }}>
         <div style={T.pageTitle}>Seguro Viagem</div>
-        <div style={{ ...T.sub, marginTop:4 }}>AIG Seguros Brasil S.A. · Garantido pela Visa · Gratuito</div>
+        <div style={{ ...T.sub, marginTop:4 }}>Mary e Jason têm seguradoras DIFERENTES</div>
       </div>
 
-      {/* Bilhete da Mary — dados reais */}
-      <Card>
-        <SectionLabel>📄 Bilhetes de Seguro</SectionLabel>
-
-        {/* Mary — bilhete emitido */}
-        <div style={{ background:`linear-gradient(135deg,${C.navy},${C.navyL})`, borderRadius:14, padding:"16px 14px", marginBottom:10 }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:10 }}>
-            <div>
-              <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700 }}>👤 Mary Ruth Jacobina</div>
-              <div style={{ color:"rgba(255,255,255,0.6)", fontSize:13, marginTop:3 }}>Titular do seguro</div>
-            </div>
-            <span style={{ background:"#1B5E20", color:"white", borderRadius:20, padding:"4px 12px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700 }}>✓ Emitido</span>
-          </div>
-          <div style={{ background:"rgba(255,255,255,0.08)", borderRadius:10, padding:"10px 12px" }}>
-            <div style={{ color:"rgba(255,255,255,0.55)", fontSize:12, letterSpacing:1, fontFamily:"'Cinzel',serif", marginBottom:4 }}>Nº DO BILHETE</div>
-            <div style={{ color:C.white, fontSize:15, fontWeight:700 }}>16011-0001-69-2610220786</div>
-            <div style={{ color:"rgba(255,255,255,0.5)", fontSize:13, marginTop:2 }}>CER-7374404</div>
-          </div>
-          <div style={{ display:"flex", gap:8, marginTop:8 }}>
-            <div style={{ flex:1, background:"rgba(255,255,255,0.08)", borderRadius:8, padding:"8px 10px" }}>
-              <div style={{ color:"rgba(255,255,255,0.5)", fontSize:11 }}>Início</div>
-              <div style={{ color:C.white, fontSize:14, fontWeight:700 }}>31/08/2026</div>
-            </div>
-            <div style={{ flex:1, background:"rgba(255,255,255,0.08)", borderRadius:8, padding:"8px 10px" }}>
-              <div style={{ color:"rgba(255,255,255,0.5)", fontSize:11 }}>Término</div>
-              <div style={{ color:C.white, fontSize:14, fontWeight:700 }}>31/08/2027</div>
-            </div>
-          </div>
-          {/* Download PDF */}
-          <a href="/documentos/bilhete_mary.pdf" target="_blank" rel="noopener noreferrer"
-            style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginTop:10, background:"rgba(232,168,32,0.2)", border:`1px solid ${C.gold}`, color:C.goldL, borderRadius:10, padding:"11px", textDecoration:"none", fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700 }}>
-            📥 Baixar PDF do Bilhete — Mary
-          </a>
+      {/* Aviso crítico: dois seguros diferentes */}
+      <div style={{ background:"#FDECEA", border:`2px solid ${C.red}`, borderRadius:16, padding:"14px 16px", marginBottom:16 }}>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.red, marginBottom:6 }}>⚠️ Atenção — cada um liga para um número diferente!</div>
+        <div style={{ fontSize:15, color:C.brown, lineHeight:1.7 }}>
+          Mary usa o seguro do <strong>cartão Visa Infinite (AIG)</strong>. Jason usa o seguro <strong>HERO Seguros (Generali)</strong>, contratado separadamente. Toque no nome de quem precisa de ajuda para ver o número certo.
         </div>
+      </div>
 
-        {/* Jason — bilhete pendente */}
-        <div style={{ background:C.creamD, borderRadius:14, padding:"16px 14px" }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:8 }}>
-            <div>
-              <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.navy }}>👤 Jason Jose Percilio</div>
-              <div style={{ color:C.brownM, fontSize:13, marginTop:3 }}>Cônjuge / Dependente</div>
-            </div>
-            <span style={{ background:"#E65100", color:"white", borderRadius:20, padding:"4px 12px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700 }}>⏳ Pendente</span>
-          </div>
-          <div style={{ fontSize:15, color:C.brownM, lineHeight:1.65 }}>
-            Bilhete de seguro ainda não emitido. Como cônjuge da titular, Jason tem direito à mesma cobertura.
-          </div>
-        </div>
-      </Card>
-
-      {/* Abas */}
-      <div style={{ display:"flex", gap:6, marginBottom:16, overflowX:"auto", paddingBottom:2 }}>
+      {/* Seletor de pessoa */}
+      <div style={{ display:"flex", gap:8, marginBottom:16 }}>
         {[
-          {id:"emergencia", label:"🆘 Emergência"},
-          {id:"coberturas", label:"🛡️ Coberturas"},
-          {id:"quempaga",   label:"💰 Quem paga?"},
-        ].map(t=>(
-          <button key={t.id} onClick={()=>setAba(t.id)} style={{ flexShrink:0, flex:1, padding:"11px 8px", borderRadius:14, border:`2px solid ${aba===t.id?C.gold:C.creamD}`, background:aba===t.id?C.gold:C.white, color:aba===t.id?C.white:C.brownM, fontFamily:"'Cinzel',serif", fontSize:13, fontWeight:700, cursor:"pointer" }}>
-            {t.label}
+          {id:"mary",  label:"👤 Mary",  cor:C.navy},
+          {id:"jason", label:"👤 Jason", cor:"#6A1B9A"},
+        ].map(p=>(
+          <button key={p.id} onClick={()=>setPessoa(p.id)} style={{ flex:1, padding:"14px 8px", borderRadius:16, border:`2.5px solid ${pessoa===p.id?p.cor:C.creamD}`, background:pessoa===p.id?p.cor:C.white, color:pessoa===p.id?C.white:C.brownM, fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, cursor:"pointer" }}>
+            {p.label}
           </button>
         ))}
       </div>
 
-      {/* ABA: EMERGÊNCIA */}
-      {aba === "emergencia" && (
+      {/* ═══ BILHETE DA MARY (Visa Infinite / AIG) ═══ */}
+      {pessoa === "mary" && (
         <>
-          {/* Números reais do bilhete */}
-          <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"20px 18px", border:`2px solid ${C.red}`, marginBottom:14 }}>
-            <div style={{ fontFamily:"'Cinzel',serif", color:"#FF8A80", fontSize:16, fontWeight:700, marginBottom:14 }}>
-              🆘 Sentiu-se mal? Ligue AGORA!
+          <Card>
+            <SectionLabel>📄 Bilhete de Seguro — Mary</SectionLabel>
+            <div style={{ background:`linear-gradient(135deg,${C.navy},${C.navyL})`, borderRadius:14, padding:"16px 14px" }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:10 }}>
+                <div>
+                  <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700 }}>Mary Ruth Jacobina</div>
+                  <div style={{ color:"rgba(255,255,255,0.6)", fontSize:13, marginTop:3 }}>Ourocard Visa Infinite · AIG Seguros</div>
+                </div>
+                <span style={{ background:"#1B5E20", color:"white", borderRadius:20, padding:"4px 12px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700 }}>✓ Emitido</span>
+              </div>
+              <div style={{ background:"rgba(255,255,255,0.08)", borderRadius:10, padding:"10px 12px" }}>
+                <div style={{ color:"rgba(255,255,255,0.55)", fontSize:12, letterSpacing:1, fontFamily:"'Cinzel',serif", marginBottom:4 }}>Nº DO BILHETE</div>
+                <div style={{ color:C.white, fontSize:15, fontWeight:700 }}>16011-0001-69-2610220786</div>
+                <div style={{ color:"rgba(255,255,255,0.5)", fontSize:13, marginTop:2 }}>CER-7374404</div>
+              </div>
+              <div style={{ display:"flex", gap:8, marginTop:8 }}>
+                <div style={{ flex:1, background:"rgba(255,255,255,0.08)", borderRadius:8, padding:"8px 10px" }}>
+                  <div style={{ color:"rgba(255,255,255,0.5)", fontSize:11 }}>Início</div>
+                  <div style={{ color:C.white, fontSize:14, fontWeight:700 }}>31/08/2026</div>
+                </div>
+                <div style={{ flex:1, background:"rgba(255,255,255,0.08)", borderRadius:8, padding:"8px 10px" }}>
+                  <div style={{ color:"rgba(255,255,255,0.5)", fontSize:11 }}>Término</div>
+                  <div style={{ color:C.white, fontSize:14, fontWeight:700 }}>31/08/2027</div>
+                </div>
+              </div>
+              <a href="/documentos/bilhete_mary.pdf" target="_blank" rel="noopener noreferrer"
+                style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginTop:10, background:"rgba(232,168,32,0.2)", border:`1px solid ${C.gold}`, color:C.goldL, borderRadius:10, padding:"11px", textDecoration:"none", fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700 }}>
+                📥 Baixar PDF do Bilhete — Mary
+              </a>
             </div>
+          </Card>
 
-            {/* Portugal / Itália — número principal */}
+          {/* Emergência Mary */}
+          <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"20px 18px", border:`2px solid ${C.red}`, marginBottom:14 }}>
+            <div style={{ fontFamily:"'Cinzel',serif", color:"#FF8A80", fontSize:16, fontWeight:700, marginBottom:14 }}>🆘 Emergência da Mary — ligue AGORA!</div>
+
             <div style={{ background:"rgba(183,28,28,0.3)", borderRadius:14, padding:"14px", marginBottom:10, border:"1px solid rgba(255,100,100,0.4)" }}>
               <div style={{ color:"#FF8A80", fontSize:12, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700, marginBottom:6 }}>📍 ESTANDO EM PORTUGAL OU ITÁLIA</div>
               <a href="tel:+13039671098" style={{ display:"flex", gap:12, alignItems:"center", textDecoration:"none" }}>
@@ -1101,7 +1113,6 @@ function PageSeguro(){
               </a>
             </div>
 
-            {/* Brasil */}
             <a href="tel:08008913679" style={{ display:"flex", gap:12, alignItems:"center", background:"rgba(255,255,255,0.08)", borderRadius:12, padding:"12px 14px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.25)", marginBottom:8 }}>
               <span style={{ fontSize:26 }}>📞</span>
               <div>
@@ -1111,7 +1122,6 @@ function PageSeguro(){
               </div>
             </a>
 
-            {/* E-mail */}
             <a href="mailto:benefits@ap-visa.com" style={{ display:"flex", gap:12, alignItems:"center", background:"rgba(255,255,255,0.08)", borderRadius:12, padding:"12px 14px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.25)" }}>
               <span style={{ fontSize:26 }}>📧</span>
               <div>
@@ -1121,7 +1131,7 @@ function PageSeguro(){
             </a>
           </div>
 
-          {/* Passo a passo de emergência */}
+          {/* Passo a passo Mary */}
           <Card>
             <SectionLabel>📋 O que fazer em caso de emergência</SectionLabel>
             {[
@@ -1143,7 +1153,6 @@ function PageSeguro(){
             ))}
           </Card>
 
-          {/* SAC AIG */}
           <Card style={{ background:"#FFF8E1", border:"1px solid #FFD54F" }}>
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:"#5D4037", marginBottom:8 }}>📞 Outros contatos da AIG (2ª a 6ª, 9h–18h)</div>
             {[
@@ -1157,81 +1166,170 @@ function PageSeguro(){
               </div>
             ))}
           </Card>
-        </>
-      )}
 
-      {/* ABA: COBERTURAS */}
-      {aba === "coberturas" && (
-        <Card>
-          <SectionLabel>🛡️ Todas as coberturas · Cartão Infinite</SectionLabel>
-          <div style={{ background:"#E8F5E9", borderRadius:10, padding:"10px 12px", marginBottom:14, border:`1px solid #A5D6A7` }}>
-            <div style={{ fontSize:15, color:C.green, fontWeight:700 }}>✅ Prêmio pago integralmente pela Visa · Gratuito para a segurada</div>
-            <div style={{ fontSize:14, color:C.brownM, marginTop:4 }}>Vigência: 31/08/2026 a 31/08/2027 · Válido por até 60 dias consecutivos por viagem</div>
-          </div>
-          {COBERTURAS.map((cob,i,arr)=>(
-            <div key={i} style={{ padding:"12px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>
-              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8, marginBottom:4 }}>
-                <div style={{ display:"flex", gap:8, alignItems:"center", flex:1 }}>
-                  <span style={{ fontSize:20, flexShrink:0 }}>{cob.icon}</span>
-                  <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:C.navy, lineHeight:1.35 }}>{cob.titulo}</div>
-                </div>
-                <span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"3px 10px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700, flexShrink:0, whiteSpace:"nowrap" }}>{cob.valor}</span>
-              </div>
-              <div style={{ fontSize:14, color:C.brownM, lineHeight:1.6, paddingLeft:28 }}>{cob.detalhe}</div>
-            </div>
-          ))}
-        </Card>
-      )}
-
-      {/* ABA: QUEM PAGA? */}
-      {aba === "quempaga" && (
-        <>
-          <Card style={{ background:"#E8F5E9", border:`1px solid #A5D6A7` }}>
-            <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.green, marginBottom:10 }}>
-              ✅ Quando o seguro paga direto (sem você desembolsar)
-            </div>
-            <div style={{ ...T.body, fontSize:16, lineHeight:1.8 }}>
-              Quando existe uma <strong>clínica ou hospital credenciado</strong> no local, a AIG paga diretamente ao prestador. Você não precisa pagar nada na hora — apenas apresentar o bilhete de seguro e um documento de identidade.
-            </div>
-            <div style={{ marginTop:12, background:"rgba(27,94,32,0.1)", borderRadius:10, padding:"10px 12px" }}>
-              <div style={{ fontSize:15, color:C.green, fontWeight:700 }}>👉 Por isso é tão importante LIGAR PRIMEIRO para a central!</div>
-              <div style={{ fontSize:14, color:C.brownM, marginTop:4 }}>Eles indicam o hospital credenciado mais próximo e autorizam o atendimento.</div>
-            </div>
-          </Card>
-
-          <Card style={{ background:"#FFF3E0", border:"1px solid #FFCC02" }}>
-            <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:"#E65100", marginBottom:10 }}>
-              ⚠️ Quando você paga e depois pede reembolso
-            </div>
-            <div style={{ ...T.body, fontSize:16, lineHeight:1.8, color:"#5D4037" }}>
-              Se não houver rede credenciada no local, você paga o atendimento e solicita o reembolso depois de volta ao Brasil.
-            </div>
-            <div style={{ marginTop:12 }}>
-              <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:"#E65100", marginBottom:8 }}>📁 Guarde obrigatoriamente:</div>
-              {["Todos os recibos e notas fiscais do atendimento","Receitas e relatórios médicos","Comprovante de pagamento (cartão ou dinheiro)","Registros de internação ou alta hospitalar"].map((d,i)=>(
-                <div key={i} style={{ display:"flex", gap:8, padding:"6px 0", fontSize:15, color:"#5D4037", borderBottom:i<3?`1px solid #FFE082`:"none" }}>
-                  <span style={{ color:"#E65100", fontWeight:700 }}>•</span>{d}
-                </div>
-              ))}
-            </div>
-          </Card>
-
+          {/* Coberturas Mary */}
           <Card>
-            <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy, marginBottom:10 }}>
-              💰 O seguro de viagem é diferente do seguro saúde
+            <SectionLabel>🛡️ Coberturas · Visa Infinite (AIG)</SectionLabel>
+            <div style={{ background:"#E8F5E9", borderRadius:10, padding:"10px 12px", marginBottom:14, border:`1px solid #A5D6A7` }}>
+              <div style={{ fontSize:15, color:C.green, fontWeight:700 }}>✅ Gratuito — benefício do cartão</div>
+              <div style={{ fontSize:14, color:C.brownM, marginTop:4 }}>Vigência: 31/08/2026 a 31/08/2027 · Até 60 dias por viagem</div>
             </div>
-            <div style={{ ...T.body, fontSize:16, lineHeight:1.8 }}>
-              O Seguro Viagem cobre <strong>emergências</strong> durante a viagem — não é um plano de saúde permanente. Serve para situações inesperadas: acidentes, doenças súbitas, hospitalização de urgência.
-            </div>
-            <div style={{ marginTop:12, background:C.creamD, borderRadius:10, padding:"10px 12px" }}>
-              <div style={{ fontSize:15, color:C.brownM, lineHeight:1.65 }}>
-                ✅ Cobre: acidente, infarto, derrame, COVID-19, fraturas, apendicite, infecções graves<br/>
-                ❌ Não cobre: consultas de rotina, doenças preexistentes sem emergência, procedimentos eletivos
+            {COBERTURAS_MARY.map((cob,i,arr)=>(
+              <div key={i} style={{ padding:"12px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>
+                <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8, marginBottom:4 }}>
+                  <div style={{ display:"flex", gap:8, alignItems:"center", flex:1 }}>
+                    <span style={{ fontSize:20, flexShrink:0 }}>{cob.icon}</span>
+                    <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:C.navy, lineHeight:1.35 }}>{cob.titulo}</div>
+                  </div>
+                  <span style={{ background:C.gold, color:C.white, borderRadius:20, padding:"3px 10px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700, flexShrink:0, whiteSpace:"nowrap" }}>{cob.valor}</span>
+                </div>
+                <div style={{ fontSize:14, color:C.brownM, lineHeight:1.6, paddingLeft:28 }}>{cob.detalhe}</div>
               </div>
-            </div>
+            ))}
           </Card>
         </>
       )}
+
+      {/* ═══ BILHETE DO JASON (HERO Seguros / Generali) ═══ */}
+      {pessoa === "jason" && (
+        <>
+          <Card>
+            <SectionLabel>📄 Bilhete de Seguro — Jason</SectionLabel>
+            <div style={{ background:"linear-gradient(135deg,#6A1B9A,#8E24AA)", borderRadius:14, padding:"16px 14px" }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:10 }}>
+                <div>
+                  <div style={{ color:"#F3E5F5", fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700 }}>Jason Jose Percilio</div>
+                  <div style={{ color:"rgba(255,255,255,0.7)", fontSize:13, marginTop:3 }}>HERO Seguros · Generali Brasil</div>
+                </div>
+                <span style={{ background:"#1B5E20", color:"white", borderRadius:20, padding:"4px 12px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700 }}>✓ Emitido</span>
+              </div>
+              <div style={{ background:"rgba(255,255,255,0.12)", borderRadius:10, padding:"10px 12px" }}>
+                <div style={{ color:"rgba(255,255,255,0.65)", fontSize:12, letterSpacing:1, fontFamily:"'Cinzel',serif", marginBottom:4 }}>Nº DO BILHETE</div>
+                <div style={{ color:"white", fontSize:15, fontWeight:700 }}>716922801004247272</div>
+              </div>
+              <div style={{ display:"flex", gap:8, marginTop:8 }}>
+                <div style={{ flex:1, background:"rgba(255,255,255,0.12)", borderRadius:8, padding:"8px 10px" }}>
+                  <div style={{ color:"rgba(255,255,255,0.6)", fontSize:11 }}>Início</div>
+                  <div style={{ color:"white", fontSize:14, fontWeight:700 }}>30/10/2026</div>
+                </div>
+                <div style={{ flex:1, background:"rgba(255,255,255,0.12)", borderRadius:8, padding:"8px 10px" }}>
+                  <div style={{ color:"rgba(255,255,255,0.6)", fontSize:11 }}>Término</div>
+                  <div style={{ color:"white", fontSize:14, fontWeight:700 }}>13/11/2026</div>
+                </div>
+              </div>
+              <div style={{ background:"rgba(255,255,255,0.12)", borderRadius:8, padding:"8px 10px", marginTop:8 }}>
+                <div style={{ color:"rgba(255,255,255,0.6)", fontSize:11 }}>Plano</div>
+                <div style={{ color:"white", fontSize:14, fontWeight:700 }}>HERO 150 · VIP + eSIM grátis</div>
+              </div>
+              <a href="/documentos/bilhete_jason.pdf" target="_blank" rel="noopener noreferrer"
+                style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginTop:10, background:"rgba(255,255,255,0.15)", border:"1px solid rgba(255,255,255,0.4)", color:"white", borderRadius:10, padding:"11px", textDecoration:"none", fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700 }}>
+                📥 Baixar PDF do Bilhete — Jason
+              </a>
+            </div>
+          </Card>
+
+          {/* Emergência Jason */}
+          <div style={{ background:"linear-gradient(150deg,#4A148C,#6A1B9A)", borderRadius:20, padding:"20px 18px", border:`2px solid ${C.red}`, marginBottom:14 }}>
+            <div style={{ fontFamily:"'Cinzel',serif", color:"#FF8A80", fontSize:16, fontWeight:700, marginBottom:14 }}>🆘 Emergência do Jason — ligue AGORA!</div>
+
+            <a href="https://wa.me/551150399001" target="_blank" rel="noopener noreferrer" style={{ display:"flex", gap:12, alignItems:"center", background:"rgba(37,211,102,0.25)", borderRadius:14, padding:"16px", textDecoration:"none", border:"1px solid rgba(37,211,102,0.5)", marginBottom:10 }}>
+              <span style={{ fontSize:32 }}>💬</span>
+              <div>
+                <div style={{ color:"#69F0AE", fontSize:12, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>WHATSAPP · CENTRAL 24H</div>
+                <div style={{ color:"white", fontSize:22, fontWeight:700, fontFamily:"'Cinzel',serif" }}>+55 11 5039-9001</div>
+                <div style={{ color:"rgba(255,255,255,0.65)", fontSize:13, marginTop:2 }}>Toque para abrir o WhatsApp diretamente</div>
+              </div>
+            </a>
+
+            <a href="tel:+551150399001" style={{ display:"flex", gap:12, alignItems:"center", background:"rgba(255,255,255,0.1)", borderRadius:12, padding:"12px 14px", textDecoration:"none", border:"1px solid rgba(255,255,255,0.25)" }}>
+              <span style={{ fontSize:26 }}>📞</span>
+              <div>
+                <div style={{ color:"#F3E5F5", fontSize:12, fontFamily:"'Cinzel',serif", letterSpacing:1, fontWeight:700 }}>OU LIGAR PARA O MESMO NÚMERO</div>
+                <div style={{ color:"white", fontSize:18, fontWeight:700, marginTop:2 }}>+55 11 5039-9001</div>
+              </div>
+            </a>
+          </div>
+
+          {/* Passo a passo Jason */}
+          <Card>
+            <SectionLabel>📋 O que fazer em caso de emergência</SectionLabel>
+            {[
+              { num:"1", cor:C.red,   titulo:"Chame no WhatsApp +55 11 5039-9001", desc:"Central de Assistência HERO/Generali, atendimento 24 horas. Envie mensagem explicando a situação — funciona mesmo no exterior com internet Wi-Fi ou o eSIM incluído no plano." },
+              { num:"2", cor:"#6A1B9A", titulo:"Informe o número do bilhete", desc:"716922801004247272 — tenha à mão para agilizar o atendimento." },
+              { num:"3", cor:C.navy,  titulo:"Siga as orientações da central", desc:"Eles indicam o que fazer e, quando possível, o hospital ou clínica mais indicada." },
+              { num:"4", cor:"#E65100", titulo:"Guarde todos os documentos", desc:"Muitas coberturas deste plano funcionam por reembolso (farmácia, atraso, cancelamento). Guarde recibos, notas fiscais e laudos médicos." },
+              { num:"5", cor:C.navy,  titulo:"Dúvidas fora de emergência", desc:"SAC 24h: 0800 88 90 200 · Ouvidoria (dias úteis, 9h-18h): 0800 88 03 900" },
+            ].map((p,i,arr)=>(
+              <div key={i} style={{ display:"flex", gap:14, padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}>
+                <div style={{ width:34, height:34, borderRadius:10, background:p.cor, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                  <span style={{ fontFamily:"'Cinzel',serif", color:"white", fontSize:16, fontWeight:700 }}>{p.num}</span>
+                </div>
+                <div>
+                  <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy, marginBottom:4 }}>{p.titulo}</div>
+                  <div style={{ ...T.body, fontSize:16, lineHeight:1.7 }}>{p.desc}</div>
+                </div>
+              </div>
+            ))}
+          </Card>
+
+          <Card style={{ background:"#F3E5F5", border:"1px solid #CE93D8" }}>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:"#4A148C", marginBottom:8 }}>📞 Outros contatos (dias úteis, 9h–18h salvo indicado)</div>
+            {[
+              { label:"SAC 24h",             tel:"0800 88 90 200" },
+              { label:"Def. Auditivos 24h",  tel:"0800 88 90 400" },
+              { label:"Ouvidoria",           tel:"0800 88 03 900" },
+            ].map((c,i)=>(
+              <div key={i} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"8px 0", borderBottom:i<2?"1px solid #E1BEE7":"none" }}>
+                <span style={{ fontSize:15, color:"#4A148C" }}>{c.label}</span>
+                <a href={`tel:${c.tel.replace(/\s/g,"")}`} style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:"#4A148C", textDecoration:"none" }}>{c.tel}</a>
+              </div>
+            ))}
+          </Card>
+
+          {/* Coberturas Jason */}
+          <Card>
+            <SectionLabel>🛡️ Coberturas · HERO 150 (Generali)</SectionLabel>
+            <div style={{ background:"#F3E5F5", borderRadius:10, padding:"10px 12px", marginBottom:14, border:"1px solid #CE93D8" }}>
+              <div style={{ fontSize:15, color:"#4A148C", fontWeight:700 }}>✅ Plano contratado · Prêmio pago: R$ 152,17 + IOF R$ 0,58</div>
+              <div style={{ fontSize:14, color:C.brownM, marginTop:4 }}>Vigência: 30/10/2026 a 13/11/2026 · Destino: Europa</div>
+            </div>
+            {COBERTURAS_JASON.map((cob,i,arr)=>(
+              <div key={i} style={{ padding:"12px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>
+                <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8, marginBottom:4 }}>
+                  <div style={{ display:"flex", gap:8, alignItems:"center", flex:1 }}>
+                    <span style={{ fontSize:20, flexShrink:0 }}>{cob.icon}</span>
+                    <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:C.navy, lineHeight:1.35 }}>{cob.titulo}</div>
+                  </div>
+                  <span style={{ background:"#6A1B9A", color:"white", borderRadius:20, padding:"3px 10px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700, flexShrink:0, whiteSpace:"nowrap" }}>{cob.valor}</span>
+                </div>
+                <div style={{ fontSize:14, color:C.brownM, lineHeight:1.6, paddingLeft:28 }}>{cob.detalhe}</div>
+              </div>
+            ))}
+          </Card>
+        </>
+      )}
+
+      {/* Quem paga? — vale para os dois */}
+      <Card style={{ background:"#E8F5E9", border:`1px solid #A5D6A7` }}>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.green, marginBottom:10 }}>
+          💰 Quem paga? Regra geral para os dois seguros
+        </div>
+        <div style={{ ...T.body, fontSize:16, lineHeight:1.8 }}>
+          Quando existe <strong>rede credenciada</strong> no local, a seguradora paga direto ao hospital — vocês não desembolsam nada. Quando não existe rede credenciada, é preciso pagar e depois pedir <strong>reembolso</strong>, guardando todos os recibos e documentos médicos.
+        </div>
+        <div style={{ marginTop:12, background:"rgba(27,94,32,0.1)", borderRadius:10, padding:"10px 12px" }}>
+          <div style={{ fontSize:15, color:C.green, fontWeight:700 }}>👉 Por isso é fundamental LIGAR PRIMEIRO para a central certa!</div>
+        </div>
+      </Card>
+
+      <Card>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy, marginBottom:10 }}>
+          ⚠️ O seguro de viagem não é seguro saúde
+        </div>
+        <div style={{ ...T.body, fontSize:16, lineHeight:1.8 }}>
+          Cobre <strong>emergências</strong> durante a viagem — acidentes, doenças súbitas, hospitalização de urgência. Não é um plano de saúde permanente nem cobre consultas de rotina.
+        </div>
+      </Card>
     </div>
   );
 }
@@ -1271,116 +1369,4 @@ function PageContato(){
       <Card>
         <SectionLabel>🆘 Emergências Locais</SectionLabel>
         {[
-          { country:"🇵🇹 Portugal",              number:"112",               detail:"Polícia, INEM (ambulância), Bombeiros" },
-          { country:"🇮🇹 Itália",                number:"112",               detail:"Polícia 113 · Ambulância 118 · Bombeiros 115" },
-          { country:"🇧🇷 Consulado BR em Roma",   number:"+39 06 4222 200",   detail:"Emergência para brasileiros na Itália" },
-          { country:"🇧🇷 Consulado BR em Lisboa", number:"+351 21 392 4000",  detail:"Emergência para brasileiros em Portugal" },
-        ].map((e,i,arr)=>(
-          <div key={i} style={{ padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>
-            <div style={{ fontFamily:"'Cinzel',serif", fontSize:17, fontWeight:700, color:C.navy, marginBottom:8 }}>{e.country}</div>
-            <a href={`tel:${e.number.replace(/\s/g,"")}`} style={{ display:"inline-flex", alignItems:"center", gap:8, background:"#FDECEA", color:C.red, borderRadius:10, padding:"10px 18px", fontSize:20, fontWeight:700, textDecoration:"none", marginBottom:6 }}>🆘 {e.number}</a>
-            <div style={{ ...T.sub, fontSize:15 }}>{e.detail}</div>
-          </div>
-        ))}
-      </Card>
-      <Card>
-        <SectionLabel>📋 Documentos Essenciais</SectionLabel>
-        {["Passaporte válido (mínimo até Maio/2027)","Seguro viagem com cobertura Schengen","Vouchers da viagem (enviados 2 dias antes)","Euro (€) em espécie — despesas pessoais","Cartão de crédito internacional (backup)"].map((d,i,arr)=>(
-          <div key={i} style={{ display:"flex", gap:12, padding:"11px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}>
-            <span style={{ color:C.green, fontSize:20, flexShrink:0, fontWeight:700 }}>✓</span>
-            <span style={{ ...T.body, fontSize:17 }}>{d}</span>
-          </div>
-        ))}
-      </Card>
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════
-//  APP PRINCIPAL
-// ═══════════════════════════════════════════════════════════
-export default function App(){
-  const [page,setPage]            = useState("hoje");
-  const [expandedDay,setExpanded] = useState(null);
-  const [weather,setWeather]      = useState({});
-  const [checked,setChecked]      = useState({});
-
-  useEffect(()=>{
-    try{ const s=localStorage.getItem("peregrinacao_checklist"); if(s) setChecked(JSON.parse(s)); }catch(_){}
-  },[]);
-
-  useEffect(()=>{
-    async function fetchWeather(){
-      const results={};
-      for(const [key,city] of Object.entries(WEATHER_CITIES)){
-        try{
-          const url=`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&start_date=2026-10-30&end_date=2026-11-12`;
-          const res=await fetch(url); const data=await res.json();
-          if(data.daily) results[key]=data.daily;
-        }catch(_){}
-      }
-      setWeather(results);
-    }
-    fetchWeather();
-  },[]);
-
-  function toggleCheck(id){
-    setChecked(prev=>{
-      const next={...prev,[id]:!prev[id]};
-      try{ localStorage.setItem("peregrinacao_checklist",JSON.stringify(next)); }catch(_){}
-      return next;
-    });
-  }
-
-  const today         = new Date(); today.setHours(0,0,0,0);
-  const tripStart     = new Date("2026-10-30T00:00:00");
-  const tripEnd       = new Date("2026-11-12T00:00:00");
-  const daysUntilTrip = Math.ceil((tripStart-today)/86400000);
-  const currentDay    = ITINERARY.find(d=>d.date===todayStr())||null;
-  const tripOver      = today>tripEnd;
-  const duringTrip    = today>=tripStart && today<=tripEnd;
-  const hotelAtual    = duringTrip ? getCurrentHotel() : HOTELS[0];
-
-  const NAV=[
-    {id:"hoje",    icon:"🏠", label:"Hoje"   },
-    {id:"roteiro", icon:"📅", label:"Roteiro"},
-    {id:"voos",    icon:"✈️", label:"Voos"   },
-    {id:"clima",   icon:"⛅", label:"Clima"  },
-    {id:"pacote",  icon:"📋", label:"Pacote" },
-    {id:"vip",     icon:"🛋️", label:"Salas"  },
-    {id:"seguro",  icon:"🛡️", label:"Seguro" },
-    {id:"contato", icon:"📞", label:"Contato"},
-  ];
-
-  return(
-    <div style={{ minHeight:"100vh", background:C.cream, fontFamily:"'EB Garamond',Georgia,serif", color:C.brown, paddingBottom:90, maxWidth:540, margin:"0 auto" }}>
-
-      <header style={{ background:`linear-gradient(160deg,${C.navy} 0%,${C.navyL} 100%)`, padding:"20px 20px 16px", boxShadow:"0 4px 24px rgba(27,43,94,0.35)", position:"sticky", top:0, zIndex:50 }}>
-        <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:13, letterSpacing:6, textAlign:"center", marginBottom:5 }}>✦  ✝  ✦</div>
-        <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:19, fontWeight:700, letterSpacing:1, textAlign:"center", lineHeight:1.3, marginBottom:4 }}>Jubileu Franciscano 2026</div>
-        <div style={{ color:"rgba(255,255,255,0.6)", fontSize:13, textAlign:"center" }}>Peregrinação · Portugal & Itália · 30 Out – 12 Nov</div>
-      </header>
-
-      {page==="hoje"    && <PageHoje currentDay={currentDay} daysUntilTrip={daysUntilTrip} tripOver={tripOver} weather={weather} checked={checked} toggleCheck={toggleCheck} />}
-      {page==="roteiro" && <PageRoteiro expandedDay={expandedDay} setExpandedDay={setExpanded} />}
-      {page==="voos"    && <PageVoos />}
-      {page==="clima"   && <PageClima weather={weather} />}
-      {page==="pacote"  && <PagePacote />}
-      {page==="vip"     && <PageSalasVip />}
-      {page==="seguro"  && <PageSeguro />}
-      {page==="contato" && <PageContato />}
-
-      {/* Botão flutuante — visível sempre, em qualquer aba */}
-      <BotaoHotel hotel={hotelAtual} antesViagem={daysUntilTrip > 0} />
-
-      <nav style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:540, background:C.navy, display:"flex", borderTop:`3px solid ${C.gold}`, zIndex:100 }}>
-        {NAV.map(n=>(
-          <button key={n.id} onClick={()=>setPage(n.id)} style={{ flex:1, padding:"9px 0 7px", background:page===n.id?"rgba(232,168,32,0.2)":"none", border:"none", cursor:"pointer", display:"flex", flexDirection:"column", alignItems:"center", gap:1 }}>
-            <span style={{ fontSize:18 }}>{n.icon}</span>
-            <span style={{ fontSize:7.5, color:page===n.id?C.goldL:"rgba(255,255,255,0.55)", fontFamily:"'Cinzel',serif", letterSpacing:0.1, fontWeight:page===n.id?700:500 }}>{n.label}</span>
-          </button>
-        ))}
-      </nav>
-    </div>
-  );
-}
+          { country:"🇵🇹 Portugal",              number:"112",               detail:"Po
