@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 
 // ═══════════════════════════════════════════════════════════
@@ -56,19 +55,75 @@ function getCurrentHotel() {
 //  ROTEIRO
 // ═══════════════════════════════════════════════════════════
 const ITINERARY = [
-  { day:1,  date:"2026-10-30", weekday:"Sexta-feira",   location:"Goiânia / Brasília → Lisboa", city:"goiania", icon:"✈️", morning:"Em horário previamente combinado, encontro para darmos início à nossa emocionante viagem rumo a Portugal e Itália.", afternoon:"Em viagem intercontinental.", evening:"Em voo — descanse bem para a chegada!", highlights:["Início da peregrinação 🙏","Voo Brasília → Lisboa"], prayer:"Senhor, abençoa nossa partida e guia nossos passos nesta jornada de fé." },
-  { day:2,  date:"2026-10-31", weekday:"Sábado",        location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"🛬", morning:"Chegada ao Aeroporto Internacional de Lisboa. Trâmites de imigração, traslado para o hotel, almoço (não incluso). Check-in e descanso. Bem-vindos a Lisboa!", afternoon:"Tarde livre — atividades pessoais, compras ou explorar a cidade no seu ritmo.", evening:"Noite livre.", highlights:["Chegada em Lisboa 🇵🇹","Check-in no hotel"], prayer:"Bem-vindos a Lisboa! Obrigado, Senhor, por nos trazer com segurança." },
-  { day:3,  date:"2026-11-01", weekday:"Domingo",       location:"Lisboa → Fátima (127km) 🕊️", city:"fatima", icon:"🕊️", morning:"Após o café da manhã, peregrinação para Fátima com guia acompanhante — local da aparição da Virgem Maria às crianças pastorinhas Lúcia, Francisco e Jacinta em 13 de maio de 1917. Visita à Basílica Santíssima Trindade e atividades religiosas do Santuário.", afternoon:"Após o almoço (não incluso), city tour guiado no Santuário de Fátima e Casa dos Pastorinhos.", evening:"Santa Missa e Procissão das Velas na Capelinha das Aparições, onde o rosário é rezado em diversos idiomas. Retorno para Lisboa.", highlights:["Santuário de Fátima 🕊️","Casa dos Pastorinhos","Santa Missa","Procissão das Velas 🕯️"], prayer:"Nossa Senhora de Fátima, intercede por nós e abençoa esta peregrinação." },
-  { day:4,  date:"2026-11-02", weekday:"Segunda-feira", location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"⛪", morning:"Café da manhã. Santa Missa na Igreja de Santo Antônio — construída no local onde o Santo nasceu, visita gratuita. Visita à Sé Patriarcal de Lisboa (Basílica de Santa Maria Maior), a igreja mais antiga da capital portuguesa, com subida ao coro alto. Almoço livre (não incluso).", afternoon:"City tour com guia local: Baixa Pombalina, Alfama, Torre de Belém, Mosteiro dos Jerônimos, Pasteis de Belém, Praça do Comércio, Rua Augusta, Elevador de Santa Justa, Castelo de São Jorge e Miradouro de Santa Luzia.", evening:"Noite livre.", highlights:["Igreja de Santo Antônio ⛪","Sé de Lisboa","Torre de Belém 🏰","Mosteiro dos Jerônimos","Alfama"], prayer:"Santo Antônio de Lisboa e de Pádua, rogai por nós!" },
-  { day:5,  date:"2026-11-03", weekday:"Terça-feira",   location:"Lisboa → Roma ✈️", city:"roma", icon:"✈️", morning:"Após o café da manhã, em horário combinado, transfer para o aeroporto de Lisboa com destino a Roma.", afternoon:"Traslado para o hotel, almoço (não incluso), check-in e descanso. Bem-vindos a Roma!", evening:"Noite livre.", highlights:["Voo Lisboa → Roma ✈️","Check-in em Roma 🇮🇹"], prayer:"Senhor, guia nossa jornada até a Cidade Eterna." },
-  { day:6,  date:"2026-11-04", weekday:"Quarta-feira",  location:"Roma / Vaticano 🇻🇦", city:"roma", icon:"✝️", morning:"Após o café da manhã, transfer para o Vaticano para assistir à Catequese Papal (se o Papa estiver em Roma). Almoço não incluso.", afternoon:"Tarde livre para atividades pessoais. Sugestões opcionais: Basílica de São Pedro com Porta Santa, Basílica de São Paulo Fora dos Muros, São Sebastião Fora dos Muros, Basílica de São João de Latrão, Basílica de Santa Maria Maior, Igreja de Santo Afonso de Ligório.", evening:"Noite livre.", highlights:["Catequese Papal 🇻🇦","Porta Santa","Basílicas opcionais"], prayer:"Santo Padre, abençoa nossa peregrinação ao Jubileu Franciscano." },
-  { day:7,  date:"2026-11-05", weekday:"Quinta-feira",  location:"Roma, Itália 🇮🇹", city:"roma", icon:"🏛️", morning:"Café da manhã no hotel. Em horário combinado, city tour panorâmico: Basílica de São Pedro, Vaticano, Coliseu, Fontana di Trevi, Panteão, Escadaria da Praça da Espanha e Praça Navona (visitas externas).", afternoon:"Tarde livre — compras ou explorar Roma no seu ritmo.", evening:"Noite livre.", highlights:["Basílica de São Pedro ✝️","Coliseu 🏛️","Fontana di Trevi ⛲","Praça Navona"], prayer:"São Pedro, guarda nossa fé e fortalece nosso caminho." },
-  { day:8,  date:"2026-11-06", weekday:"Sexta-feira",   location:"Roma → Assis 🚂", city:"assis", icon:"🚂", morning:"Após o café da manhã, saída para a estação de trem rumo a Assis. Traslado para o hotel, almoço livre (não incluso). Acomodação e descanso. Bem-vindos a Assis!", afternoon:"Tarde livre para atividades pessoais. Sugestões: participar de momentos de oração, caminhar pelas ruas medievais de Assis.", evening:"Noite livre.", highlights:["Trem Roma → Assis 🚂","Hospedagem em Convento ⛪"], prayer:"São Francisco de Assis, rogai por nós. Paz e Bem! 🕊️" },
-  { day:9,  date:"2026-11-07", weekday:"Sábado",        location:"Assis, Itália 🌿", city:"assis", icon:"🌿", morning:"Após o café da manhã, Santa Missa na Porciúncula. Almoço livre (não incluso).", afternoon:"Às 15h: visita à Basílica de Santa Clara, Carlos Acutis, Catedral de São Rufino e Igrejinha de São Damião.", evening:"Noite livre.", highlights:["Missa na Porciúncula 🕊️","Basílica de Santa Clara","Carlos Acutis","São Damião"], prayer:"Francisco e Clara, ensinai-nos a simplicidade e o amor." },
-  { day:10, date:"2026-11-08", weekday:"Domingo",       location:"Assis, Itália ⛪", city:"assis", icon:"⛪", morning:"Após o café da manhã, Missa na Basílica de São Francisco de Assis. Almoço livre (não incluso).", afternoon:"Tarde livre para atividades pessoais. Sugestão opcional: visitar uma vinícola local.", evening:"Noite livre.", highlights:["Missa na Basílica de São Francisco 🙏"], prayer:"São Francisco, que nossa fé floresça como a tua." },
-  { day:11, date:"2026-11-09", weekday:"Segunda-feira", location:"Santuários da Região 🙏", city:"assis", icon:"🙏", morning:"Após o café da manhã, em horário combinado, city tour para o Santuário de Fonte Colombo, Santuário Della Foresta, Convento San Giacomo Vaggio Bustone e Greccio. Almoço no local (não incluso).", afternoon:"Continuação do passeio pelos santuários.", evening:"Noite livre.", highlights:["Fonte Colombo","Santuário Della Foresta","Convento Vaggio Bustone","Greccio 🌟"], prayer:"Que os passos de Francisco iluminem nossa peregrinação." },
-  { day:12, date:"2026-11-10", weekday:"Terça-feira",   location:"La Verna, Itália ⛰️", city:"laverna", icon:"⛰️", morning:"Após o café da manhã, visita ao Santuário de La Verna — lugar sagrado onde São Francisco recebeu as Estigmas.", afternoon:"Almoço no local (não incluso). Continuação da visita a La Verna.", evening:"Noite livre.", highlights:["Santuário de La Verna ⛰️","Local das Estigmas de São Francisco 🌟"], prayer:"Senhor, que recebamos as chagas do teu amor como Francisco." },
-  { day:13, date:"2026-11-11", weekday:"Quarta-feira",  location:"Cássia → Roma → Brasil 🏠", city:"assis", icon:"🏠", morning:"Café da manhã no horário combinado. Saída para Cássia. Almoço não incluso.", afternoon:"Traslado para o aeroporto de Roma com destino ao Brasil.", evening:"Chegada prevista em Brasília no dia 12/Nov às 16h40. Transfer Brasília → Goiânia. Fim dos serviços contratados. Os acompanhantes do grupo sempre estarão disponíveis para orientar caso seja necessário.", highlights:["Visita a Cássia 🙏","Voo Roma → Brasil ✈️","Chegada em Brasília: 12/Nov às 16h40 🇧🇷"], prayer:"Senhor, obrigado por esta peregrinação abençoada. Paz e Bem! 🕊️" },
+  { day:1,  date:"2026-10-30", weekday:"Sexta-feira",   location:"Goiânia / Brasília → Lisboa", city:"goiania", icon:"✈️", morning:"Em horário previamente combinado, encontro para darmos início à nossa emocionante viagem rumo a Portugal e Itália.", afternoon:"Em viagem intercontinental.", evening:"Em voo — descanse bem para a chegada!", highlights:["Início da peregrinação 🙏","Voo Brasília → Lisboa"], prayer:"Senhor, abençoa nossa partida e guia nossos passos nesta jornada de fé.", places:[] },
+  { day:2,  date:"2026-10-31", weekday:"Sábado",        location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"🛬", morning:"Chegada ao Aeroporto Internacional de Lisboa. Trâmites de imigração, traslado para o hotel, almoço (não incluso). Check-in e descanso. Bem-vindos a Lisboa!", afternoon:"Tarde livre — atividades pessoais, compras ou explorar a cidade no seu ritmo.", evening:"Noite livre.", highlights:["Chegada em Lisboa 🇵🇹","Check-in no hotel"], prayer:"Bem-vindos a Lisboa! Obrigado, Senhor, por nos trazer com segurança.", places:[
+    { name:"Aeroporto Internacional de Lisboa", query:"Aeroporto Humberto Delgado Lisboa" },
+  ] },
+  { day:3,  date:"2026-11-01", weekday:"Domingo",       location:"Lisboa → Fátima (127km) 🕊️", city:"fatima", icon:"🕊️", morning:"Após o café da manhã, peregrinação para Fátima com guia acompanhante — local da aparição da Virgem Maria às crianças pastorinhas Lúcia, Francisco e Jacinta em 13 de maio de 1917. Visita à Basílica Santíssima Trindade e atividades religiosas do Santuário.", afternoon:"Após o almoço (não incluso), city tour guiado no Santuário de Fátima e Casa dos Pastorinhos.", evening:"Santa Missa e Procissão das Velas na Capelinha das Aparições, onde o rosário é rezado em diversos idiomas. Retorno para Lisboa.", highlights:["Santuário de Fátima 🕊️","Casa dos Pastorinhos","Santa Missa","Procissão das Velas 🕯️"], prayer:"Nossa Senhora de Fátima, intercede por nós e abençoa esta peregrinação.", places:[
+    { name:"Basílica Santíssima Trindade", query:"Basílica Santíssima Trindade Fátima" },
+    { name:"Santuário de Fátima", query:"Santuário de Fátima" },
+    { name:"Fátima", query:"Fátima Portugal" },
+    { name:"Casa dos Pastorinhos", query:"Casa dos Pastorinhos Fátima" },
+    { name:"Capelinha das Aparições", query:"Capelinha das Aparições Fátima" },
+  ] },
+  { day:4,  date:"2026-11-02", weekday:"Segunda-feira", location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"⛪", morning:"Café da manhã. Santa Missa na Igreja de Santo Antônio — construída no local onde o Santo nasceu, visita gratuita. Visita à Sé Patriarcal de Lisboa (Basílica de Santa Maria Maior), a igreja mais antiga da capital portuguesa, com subida ao coro alto. Almoço livre (não incluso).", afternoon:"City tour com guia local: Baixa Pombalina, Alfama, Torre de Belém, Mosteiro dos Jerônimos, Pasteis de Belém, Praça do Comércio, Rua Augusta, Elevador de Santa Justa, Castelo de São Jorge e Miradouro de Santa Luzia.", evening:"Noite livre.", highlights:["Igreja de Santo Antônio ⛪","Sé de Lisboa","Torre de Belém 🏰","Mosteiro dos Jerônimos","Alfama"], prayer:"Santo Antônio de Lisboa e de Pádua, rogai por nós!", places:[
+    { name:"Igreja de Santo Antônio", query:"Igreja de Santo António Lisboa" },
+    { name:"Sé Patriarcal de Lisboa", query:"Sé de Lisboa Catedral" },
+    { name:"Basílica de Santa Maria Maior", query:"Sé Catedral Lisboa Basílica Santa Maria Maior" },
+    { name:"Baixa Pombalina", query:"Baixa Pombalina Lisboa" },
+    { name:"Alfama", query:"Alfama Lisboa" },
+    { name:"Torre de Belém", query:"Torre de Belém Lisboa" },
+    { name:"Mosteiro dos Jerônimos", query:"Mosteiro dos Jerónimos Lisboa" },
+    { name:"Pasteis de Belém", query:"Pastéis de Belém Lisboa" },
+    { name:"Praça do Comércio", query:"Praça do Comércio Lisboa" },
+    { name:"Rua Augusta", query:"Rua Augusta Lisboa" },
+    { name:"Elevador de Santa Justa", query:"Elevador de Santa Justa Lisboa" },
+    { name:"Castelo de São Jorge", query:"Castelo de São Jorge Lisboa" },
+    { name:"Miradouro de Santa Luzia", query:"Miradouro de Santa Luzia Lisboa" },
+  ] },
+  { day:5,  date:"2026-11-03", weekday:"Terça-feira",   location:"Lisboa → Roma ✈️", city:"roma", icon:"✈️", morning:"Após o café da manhã, em horário combinado, transfer para o aeroporto de Lisboa com destino a Roma.", afternoon:"Traslado para o hotel, almoço (não incluso), check-in e descanso. Bem-vindos a Roma!", evening:"Noite livre.", highlights:["Voo Lisboa → Roma ✈️","Check-in em Roma 🇮🇹"], prayer:"Senhor, guia nossa jornada até a Cidade Eterna.", places:[] },
+  { day:6,  date:"2026-11-04", weekday:"Quarta-feira",  location:"Roma / Vaticano 🇻🇦", city:"roma", icon:"✝️", morning:"Após o café da manhã, transfer para o Vaticano para assistir à Catequese Papal (se o Papa estiver em Roma). Almoço não incluso.", afternoon:"Tarde livre para atividades pessoais. Sugestões opcionais: Basílica de São Pedro com Porta Santa, Basílica de São Paulo Fora dos Muros, São Sebastião Fora dos Muros, Basílica de São João de Latrão, Basílica de Santa Maria Maior, Igreja de Santo Afonso de Ligório.", evening:"Noite livre.", highlights:["Catequese Papal 🇻🇦","Porta Santa","Basílicas opcionais"], prayer:"Santo Padre, abençoa nossa peregrinação ao Jubileu Franciscano.", places:[
+    { name:"Vaticano", query:"Cidade do Vaticano" },
+    { name:"Basílica de São Pedro", query:"Basílica de São Pedro Vaticano" },
+    { name:"Porta Santa", query:"Porta Santa Basílica São Pedro" },
+    { name:"Basílica de São Paulo Fora dos Muros", query:"Basílica de São Paulo Fora dos Muros Roma" },
+    { name:"São Sebastião Fora dos Muros", query:"Basílica de São Sebastião Fora dos Muros Roma" },
+    { name:"Basílica de São João de Latrão", query:"Basílica de São João de Latrão Roma" },
+    { name:"Basílica de Santa Maria Maior", query:"Basílica de Santa Maria Maior Roma" },
+    { name:"Igreja de Santo Afonso de Ligório", query:"Igreja de Santo Afonso de Ligório Roma" },
+  ] },
+  { day:7,  date:"2026-11-05", weekday:"Quinta-feira",  location:"Roma, Itália 🇮🇹", city:"roma", icon:"🏛️", morning:"Café da manhã no hotel. Em horário combinado, city tour panorâmico: Basílica de São Pedro, Vaticano, Coliseu, Fontana di Trevi, Panteão, Escadaria da Praça da Espanha e Praça Navona (visitas externas).", afternoon:"Tarde livre — compras ou explorar Roma no seu ritmo.", evening:"Noite livre.", highlights:["Basílica de São Pedro ✝️","Coliseu 🏛️","Fontana di Trevi ⛲","Praça Navona"], prayer:"São Pedro, guarda nossa fé e fortalece nosso caminho.", places:[
+    { name:"Basílica de São Pedro", query:"Basílica de São Pedro Vaticano" },
+    { name:"Vaticano", query:"Cidade do Vaticano" },
+    { name:"Coliseu", query:"Coliseu Roma" },
+    { name:"Fontana di Trevi", query:"Fontana di Trevi Roma" },
+    { name:"Panteão", query:"Panteão Roma" },
+    { name:"Escadaria da Praça da Espanha", query:"Escadaria da Praça de Espanha Roma" },
+    { name:"Praça Navona", query:"Praça Navona Roma" },
+  ] },
+  { day:8,  date:"2026-11-06", weekday:"Sexta-feira",   location:"Roma → Assis 🚂", city:"assis", icon:"🚂", morning:"Após o café da manhã, saída para a estação de trem rumo a Assis. Traslado para o hotel, almoço livre (não incluso). Acomodação e descanso. Bem-vindos a Assis!", afternoon:"Tarde livre para atividades pessoais. Sugestões: participar de momentos de oração, caminhar pelas ruas medievais de Assis.", evening:"Noite livre.", highlights:["Trem Roma → Assis 🚂","Hospedagem em Convento ⛪"], prayer:"São Francisco de Assis, rogai por nós. Paz e Bem! 🕊️", places:[] },
+  { day:9,  date:"2026-11-07", weekday:"Sábado",        location:"Assis, Itália 🌿", city:"assis", icon:"🌿", morning:"Após o café da manhã, Santa Missa na Porciúncula. Almoço livre (não incluso).", afternoon:"Às 15h: visita à Basílica de Santa Clara, Carlos Acutis, Catedral de São Rufino e Igrejinha de São Damião.", evening:"Noite livre.", highlights:["Missa na Porciúncula 🕊️","Basílica de Santa Clara","Carlos Acutis","São Damião"], prayer:"Francisco e Clara, ensinai-nos a simplicidade e o amor.", places:[
+    { name:"Porciúncula", query:"Porciúncula Santa Maria degli Angeli Assis" },
+    { name:"Basílica de Santa Clara", query:"Basílica de Santa Clara Assis" },
+    { name:"Carlos Acutis", query:"Carlo Acutis" },
+    { name:"Catedral de São Rufino", query:"Catedral de São Rufino Assis" },
+    { name:"Igrejinha de São Damião", query:"San Damiano Assis" },
+  ] },
+  { day:10, date:"2026-11-08", weekday:"Domingo",       location:"Assis, Itália ⛪", city:"assis", icon:"⛪", morning:"Após o café da manhã, Missa na Basílica de São Francisco de Assis. Almoço livre (não incluso).", afternoon:"Tarde livre para atividades pessoais. Sugestão opcional: visitar uma vinícola local.", evening:"Noite livre.", highlights:["Missa na Basílica de São Francisco 🙏"], prayer:"São Francisco, que nossa fé floresça como a tua.", places:[
+    { name:"Basílica de São Francisco de Assis", query:"Basílica de São Francisco de Assis" },
+  ] },
+  { day:11, date:"2026-11-09", weekday:"Segunda-feira", location:"Santuários da Região 🙏", city:"assis", icon:"🙏", morning:"Após o café da manhã, em horário combinado, city tour para o Santuário de Fonte Colombo, Santuário Della Foresta, Convento San Giacomo Vaggio Bustone e Greccio. Almoço no local (não incluso).", afternoon:"Continuação do passeio pelos santuários.", evening:"Noite livre.", highlights:["Fonte Colombo","Santuário Della Foresta","Convento Vaggio Bustone","Greccio 🌟"], prayer:"Que os passos de Francisco iluminem nossa peregrinação.", places:[
+    { name:"Santuário de Fonte Colombo", query:"Santuario di Fonte Colombo" },
+    { name:"Santuário Della Foresta", query:"Santuario della Foresta Rieti" },
+    { name:"Convento San Giacomo Vaggio Bustone", query:"Convento San Giacomo Poggio Bustone" },
+    { name:"Greccio", query:"Greccio Presépio São Francisco" },
+  ] },
+  { day:12, date:"2026-11-10", weekday:"Terça-feira",   location:"La Verna, Itália ⛰️", city:"laverna", icon:"⛰️", morning:"Após o café da manhã, visita ao Santuário de La Verna — lugar sagrado onde São Francisco recebeu as Estigmas.", afternoon:"Almoço no local (não incluso). Continuação da visita a La Verna.", evening:"Noite livre.", highlights:["Santuário de La Verna ⛰️","Local das Estigmas de São Francisco 🌟"], prayer:"Senhor, que recebamos as chagas do teu amor como Francisco.", places:[
+    { name:"Santuário de La Verna", query:"Santuário de La Verna" },
+  ] },
+  { day:13, date:"2026-11-11", weekday:"Quarta-feira",  location:"Cássia → Roma → Brasil 🏠", city:"assis", icon:"🏠", morning:"Café da manhã no horário combinado. Saída para Cássia. Almoço não incluso.", afternoon:"Traslado para o aeroporto de Roma com destino ao Brasil.", evening:"Chegada prevista em Brasília no dia 12/Nov às 16h40. Transfer Brasília → Goiânia. Fim dos serviços contratados. Os acompanhantes do grupo sempre estarão disponíveis para orientar caso seja necessário.", highlights:["Visita a Cássia 🙏","Voo Roma → Brasil ✈️","Chegada em Brasília: 12/Nov às 16h40 🇧🇷"], prayer:"Senhor, obrigado por esta peregrinação abençoada. Paz e Bem! 🕊️", places:[
+    { name:"Cássia", query:"Cascia Santa Rita Itália" },
+  ] },
 ];
 
 // ═══════════════════════════════════════════════════════════
@@ -131,6 +186,38 @@ const T = {
 function getWx(c){ if(c==null)return null; return WMO[c]||WMO[Math.floor(c/10)*10]||"🌤️ Variável"; }
 function fmtDate(s){ const[,m,d]=s.split("-"); const mo=["","Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]; return `${parseInt(d)} de ${mo[parseInt(m)]}`; }
 function todayStr(){ const t=new Date(); t.setHours(0,0,0,0); return t.toISOString().split("T")[0]; }
+function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+
+// Transforma nomes de lugares dentro de um texto em links clicáveis
+// que abrem uma pesquisa do Google em nova aba (não sobrepõe o site).
+function LinkedText({ text, places }){
+  if (!places || places.length === 0) return <>{text}</>;
+  const sorted = [...places].sort((a,b) => b.name.length - a.name.length);
+  const pattern = new RegExp("(" + sorted.map(p => escapeRegExp(p.name)).join("|") + ")");
+  const parts = text.split(pattern);
+  return (
+    <>
+      {parts.map((part, i) => {
+        const match = sorted.find(p => p.name === part);
+        if (match) {
+          return (
+            <a
+              key={i}
+              href={`https://www.google.com/search?q=${encodeURIComponent(match.query || match.name)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={e => e.stopPropagation()}
+              style={{ color:C.gold, fontWeight:700, textDecoration:"underline", textDecorationStyle:"dotted", textUnderlineOffset:2 }}
+            >
+              {part}
+            </a>
+          );
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </>
+  );
+}
 
 // ═══════════════════════════════════════════════════════════
 //  COMPONENTES BASE
@@ -185,19 +272,15 @@ function DayCard({ d, expanded, onToggle }){
       </div>
       {expanded&&(
         <>
-          <div style={{ display:"flex", flexWrap:"wrap", gap:8, marginBottom:16 }}>
-            {d.highlights.map((h,i)=><span key={i} style={{ background:C.creamD, borderRadius:20, padding:"6px 14px", fontSize:15, color:C.brownM, fontWeight:600 }}>{h}</span>)}
-          </div>
           {[["Manhã","🌅",d.morning],["Tarde","☀️",d.afternoon],["Noite","🌙",d.evening]].map(([lab,em,txt],i,arr)=>(
             <div key={i}>
               <div style={{ display:"flex", gap:12, alignItems:"flex-start", marginBottom:10 }}>
                 <span style={{ ...T.label, fontSize:13, minWidth:56, paddingTop:3, display:"block" }}>{lab}</span>
-                <span style={{ ...T.body, flex:1 }}>{em} {txt}</span>
+                <span style={{ ...T.body, flex:1 }}>{em} <LinkedText text={txt} places={d.places} /></span>
               </div>
               {i<arr.length-1&&<Divider />}
             </div>
           ))}
-          <PrayerBox text={d.prayer} />
         </>
       )}
     </div>
@@ -1300,74 +1383,4 @@ function PageSeguro(){
                   <div style={{ display:"flex", gap:8, alignItems:"center", flex:1 }}>
                     <span style={{ fontSize:20, flexShrink:0 }}>{cob.icon}</span>
                     <div style={{ fontFamily:"'Cinzel',serif", fontSize:14, fontWeight:700, color:C.navy, lineHeight:1.35 }}>{cob.titulo}</div>
-                  </div>
-                  <span style={{ background:"#6A1B9A", color:"white", borderRadius:20, padding:"3px 10px", fontSize:12, fontFamily:"'Cinzel',serif", fontWeight:700, flexShrink:0, whiteSpace:"nowrap" }}>{cob.valor}</span>
-                </div>
-                <div style={{ fontSize:14, color:C.brownM, lineHeight:1.6, paddingLeft:28 }}>{cob.detalhe}</div>
-              </div>
-            ))}
-          </Card>
-        </>
-      )}
-
-      {/* Quem paga? — vale para os dois */}
-      <Card style={{ background:"#E8F5E9", border:`1px solid #A5D6A7` }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.green, marginBottom:10 }}>
-          💰 Quem paga? Regra geral para os dois seguros
-        </div>
-        <div style={{ ...T.body, fontSize:16, lineHeight:1.8 }}>
-          Quando existe <strong>rede credenciada</strong> no local, a seguradora paga direto ao hospital — vocês não desembolsam nada. Quando não existe rede credenciada, é preciso pagar e depois pedir <strong>reembolso</strong>, guardando todos os recibos e documentos médicos.
-        </div>
-        <div style={{ marginTop:12, background:"rgba(27,94,32,0.1)", borderRadius:10, padding:"10px 12px" }}>
-          <div style={{ fontSize:15, color:C.green, fontWeight:700 }}>👉 Por isso é fundamental LIGAR PRIMEIRO para a central certa!</div>
-        </div>
-      </Card>
-
-      <Card>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy, marginBottom:10 }}>
-          ⚠️ O seguro de viagem não é seguro saúde
-        </div>
-        <div style={{ ...T.body, fontSize:16, lineHeight:1.8 }}>
-          Cobre <strong>emergências</strong> durante a viagem — acidentes, doenças súbitas, hospitalização de urgência. Não é um plano de saúde permanente nem cobre consultas de rotina.
-        </div>
-      </Card>
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════
-//  PÁGINA: CONTATO
-// ═══════════════════════════════════════════════════════════
-function PageContato(){
-  return(
-    <div style={{ padding:"20px 16px" }}>
-      <div style={{ marginBottom:18 }}>
-        <div style={T.pageTitle}>Contato</div>
-        <div style={{ ...T.sub, marginTop:4 }}>Agência, direção espiritual e emergências</div>
-      </div>
-      <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"22px 18px", border:`2px solid ${C.gold}`, marginBottom:16 }}>
-        <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:20, fontWeight:700, marginBottom:16 }}>🏢 Beth Viagens e Turismo</div>
-        <a href="tel:+5562984296855" style={{ display:"flex", gap:14, alignItems:"center", background:"rgba(255,255,255,0.12)", borderRadius:14, padding:"16px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.4)", marginBottom:12 }}>
-          <span style={{ fontSize:36 }}>📱</span>
-          <div><div style={{ color:C.goldL, fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>WHATSAPP / TELEFONE</div><div style={{ color:C.white, fontSize:22, fontWeight:700, marginTop:2 }}>(62) 98429-6855</div></div>
-        </a>
-        <a href="mailto:bethviagens.comercial@gmail.com" style={{ display:"flex", gap:14, alignItems:"center", background:"rgba(255,255,255,0.12)", borderRadius:14, padding:"16px", textDecoration:"none", border:"1px solid rgba(232,201,122,0.4)" }}>
-          <span style={{ fontSize:36 }}>📧</span>
-          <div><div style={{ color:C.goldL, fontSize:13, fontFamily:"'Cinzel',serif", letterSpacing:1.5, fontWeight:700 }}>E-MAIL</div><div style={{ color:"rgba(255,255,255,0.9)", fontSize:17, marginTop:2 }}>bethviagens.comercial@gmail.com</div></div>
-        </a>
-      </div>
-      <Card>
-        <SectionLabel>🙏 Direção Espiritual</SectionLabel>
-        <div style={{ display:"flex", gap:12 }}>
-          {["Frei Edgar Manso","Frei Matheus Morais"].map((name,i)=>(
-            <div key={i} style={{ flex:1, background:C.creamD, borderRadius:14, padding:"18px 12px", textAlign:"center" }}>
-              <div style={{ fontSize:36, marginBottom:8 }}>🕊️</div>
-              <div style={{ fontFamily:"'Cinzel',serif", fontSize:16, fontWeight:700, color:C.navy, lineHeight:1.35 }}>{name}</div>
-            </div>
-          ))}
-        </div>
-      </Card>
-      <Card>
-        <SectionLabel>🆘 Emergências Locais</SectionLabel>
-        {[
-          { country:"🇵🇹 Portugal",              number:"112",               detail:"Po
+                  </div
