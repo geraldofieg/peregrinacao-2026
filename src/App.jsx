@@ -1181,7 +1181,9 @@ const LOUNGES = [
       { nome:"VIP Express Club Pier Sul",           horario:"06h00 às 22h00", local:"Terminal 1 · Embarque doméstico" },
     ],
     restaurantes:[
-      { nome:"Living Heineken", horario:"Consultar no app", local:"Promoção pelo Visa Airport Companion: desconto de USD 32 (deduz 1 visita) ou 1L de chope grátis na compra de 1L + 20% off em comidas e bebidas." },
+      { nome:"Living Heineken — Estacionamento", horario:"Consultar no app", local:"No estacionamento do aeroporto, em frente à entrada principal." },
+      { nome:"Living Heineken — Embarque (lado 1)", horario:"Consultar no app", local:"Dentro do salão de embarque, de um dos lados." },
+      { nome:"Living Heineken — Embarque (lado 2)", horario:"Consultar no app", local:"Dentro do salão de embarque, do outro lado." },
     ],
   },
   {
@@ -1324,7 +1326,7 @@ function PageSalasVip(){
         <>
           <Card style={{ background:"#FFF8E1", border:"1px solid #FFD54F" }}>
             <div style={{ ...T.body, fontSize:16, lineHeight:1.75, color:"#5D4037" }}>
-              🍽️ Restaurantes disponíveis pelo programa <strong>Visa Airport Companion</strong> (DragonPass) nos aeroportos da rota. Por ora mapeados apenas em <strong>Brasília (BSB)</strong>.
+              🍽️ Restaurantes disponíveis pelo programa <strong>Visa Airport Companion</strong> (DragonPass) nos aeroportos da rota. Por ora mapeados apenas em <strong>Brasília (BSB)</strong> — há 3 unidades da Living Heineken no aeroporto, qualquer uma delas aceita a promoção: desconto de USD 32 (deduz 1 visita) ou 1L de chope grátis na compra de 1L + 20% off em comidas e bebidas.
             </div>
           </Card>
 
