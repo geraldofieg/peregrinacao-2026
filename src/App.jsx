@@ -213,12 +213,14 @@ const CHECKLIST_ITEMS = [
 //  CLIMA HISTÓRICO
 // ═══════════════════════════════════════════════════════════
 const HISTORICAL_CLIMATE = [
-  { city:"🇵🇹 Lisboa",  period:"31 Out – 03 Nov", maxC:19, minC:12, rainDays:9,  humidity:"76%", desc:"Outono ameno e agradável. Dias ensolarados são comuns, mas chuvas passageiras acontecem.", tip:"💡 Vista-se em camadas — pela manhã pode fazer frio, mas o dia aquece." },
-  { city:"🇵🇹 Fátima",  period:"01 Nov",          maxC:17, minC:9,  rainDays:10, humidity:"80%", desc:"Ligeiramente mais fria que Lisboa. Noites frescas, especialmente para a Procissão das Velas.", tip:"💡 Leve casaco para a Procissão das Velas à noite — pode fazer bastante frio." },
-  { city:"🇮🇹 Roma",    period:"03 Nov – 06 Nov", maxC:17, minC:10, rainDays:11, humidity:"74%", desc:"Outono romano temperado. Chuvas aumentam em novembro mas raramente são longas.", tip:"💡 Um guarda-chuva compacto pode ser útil. Roupas leves durante o dia, agasalho à noite." },
-  { city:"🇮🇹 Assis",   period:"06 Nov – 11 Nov", maxC:14, minC:5,  rainDays:13, humidity:"78%", desc:"Mais fria que Roma por estar em altitude (424m). Névoa matinal é comum. Paisagem deslumbrante.", tip:"💡 Leve casaco grosso, cachecol e sapatos confortáveis para caminhar nas pedras medievais." },
-  { city:"🇮🇹 La Verna",period:"10 Nov",           maxC:10, minC:2,  rainDays:14, humidity:"82%", desc:"Santuário em altitude elevada (1.128m). Novembro é frio e pode haver geada.", tip:"💡 Roupas de inverno recomendadas: casaco pesado, luvas e cachecol." },
+  { cityKey:"lisboa",  city:"🇵🇹 Lisboa",  period:"31 Out – 03 Nov", maxC:19, minC:12, rainDays:9,  humidity:"76%", desc:"Outono ameno e agradável. Dias ensolarados são comuns, mas chuvas passageiras acontecem.", tip:"💡 Vista-se em camadas — pela manhã pode fazer frio, mas o dia aquece." },
+  { cityKey:"fatima",  city:"🇵🇹 Fátima",  period:"01 Nov",          maxC:17, minC:9,  rainDays:10, humidity:"80%", desc:"Ligeiramente mais fria que Lisboa. Noites frescas, especialmente para a Procissão das Velas.", tip:"💡 Leve casaco para a Procissão das Velas à noite — pode fazer bastante frio." },
+  { cityKey:"roma",    city:"🇮🇹 Roma",    period:"03 Nov – 06 Nov", maxC:17, minC:10, rainDays:11, humidity:"74%", desc:"Outono romano temperado. Chuvas aumentam em novembro mas raramente são longas.", tip:"💡 Um guarda-chuva compacto pode ser útil. Roupas leves durante o dia, agasalho à noite." },
+  { cityKey:"assis",   city:"🇮🇹 Assis",   period:"06 Nov – 11 Nov", maxC:14, minC:5,  rainDays:13, humidity:"78%", desc:"Mais fria que Roma por estar em altitude (424m). Névoa matinal é comum. Paisagem deslumbrante.", tip:"💡 Leve casaco grosso, cachecol e sapatos confortáveis para caminhar nas pedras medievais." },
+  { cityKey:"laverna", city:"🇮🇹 La Verna",period:"10 Nov",           maxC:10, minC:2,  rainDays:14, humidity:"82%", desc:"Santuário em altitude elevada (1.128m). Novembro é frio e pode haver geada.", tip:"💡 Roupas de inverno recomendadas: casaco pesado, luvas e cachecol." },
 ];
+// Acesso rápido à média histórica por cidade (chave usada em ITINERARY/WEATHER_CITIES)
+const HIST_BY_CITY = Object.fromEntries(HISTORICAL_CLIMATE.map(h => [h.cityKey, h]));
 
 const WEATHER_CITIES = {
   goiania:{ lat:-16.6864, lon:-49.2643, name:"Goiânia"  },
@@ -628,10 +630,10 @@ function PageClima({ weather }){
       {tab==="previsao"&&(
         <>
           <Card style={{ background:"#EEF2FF", border:"none" }}>
-            <div style={{ ...T.body, fontSize:16, lineHeight:1.7, color:C.navy }}>🛰️ Dados atualizados automaticamente via Open-Meteo. A previsão exata fica disponível quando faltar <strong>até 16 dias</strong> para cada data.</div>
+            <div style={{ ...T.body, fontSize:16, lineHeight:1.7, color:C.navy }}>🛰️ Dados atualizados automaticamente via Open-Meteo. A previsão exata fica disponível quando faltar <strong>até 16 dias</strong> para cada data. Até lá, mostramos a <strong>média histórica</strong> do período (📊) — assim que a previsão real ficar disponível, ela substitui a média automaticamente (🛰️).</div>
           </Card>
           {Object.entries(cityDayMap).map(([cityKey,days])=>{
-            const info=WEATHER_CITIES[cityKey]; const cw=weather[cityKey];
+            const info=WEATHER_CITIES[cityKey]; const cw=weather[cityKey]; const hist=HIST_BY_CITY[cityKey];
             return(
               <Card key={cityKey}>
                 <div style={{ ...T.sectionTitle, marginBottom:14 }}>{flag(cityKey)} {info?.name}</div>
@@ -640,7 +642,19 @@ function PageClima({ weather }){
                   return(
                     <div key={di.date} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"12px 0", borderBottom:i<days.length-1?`1px solid ${C.creamD}`:"none" }}>
                       <div><DayBadge day={di.day} /><div style={{ ...T.sub, fontSize:15, marginTop:4 }}>{fmtDate(di.date)}</div></div>
-                      {w?<WxBadge {...w} compact/>:<span style={{ ...T.sub, fontSize:15, fontStyle:"italic" }}>Em breve…</span>}
+                      {w ? (
+                        <div style={{ textAlign:"right" }}>
+                          <WxBadge {...w} compact/>
+                          <div style={{ fontSize:11, color:C.green, marginTop:3, fontWeight:700 }}>🛰️ Previsão real</div>
+                        </div>
+                      ) : hist ? (
+                        <div style={{ textAlign:"right" }}>
+                          <div style={{ fontSize:18, color:C.gold, fontWeight:700 }}>{hist.maxC}° / {hist.minC}°</div>
+                          <div style={{ fontSize:11, color:"#8D6E63", marginTop:3, fontWeight:700 }}>📊 Média histórica</div>
+                        </div>
+                      ) : (
+                        <span style={{ ...T.sub, fontSize:15, fontStyle:"italic" }}>Em breve…</span>
+                      )}
                     </div>
                   );
                 })}
