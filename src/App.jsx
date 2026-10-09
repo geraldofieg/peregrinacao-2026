@@ -1233,12 +1233,12 @@ function PageSalasVip(){
         <div style={{ ...T.sub, marginTop:4 }}>Acesso nos aeroportos da rota</div>
       </div>
 
-      {/* Card do cartão */}
+      {/* Card do cartão — Mary (titular) */}
       <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"22px 18px", border:`2px solid ${C.gold}`, marginBottom:16 }}>
         <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:18, fontWeight:700, marginBottom:14 }}>
-          💳 Cartão — Titular da Viagem
+          💳 Cartão — Mary (Titular)
         </div>
-        <div style={{ background:"rgba(255,255,255,0.1)", borderRadius:14, padding:"16px 14px", marginBottom:12 }}>
+        <div style={{ background:"rgba(255,255,255,0.1)", borderRadius:14, padding:"16px 14px" }}>
           <div style={{ color:C.white, fontSize:17, fontWeight:700, marginBottom:6 }}>Ourocard Visa Infinite — Banco do Brasil</div>
           <div style={{ color:"rgba(255,255,255,0.75)", fontSize:16, lineHeight:1.7 }}>
             Programa: <strong style={{ color:C.goldL }}>Visa Airport Companion</strong> (DragonPass)
@@ -1253,18 +1253,35 @@ function PageSalasVip(){
             </div>
           </div>
         </div>
-        <div style={{ background:"rgba(183,28,28,0.2)", borderRadius:12, padding:"12px 14px", border:"1px solid rgba(183,28,28,0.45)" }}>
-          <div style={{ color:"#FF8A80", fontSize:15, lineHeight:1.65 }}>
-            ⚠️ <strong>Cartão do padrasto:</strong> benefícios ainda sendo levantados. Será adicionado em breve.
+      </div>
+
+      {/* Card do cartão — Jason (adicional) */}
+      <div style={{ background:"linear-gradient(150deg,#4A148C,#6A1B9A)", borderRadius:20, padding:"22px 18px", border:`2px solid ${C.gold}`, marginBottom:16 }}>
+        <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:18, fontWeight:700, marginBottom:14 }}>
+          💳 Cartão — Jason (Adicional)
+        </div>
+        <div style={{ background:"rgba(255,255,255,0.1)", borderRadius:14, padding:"16px 14px" }}>
+          <div style={{ color:C.white, fontSize:17, fontWeight:700, marginBottom:6 }}>Ourocard Visa Infinite — adicional da Mary</div>
+          <div style={{ color:"rgba(255,255,255,0.75)", fontSize:16, lineHeight:1.7 }}>
+            Mesmo programa: <strong style={{ color:C.goldL }}>Visa Airport Companion</strong> (DragonPass)
+          </div>
+          <div style={{ marginTop:10, background:"rgba(232,168,32,0.2)", borderRadius:10, padding:"12px 14px", border:`1px solid ${C.gold}` }}>
+            <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:17, fontWeight:700 }}>🎟️ 4 acessos gratuitos por ano</div>
+            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:15, marginTop:4 }}>Próprios do cartão adicional — não dividem os acessos da Mary</div>
+          </div>
+          <div style={{ marginTop:10, background:"rgba(255,255,255,0.08)", borderRadius:10, padding:"12px 14px" }}>
+            <div style={{ color:"rgba(255,255,255,0.8)", fontSize:15, lineHeight:1.7 }}>
+              📱 Baixe o app <strong>Visa Airport Companion</strong>, cadastre o cartão adicional dele e apresente o QR Code próprio na entrada da sala.
+            </div>
           </div>
         </div>
       </div>
 
       {/* Dica */}
       <Card style={{ background:"#E8F5E9", border:`1px solid #A5D6A7` }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.green, marginBottom:8 }}>💡 Como aproveitar os 4 acessos</div>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.green, marginBottom:8 }}>💡 Como aproveitar os 8 acessos (4 + 4)</div>
         <div style={{ ...T.body, fontSize:16, lineHeight:1.75 }}>
-          Com 4 acessos e 3 aeroportos na rota (GRU, LIS, FCO), dá para usar 2 em <strong>Guarulhos</strong> (espera longa antes do voo) e 2 em <strong>Roma</strong> na volta — onde há 5 opções de sala.
+          Mary e Jason têm 4 acessos cada um, no total 8 entre os dois. Com 3 aeroportos na rota (GRU, LIS, FCO), dá para usar algumas entradas em <strong>Guarulhos</strong> antes do voo de ida e o restante em <strong>Roma</strong> na volta — onde há 5 opções de sala.
         </div>
       </Card>
 
