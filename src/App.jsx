@@ -205,16 +205,7 @@ const ITINERARY = [
 //  CHECKLIST
 // ═══════════════════════════════════════════════════════════
 const CHECKLIST_ITEMS = [
-  { id:"passport",  text:"Renovar / tirar passaporte (validade mínima: Maio/2027)",        urgente:true  },
-  { id:"seguro",    text:"Contratar Seguro Viagem com cobertura Schengen",                 urgente:true  },
-  { id:"euros",     text:"Comprar Euros em espécie para despesas pessoais",                urgente:false },
-  { id:"banco",     text:"Avisar o banco sobre uso do cartão no exterior",                 urgente:false },
-  { id:"cartao",    text:"Verificar limite e validade do cartão de crédito internacional", urgente:false },
-  { id:"vacinas",   text:"Verificar vacinas recomendadas para Europa",                     urgente:false },
-  { id:"adaptador", text:"Comprar adaptador de tomada (Europa — Tipo C/F)",                urgente:false },
   { id:"remedio",   text:"Separar medicamentos de uso contínuo + receitas médicas",        urgente:false },
-  { id:"dados",     text:"Confirmar dados pessoais com a agência Beth Viagens",            urgente:false },
-  { id:"apps",      text:"Instalar aplicativos: tradutor offline, Google Maps, WhatsApp",  urgente:false },
   { id:"voucher",   text:"Receber vouchers da viagem (enviados 2 dias antes do embarque)", urgente:false },
 ];
 
@@ -895,7 +886,7 @@ function PageVoos(){
       chegada: { data:"31 Out 2026", hora:"06:40" },
       embarque:"17:30",   // portões fecham 1h antes — voo internacional longo
       chegarAeroporto:"15:30",  // 3h antes — internacional com despacho de bagagem
-      aviao:"Boeing 339", classe:"G — Econômica", duracao:"~10h10",
+      aviao:"Airbus A330-900 (339)", classe:"G — Econômica", duracao:"~10h10",
       alerta:"Voo internacional longo (noite). Chegue ao aeroporto às 15h30 — 3 horas antes.",
     },
     {
@@ -933,7 +924,7 @@ function PageVoos(){
       chegada: { data:"12 Nov 2026", hora:"16:45" },
       embarque:"09:15",
       chegarAeroporto:"Vindo da conexão — já estão no aeroporto",
-      aviao:"Boeing 339", classe:"G — Econômica", duracao:"~8h50",
+      aviao:"Airbus A330-900 (339)", classe:"G — Econômica", duracao:"~8h50",
       alerta:"Conexão de 1h45 em Lisboa. Ao desembarcar do TP 839, siga direto ao portão do TP 57.",
     },
   ];
@@ -1181,17 +1172,16 @@ function PageVoos(){
 // ═══════════════════════════════════════════════════════════
 const LOUNGES = [
   {
-    code:"GRU", airport:"Guarulhos (GRU)", city:"São Paulo, Brasil 🇧🇷",
-    role:"Embarque para Lisboa (30/Out)",
+    code:"BSB", airport:"Brasília (BSB)", city:"Brasília, Brasil 🇧🇷",
+    role:"Embarque direto para Lisboa (30/Out) — voo não passa por São Paulo",
     salas:[
-      { nome:"Visa Infinite Lounge", horario:"24 horas",       local:"Terminal 3 · Lado ar · Piso 1 · Próximo ao portão 328" },
-      { nome:"LATAM VIP Lounge",     horario:"22h30 às 18h00", local:"Terminal 3 · Lado ar · Piso 3 · Após controle de passaporte e segurança" },
+      { nome:"Aeroportos VIP Club (Internacional)", horario:"24 horas",      local:"Terminal 1 · Partidas internacionais · Lado ar · Nível do solo · Após controle de passaporte e segurança, vire à esquerda na Duty Free. Recomendada — é a sala do lado do embarque internacional, o do voo para Lisboa." },
+      { nome:"Aeroportos VIP Club (Doméstico)",     horario:"24 horas",      local:"Terminal 1 · Partidas domésticas · Lado ar · Nível 2" },
+      { nome:"VIP Express Club Pier Norte",         horario:"06h00 às 22h00", local:"Terminal 1 · Embarque doméstico · Lado ar · Nível 2" },
+      { nome:"VIP Express Club Pier Sul",           horario:"06h00 às 22h00", local:"Terminal 1 · Embarque doméstico" },
     ],
     restaurantes:[
-      { nome:"General Prime Steak & Burger", horario:"11h00 às 01h00", local:"Lado ar · Embarques internacionais · Nível 2 · Próximo ao portão 310" },
-      { nome:"Living Heineken (Lado Ar)",    horario:"24 horas",       local:"Lado ar · Área de embarque · Em frente ao Chanel" },
-      { nome:"Living Heineken (Lado Terra)", horario:"24 horas",       local:"Lado terra · Em frente ao Check-in F" },
-      { nome:"Rokkon — Culinária Asiática",  horario:"24 horas",       local:"Lado terra · Oposto ao Check-in H" },
+      { nome:"Living Heineken", horario:"Consultar no app", local:"Promoção pelo Visa Airport Companion: desconto de USD 32 (deduz 1 visita) ou 1L de chope grátis na compra de 1L + 20% off em comidas e bebidas." },
     ],
   },
   {
@@ -1223,7 +1213,7 @@ function PageSalasVip(){
   const [aberto, setAberto] = useState(null);
   const [aba, setAba]       = useState("salas");
 
-  // Todos os restaurantes (apenas GRU tem por ora)
+  // Todos os restaurantes (apenas BSB tem por ora)
   const todosRestaurantes = LOUNGES.filter(ap => ap.restaurantes.length > 0);
 
   return(
@@ -1281,7 +1271,7 @@ function PageSalasVip(){
       <Card style={{ background:"#E8F5E9", border:`1px solid #A5D6A7` }}>
         <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.green, marginBottom:8 }}>💡 Como aproveitar os 8 acessos (4 + 4)</div>
         <div style={{ ...T.body, fontSize:16, lineHeight:1.75 }}>
-          Mary e Jason têm 4 acessos cada um, no total 8 entre os dois. Com 3 aeroportos na rota (GRU, LIS, FCO), dá para usar algumas entradas em <strong>Guarulhos</strong> antes do voo de ida e o restante em <strong>Roma</strong> na volta — onde há 5 opções de sala.
+          Mary e Jason têm 4 acessos cada um, no total 8 entre os dois. Com 3 aeroportos na rota (BSB, LIS, FCO), dá para usar algumas entradas em <strong>Brasília</strong> antes do voo de ida e o restante em <strong>Roma</strong> na volta — onde há 5 opções de sala.
         </div>
       </Card>
 
@@ -1334,7 +1324,7 @@ function PageSalasVip(){
         <>
           <Card style={{ background:"#FFF8E1", border:"1px solid #FFD54F" }}>
             <div style={{ ...T.body, fontSize:16, lineHeight:1.75, color:"#5D4037" }}>
-              🍽️ Restaurantes disponíveis pelo programa <strong>Visa Airport Companion</strong> (DragonPass) nos aeroportos da rota. Por ora mapeados apenas em <strong>Guarulhos (GRU)</strong>.
+              🍽️ Restaurantes disponíveis pelo programa <strong>Visa Airport Companion</strong> (DragonPass) nos aeroportos da rota. Por ora mapeados apenas em <strong>Brasília (BSB)</strong>.
             </div>
           </Card>
 
