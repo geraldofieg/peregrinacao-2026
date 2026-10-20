@@ -1817,7 +1817,11 @@ export default function App(){
       const results={};
       for(const [key,city] of Object.entries(WEATHER_CITIES)){
         try{
-          const url=`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&start_date=2026-10-30&end_date=2026-11-12`;
+          const url=`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&forecast_days=16`;
+          // Pede sempre "os próximos 16 dias" (limite do Open-Meteo). Pedir um intervalo fixo
+          // até 12/Nov fazia a API recusar a consulta inteira enquanto o fim da viagem
+          // estivesse a mais de 16 dias. As datas da viagem dentro da janela usam a previsão
+          // real; as que ainda estão fora dela caem na média histórica.
           const res=await fetch(url); const data=await res.json();
           if(data.daily) results[key]=data.daily;
         }catch(_){}
