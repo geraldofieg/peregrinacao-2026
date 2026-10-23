@@ -130,75 +130,324 @@ function getCurrentHotel() {
 //  ROTEIRO
 // ═══════════════════════════════════════════════════════════
 const ITINERARY = [
-  { day:1,  date:"2026-10-30", weekday:"Sexta-feira",   location:"Goiânia / Brasília → Lisboa", city:"goiania", icon:"✈️", morning:"Em horário previamente combinado, encontro para darmos início à nossa emocionante viagem rumo a Portugal e Itália.", afternoon:"Em viagem intercontinental.", evening:"Em voo — descanse bem para a chegada!", highlights:["Início da peregrinação 🙏","Voo Brasília → Lisboa"], prayer:"Senhor, abençoa nossa partida e guia nossos passos nesta jornada de fé.", places:[] },
-  { day:2,  date:"2026-10-31", weekday:"Sábado",        location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"🛬", morning:"Chegada ao Aeroporto Internacional de Lisboa. Trâmites de imigração, traslado para o hotel, almoço (não incluso). Check-in e descanso. Bem-vindos a Lisboa!", afternoon:"Tarde livre — atividades pessoais, compras ou explorar a cidade no seu ritmo.", evening:"Noite livre.", highlights:["Chegada em Lisboa 🇵🇹","Check-in no hotel"], prayer:"Bem-vindos a Lisboa! Obrigado, Senhor, por nos trazer com segurança.", places:[
-    { name:"Aeroporto Internacional de Lisboa", query:"Aeroporto Humberto Delgado Lisboa Portugal wikipedia" },
-  ] },
-  { day:3,  date:"2026-11-01", weekday:"Domingo",       location:"Lisboa → Fátima (127km) 🕊️", city:"fatima", icon:"🕊️", morning:"Após o café da manhã, peregrinação para Fátima com guia acompanhante — local da aparição da Virgem Maria às crianças pastorinhas Lúcia, Francisco e Jacinta em 13 de maio de 1917. Visita à Basílica Santíssima Trindade e atividades religiosas do Santuário.", afternoon:"Após o almoço (não incluso), city tour guiado no Santuário de Fátima e Casa dos Pastorinhos.", evening:"Santa Missa e Procissão das Velas na Capelinha das Aparições, onde o rosário é rezado em diversos idiomas. Retorno para Lisboa.", highlights:["Santuário de Fátima 🕊️","Casa dos Pastorinhos","Santa Missa","Procissão das Velas 🕯️"], prayer:"Nossa Senhora de Fátima, intercede por nós e abençoa esta peregrinação.", places:[
-    { name:"Basílica Santíssima Trindade", query:"Basílica Santíssima Trindade Fátima Portugal wikipedia" },
-    { name:"Santuário de Fátima", query:"Santuário de Fátima Cova da Iria Portugal wikipedia" },
-    { name:"Fátima", query:"Fátima Cova da Iria Portugal wikipedia" },
-    { name:"Casa dos Pastorinhos", query:"Casa dos Pastorinhos Fátima Portugal aparições" },
-    { name:"Capelinha das Aparições", query:"Capelinha das Aparições Fátima Portugal wikipedia" },
-  ] },
-  { day:4,  date:"2026-11-02", weekday:"Segunda-feira", location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"⛪", morning:"Café da manhã. Santa Missa na Igreja de Santo Antônio — construída no local onde o Santo nasceu, visita gratuita. Visita à Sé Patriarcal de Lisboa (Basílica de Santa Maria Maior), a igreja mais antiga da capital portuguesa, com subida ao coro alto. Almoço livre (não incluso).", afternoon:"City tour com guia local: Baixa Pombalina, Alfama, Torre de Belém, Mosteiro dos Jerônimos, Pasteis de Belém, Praça do Comércio, Rua Augusta, Elevador de Santa Justa, Castelo de São Jorge e Miradouro de Santa Luzia.", evening:"Noite livre.", highlights:["Igreja de Santo Antônio ⛪","Sé de Lisboa","Torre de Belém 🏰","Mosteiro dos Jerônimos","Alfama"], prayer:"Santo Antônio de Lisboa e de Pádua, rogai por nós!", places:[
-    { name:"Igreja de Santo Antônio", query:"Igreja de Santo António de Lisboa Portugal wikipedia" },
-    { name:"Sé Patriarcal de Lisboa", query:"Sé de Lisboa Catedral Patriarcal Portugal wikipedia" },
-    { name:"Basílica de Santa Maria Maior", query:"Sé Catedral Lisboa Basílica Santa Maria Maior Portugal wikipedia" },
-    { name:"Baixa Pombalina", query:"Baixa Pombalina Lisboa Portugal wikipedia" },
-    { name:"Alfama", query:"Alfama Lisboa Portugal wikipedia" },
-    { name:"Torre de Belém", query:"Torre de Belém Lisboa Portugal wikipedia" },
-    { name:"Mosteiro dos Jerônimos", query:"Mosteiro dos Jerónimos Lisboa Portugal wikipedia" },
-    { name:"Pasteis de Belém", query:"Pastéis de Belém Lisboa Portugal wikipedia" },
-    { name:"Praça do Comércio", query:"Praça do Comércio Lisboa Portugal wikipedia" },
-    { name:"Rua Augusta", query:"Rua Augusta Lisboa Portugal wikipedia" },
-    { name:"Elevador de Santa Justa", query:"Elevador de Santa Justa Lisboa Portugal wikipedia" },
-    { name:"Castelo de São Jorge", query:"Castelo de São Jorge Lisboa Portugal wikipedia" },
-    { name:"Miradouro de Santa Luzia", query:"Miradouro de Santa Luzia Lisboa Portugal wikipedia" },
-  ] },
-  { day:5,  date:"2026-11-03", weekday:"Terça-feira",   location:"Lisboa → Roma ✈️", city:"roma", icon:"✈️", morning:"Após o café da manhã, em horário combinado, transfer para o aeroporto de Lisboa com destino a Roma.", afternoon:"Traslado para o hotel, almoço (não incluso), check-in e descanso. Bem-vindos a Roma!", evening:"Noite livre.", highlights:["Voo Lisboa → Roma ✈️","Check-in em Roma 🇮🇹"], prayer:"Senhor, guia nossa jornada até a Cidade Eterna.", places:[] },
-  { day:6,  date:"2026-11-04", weekday:"Quarta-feira",  location:"Roma / Vaticano 🇻🇦", city:"roma", icon:"✝️", morning:"Após o café da manhã, transfer para o Vaticano para assistir à Catequese Papal (se o Papa estiver em Roma). Almoço não incluso.", afternoon:"Tarde livre para atividades pessoais. Sugestões opcionais: Basílica de São Pedro com Porta Santa, Basílica de São Paulo Fora dos Muros, São Sebastião Fora dos Muros, Basílica de São João de Latrão, Basílica de Santa Maria Maior, Igreja de Santo Afonso de Ligório.", evening:"Noite livre.", highlights:["Catequese Papal 🇻🇦","Porta Santa","Basílicas opcionais"], prayer:"Santo Padre, abençoa nossa peregrinação ao Jubileu Franciscano.", places:[
-    { name:"Vaticano", query:"Cidade do Vaticano Roma wikipedia" },
-    { name:"Basílica de São Pedro", query:"Basílica de São Pedro Vaticano Roma wikipedia" },
-    { name:"Porta Santa", query:"Porta Santa Basílica São Pedro Vaticano wikipedia" },
-    { name:"Basílica de São Paulo Fora dos Muros", query:"Basílica de São Paulo Fora dos Muros Roma Itália wikipedia" },
-    { name:"São Sebastião Fora dos Muros", query:"Basílica de São Sebastião Fora dos Muros Roma Itália wikipedia" },
-    { name:"Basílica de São João de Latrão", query:"Basílica de São João de Latrão Roma Itália wikipedia" },
-    { name:"Basílica de Santa Maria Maior", query:"Basílica de Santa Maria Maior Roma Itália wikipedia" },
-    { name:"Igreja de Santo Afonso de Ligório", query:"Igreja de Santo Afonso de Ligório Roma Itália wikipedia" },
-  ] },
-  { day:7,  date:"2026-11-05", weekday:"Quinta-feira",  location:"Roma, Itália 🇮🇹", city:"roma", icon:"🏛️", morning:"Café da manhã no hotel. Em horário combinado, city tour panorâmico: Basílica de São Pedro, Vaticano, Coliseu, Fontana di Trevi, Panteão, Escadaria da Praça da Espanha e Praça Navona (visitas externas).", afternoon:"Tarde livre — compras ou explorar Roma no seu ritmo.", evening:"Noite livre.", highlights:["Basílica de São Pedro ✝️","Coliseu 🏛️","Fontana di Trevi ⛲","Praça Navona"], prayer:"São Pedro, guarda nossa fé e fortalece nosso caminho.", places:[
-    { name:"Basílica de São Pedro", query:"Basílica de São Pedro Vaticano Roma wikipedia" },
-    { name:"Vaticano", query:"Cidade do Vaticano Roma wikipedia" },
-    { name:"Coliseu", query:"Coliseu de Roma Itália wikipedia" },
-    { name:"Fontana di Trevi", query:"Fontana di Trevi Roma Itália wikipedia" },
-    { name:"Panteão", query:"Panteão de Roma Itália wikipedia" },
-    { name:"Escadaria da Praça da Espanha", query:"Escadaria da Praça de Espanha Roma Itália wikipedia" },
-    { name:"Praça Navona", query:"Praça Navona Roma Itália wikipedia" },
-  ] },
-  { day:8,  date:"2026-11-06", weekday:"Sexta-feira",   location:"Roma → Assis 🚂", city:"assis", icon:"🚂", morning:"Após o café da manhã, saída para a estação de trem rumo a Assis. Traslado para o hotel, almoço livre (não incluso). Acomodação e descanso. Bem-vindos a Assis!", afternoon:"Tarde livre para atividades pessoais. Sugestões: participar de momentos de oração, caminhar pelas ruas medievais de Assis.", evening:"Noite livre.", highlights:["Trem Roma → Assis 🚂","Hospedagem em Convento ⛪"], prayer:"São Francisco de Assis, rogai por nós. Paz e Bem! 🕊️", places:[] },
-  { day:9,  date:"2026-11-07", weekday:"Sábado",        location:"Assis, Itália 🌿", city:"assis", icon:"🌿", morning:"Após o café da manhã, Santa Missa na Porciúncula. Almoço livre (não incluso).", afternoon:"Às 15h: visita à Basílica de Santa Clara, Carlos Acutis, Catedral de São Rufino e Igrejinha de São Damião.", evening:"Noite livre.", highlights:["Missa na Porciúncula 🕊️","Basílica de Santa Clara","Carlos Acutis","São Damião"], prayer:"Francisco e Clara, ensinai-nos a simplicidade e o amor.", places:[
-    { name:"Porciúncula", query:"Porciúncula Santa Maria degli Angeli Assis Itália wikipedia" },
-    { name:"Basílica de Santa Clara", query:"Basílica de Santa Clara Assis Itália wikipedia" },
-    { name:"Carlos Acutis", query:"Carlo Acutis wikipedia" },
-    { name:"Catedral de São Rufino", query:"Catedral de São Rufino Assis Itália wikipedia" },
-    { name:"Igrejinha de São Damião", query:"San Damiano Assis Itália wikipedia" },
-  ] },
-  { day:10, date:"2026-11-08", weekday:"Domingo",       location:"Assis, Itália ⛪", city:"assis", icon:"⛪", morning:"Após o café da manhã, Missa na Basílica de São Francisco de Assis. Almoço livre (não incluso).", afternoon:"Tarde livre para atividades pessoais. Sugestão opcional: visitar uma vinícola local.", evening:"Noite livre.", highlights:["Missa na Basílica de São Francisco 🙏"], prayer:"São Francisco, que nossa fé floresça como a tua.", places:[
-    { name:"Basílica de São Francisco de Assis", query:"Basílica de São Francisco de Assis Itália wikipedia" },
-  ] },
-  { day:11, date:"2026-11-09", weekday:"Segunda-feira", location:"Santuários da Região 🙏", city:"assis", icon:"🙏", morning:"Após o café da manhã, em horário combinado, city tour para o Santuário de Fonte Colombo, Santuário Della Foresta, Convento San Giacomo Vaggio Bustone e Greccio. Almoço no local (não incluso).", afternoon:"Continuação do passeio pelos santuários.", evening:"Noite livre.", highlights:["Fonte Colombo","Santuário Della Foresta","Convento Vaggio Bustone","Greccio 🌟"], prayer:"Que os passos de Francisco iluminem nossa peregrinação.", places:[
-    { name:"Santuário de Fonte Colombo", query:"Santuario di Fonte Colombo Rieti Itália wikipedia" },
-    { name:"Santuário Della Foresta", query:"Santuario della Foresta Rieti Itália" },
-    { name:"Convento San Giacomo Vaggio Bustone", query:"Convento San Giacomo Poggio Bustone Rieti Itália" },
-    { name:"Greccio", query:"Greccio presépio São Francisco Itália wikipedia" },
-  ] },
-  { day:12, date:"2026-11-10", weekday:"Terça-feira",   location:"La Verna, Itália ⛰️", city:"laverna", icon:"⛰️", morning:"Após o café da manhã, visita ao Santuário de La Verna — lugar sagrado onde São Francisco recebeu as Estigmas.", afternoon:"Almoço no local (não incluso). Continuação da visita a La Verna.", evening:"Noite livre.", highlights:["Santuário de La Verna ⛰️","Local das Estigmas de São Francisco 🌟"], prayer:"Senhor, que recebamos as chagas do teu amor como Francisco.", places:[
-    { name:"Santuário de La Verna", query:"Santuário de La Verna Itália São Francisco estigmas wikipedia" },
-  ] },
-  { day:13, date:"2026-11-11", weekday:"Quarta-feira",  location:"Cássia → Roma → Brasil 🏠", city:"assis", icon:"🏠", morning:"Café da manhã no horário combinado. Saída para Cássia. Almoço não incluso.", afternoon:"Traslado para o aeroporto de Roma com destino ao Brasil.", evening:"Chegada prevista em Brasília no dia 12/Nov às 16h40. Transfer Brasília → Goiânia. Fim dos serviços contratados. Os acompanhantes do grupo sempre estarão disponíveis para orientar caso seja necessário.", highlights:["Visita a Cássia 🙏","Voo Roma → Brasil ✈️","Chegada em Brasília: 12/Nov às 16h40 🇧🇷"], prayer:"Senhor, obrigado por esta peregrinação abençoada. Paz e Bem! 🕊️", places:[
-    { name:"Cássia", query:"Cascia Itália Santa Rita wikipedia" },
-  ] },
+  { day:1, date:"2026-10-30", weekday:"Sexta-feira", location:"Goiânia / Brasília → Lisboa", city:"goiania", icon:"✈️",
+    morning:"10h — Saída da Paróquia São Francisco de Assis, em Goiânia, com destino ao Aeroporto de Brasília. Parada no Posto Presidente, em Anápolis.",
+    afternoon:"Almoço no Posto Jerivá, em Alexânia (não incluso). Chegada ao Aeroporto de Brasília — o ideal é estar lá às 15h30.",
+    evening:"Embarque às 17h30 e voo TP 58 Brasília → Lisboa às 18h30. Noite no avião — descanse bem!",
+    agenda:[
+      { h:"10h",    t:"Saída da Paróquia São Francisco de Assis, em Goiânia, rumo ao Aeroporto de Brasília" },
+      { h:"",       t:"Parada no Posto Presidente, em Anápolis" },
+      { h:"Almoço", t:"Posto Jerivá, em Alexânia (não incluso)" },
+      { h:"15h30",  t:"Chegada ao Aeroporto de Brasília (3 horas antes do voo)" },
+      { h:"17h30",  t:"Embarque — os portões fecham" },
+      { h:"18h30",  t:"Decolagem do voo TP 58 para Lisboa" },
+      { h:"Amanhã", t:"Chegada prevista em Lisboa às 06h40 (hora local)" },
+    ],
+    lembretes:[
+      "Estar no Aeroporto de Brasília às 15h30 — o voo sai às 18h30",
+      "Passaporte, e-tickets e seguro viagem à mão (não na mala despachada)",
+      "Remédios de uso contínuo na bagagem de mão",
+      "Em Lisboa os relógios marcam 3 horas a mais que no Brasil",
+    ],
+    levar:[
+      "Passaporte dentro da validade",
+      "E-tickets da TAP (localizador ZRFUUD) e vouchers da viagem",
+      "Comprovante do seguro viagem",
+      "Medicamentos de uso contínuo + receitas (bagagem de mão)",
+      "1 mala de até 23 kg, 1 bagagem de bordo de até 10 kg e 1 item pessoal",
+      "Casaco ou agasalho para a chegada (Lisboa amanhece com cerca de 12°)",
+      "Adaptador de tomada europeu e carregador portátil (na bagagem de mão)",
+      "Camiseta da peregrinação",
+      "Cartão internacional e alguns euros",
+    ],
+    prayer:"Senhor, abençoa nossa partida e guia nossos passos nesta jornada de fé.", places:[] },
+
+  { day:2, date:"2026-10-31", weekday:"Sábado", location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"🛬",
+    morning:"Chegada ao Aeroporto Internacional de Lisboa. Após os trâmites de imigração, transfer para o hotel Iberostar Lisboa.",
+    afternoon:"Almoço (não incluso). Check-in e descanso. Tarde livre.",
+    evening:"Jantar de boas-vindas (incluso). O transfer até o jantar não está incluso.",
+    agenda:[
+      { h:"Manhã",  t:"Chegada ao Aeroporto Internacional de Lisboa e trâmites de imigração" },
+      { h:"",       t:"Transfer para o hotel Iberostar Lisboa" },
+      { h:"Almoço", t:"Não incluso" },
+      { h:"",       t:"Check-in e descanso" },
+      { h:"Tarde",  t:"Livre" },
+      { h:"Noite",  t:"Jantar de boas-vindas (incluso)" },
+    ],
+    lembretes:[
+      "O jantar de boas-vindas é incluso, mas o transfer até o local não",
+      "Acerte o relógio: Lisboa está 3 horas à frente do Brasil",
+    ],
+    prayer:"Bem-vindos a Lisboa! Obrigado, Senhor, por nos trazer com segurança.", places:[
+      { name:"Aeroporto Internacional de Lisboa", query:"Aeroporto Humberto Delgado Lisboa Portugal wikipedia" },
+    ] },
+
+  { day:3, date:"2026-11-01", weekday:"Domingo", location:"Lisboa → Fátima (127km) 🕊️", city:"fatima", icon:"🕊️",
+    morning:"Após o café da manhã, saída com guia acompanhante em direção a Fátima.",
+    afternoon:"Almoço livre (não incluso), seguido de visita guiada ao Santuário de Fátima e à Casa dos Pastorinhos.",
+    evening:"Participação na Santa Missa e na tradicional Procissão das Velas, um momento especial de fé e devoção mariana. Retorno a Lisboa.",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã e saída com guia acompanhante rumo a Fátima" },
+      { h:"Almoço", t:"Livre (não incluso)" },
+      { h:"Tarde",  t:"Visita guiada ao Santuário de Fátima e à Casa dos Pastorinhos" },
+      { h:"Noite",  t:"Santa Missa e tradicional Procissão das Velas" },
+      { h:"",       t:"Retorno a Lisboa" },
+    ],
+    lembretes:[
+      "À noite a Procissão das Velas costuma ser fria (média de 9° em Fátima): leve casaco",
+      "Use calçado confortável",
+    ],
+    sugestoes:"O Santuário de Fátima reúne a Basílica Santíssima Trindade e a Capelinha das Aparições.",
+    prayer:"Nossa Senhora de Fátima, intercede por nós e abençoa esta peregrinação.", places:[
+      { name:"Basílica Santíssima Trindade", query:"Basílica Santíssima Trindade Fátima Portugal wikipedia" },
+      { name:"Santuário de Fátima", query:"Santuário de Fátima Cova da Iria Portugal wikipedia" },
+      { name:"Casa dos Pastorinhos", query:"Casa dos Pastorinhos Fátima Portugal aparições" },
+      { name:"Capelinha das Aparições", query:"Capelinha das Aparições Fátima Portugal wikipedia" },
+    ] },
+
+  { day:4, date:"2026-11-02", weekday:"Segunda-feira", location:"Lisboa, Portugal 🇵🇹", city:"lisboa", icon:"⛪",
+    morning:"Após o café da manhã no hotel, Santa Missa no Santuário de Santo Antônio (transfer não incluso).",
+    afternoon:"Almoço livre (não incluso). City tour com guia local pelos principais pontos turísticos de Lisboa.",
+    evening:"Noite livre.",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã no hotel e Santa Missa no Santuário de Santo Antônio (transfer não incluso)" },
+      { h:"Almoço", t:"Livre (não incluso)" },
+      { h:"Tarde",  t:"City tour com guia local pelos principais pontos turísticos de Lisboa" },
+      { h:"Noite",  t:"Livre" },
+    ],
+    lembretes:[
+      "No fim do dia o guia informa o horário de saída do hotel para o aeroporto de amanhã (03/11) — anote!",
+      "Deixe as malas arrumadas hoje: amanhã é dia de voo para Roma",
+      "O transfer até a Missa não está incluso",
+    ],
+    sugestoes:"Lugares que costumam fazer parte de um passeio por Lisboa: Sé Patriarcal de Lisboa, Baixa Pombalina, Alfama, Torre de Belém, Mosteiro dos Jerônimos, Pasteis de Belém, Praça do Comércio, Rua Augusta, Elevador de Santa Justa, Castelo de São Jorge e Miradouro de Santa Luzia.",
+    prayer:"Santo Antônio de Lisboa e de Pádua, rogai por nós!", places:[
+      { name:"Santuário de Santo Antônio", query:"Igreja de Santo António de Lisboa Portugal wikipedia" },
+      { name:"Sé Patriarcal de Lisboa", query:"Sé de Lisboa Catedral Patriarcal Portugal wikipedia" },
+      { name:"Baixa Pombalina", query:"Baixa Pombalina Lisboa Portugal wikipedia" },
+      { name:"Alfama", query:"Alfama Lisboa Portugal wikipedia" },
+      { name:"Torre de Belém", query:"Torre de Belém Lisboa Portugal wikipedia" },
+      { name:"Mosteiro dos Jerônimos", query:"Mosteiro dos Jerónimos Lisboa Portugal wikipedia" },
+      { name:"Pasteis de Belém", query:"Pastéis de Belém Lisboa Portugal wikipedia" },
+      { name:"Praça do Comércio", query:"Praça do Comércio Lisboa Portugal wikipedia" },
+      { name:"Rua Augusta", query:"Rua Augusta Lisboa Portugal wikipedia" },
+      { name:"Elevador de Santa Justa", query:"Elevador de Santa Justa Lisboa Portugal wikipedia" },
+      { name:"Castelo de São Jorge", query:"Castelo de São Jorge Lisboa Portugal wikipedia" },
+      { name:"Miradouro de Santa Luzia", query:"Miradouro de Santa Luzia Lisboa Portugal wikipedia" },
+    ] },
+
+  { day:5, date:"2026-11-03", weekday:"Terça-feira", location:"Lisboa → Roma ✈️", city:"roma", icon:"✈️",
+    morning:"Café da manhã. O horário de saída do hotel para o aeroporto será informado pelo guia no final do dia anterior (02/11). Voo TP 834 Lisboa → Roma às 11h45.",
+    afternoon:"Transfer para o hotel nhow Roma Vittorio Veneto. Almoço (não incluso), check-in e descanso. Bem-vindos a Roma!",
+    evening:"Noite livre.",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã" },
+      { h:"",       t:"Saída do hotel para o aeroporto: horário informado pelo guia na noite de 02/11" },
+      { h:"11h00",  t:"Embarque do voo TP 834 Lisboa → Roma" },
+      { h:"11h45",  t:"Decolagem" },
+      { h:"15h50",  t:"Chegada ao aeroporto de Fiumicino (hora de Roma)" },
+      { h:"Tarde",  t:"Transfer para o hotel nhow Roma Vittorio Veneto" },
+      { h:"",       t:"Almoço (não incluso), check-in e descanso" },
+      { h:"Noite",  t:"Livre" },
+    ],
+    lembretes:[
+      "Confirme o horário de saída do hotel que o guia informou ontem à noite",
+      "Chegue ao aeroporto 2 horas antes do voo (09h45), salvo outra orientação do guia",
+      "Passaporte e e-ticket à mão",
+      "Roma está 1 hora à frente de Lisboa (4 horas à frente do Brasil)",
+    ],
+    prayer:"Senhor, guia nossa jornada até a Cidade Eterna.", places:[] },
+
+  { day:6, date:"2026-11-04", weekday:"Quarta-feira", location:"Roma / Vaticano 🇻🇦", city:"roma", icon:"✝️",
+    morning:"Após o café da manhã, transfer para o Vaticano para participação na Audiência Papal, sujeita à presença do Pontífice e à programação oficial.",
+    afternoon:"Almoço livre (não incluso). Tarde livre para atividades pessoais.",
+    evening:"Noite livre.",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã e transfer para o Vaticano" },
+      { h:"",       t:"Audiência Papal — sujeita à presença do Pontífice e à programação oficial" },
+      { h:"Almoço", t:"Livre (não incluso)" },
+      { h:"Tarde",  t:"Livre para atividades pessoais" },
+      { h:"Noite",  t:"Livre" },
+    ],
+    lembretes:[
+      "Leve um documento com foto",
+      "Vista-se com respeito: ombros e joelhos cobertos",
+      "A Audiência depende da presença do Papa e da programação oficial",
+    ],
+    sugestoes:"Para a tarde livre: Basílica de São Pedro com Porta Santa, Basílica de São Paulo Fora dos Muros, São Sebastião Fora dos Muros, Basílica de São João de Latrão, Basílica de Santa Maria Maior e Igreja de Santo Afonso de Ligório.",
+    prayer:"Santo Padre, abençoa nossa peregrinação ao Jubileu Franciscano.", places:[
+      { name:"Vaticano", query:"Cidade do Vaticano Roma wikipedia" },
+      { name:"Basílica de São Pedro", query:"Basílica de São Pedro Vaticano Roma wikipedia" },
+      { name:"Porta Santa", query:"Porta Santa Basílica São Pedro Vaticano wikipedia" },
+      { name:"Basílica de São Paulo Fora dos Muros", query:"Basílica de São Paulo Fora dos Muros Roma Itália wikipedia" },
+      { name:"São Sebastião Fora dos Muros", query:"Basílica de São Sebastião Fora dos Muros Roma Itália wikipedia" },
+      { name:"Basílica de São João de Latrão", query:"Basílica de São João de Latrão Roma Itália wikipedia" },
+      { name:"Basílica de Santa Maria Maior", query:"Basílica de Santa Maria Maior Roma Itália wikipedia" },
+      { name:"Igreja de Santo Afonso de Ligório", query:"Igreja de Santo Afonso de Ligório Roma Itália wikipedia" },
+    ] },
+
+  { day:7, date:"2026-11-05", weekday:"Quinta-feira", location:"Roma, Itália 🇮🇹", city:"roma", icon:"🏛️",
+    morning:"Café da manhã no hotel. 10h — Santa Missa na Basílica do Perpétuo Socorro (transfer não incluso).",
+    afternoon:"12h — Almoço (não incluso). 13h — City tour panorâmico pelos principais pontos turísticos de Roma.",
+    evening:"Noite livre.",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã no hotel" },
+      { h:"10h",    t:"Santa Missa na Basílica do Perpétuo Socorro (transfer não incluso)" },
+      { h:"12h",    t:"Almoço (não incluso)" },
+      { h:"13h",    t:"City tour panorâmico pelos principais pontos turísticos de Roma" },
+      { h:"Noite",  t:"Livre" },
+    ],
+    lembretes:[
+      "O transfer até a Missa das 10h não está incluso — combine o deslocamento com o guia",
+      "Confirme com o guia o ponto de encontro e o endereço da Basílica",
+    ],
+    sugestoes:"Pontos que costumam aparecer em um city tour panorâmico por Roma (visitas externas): Basílica de São Pedro, Coliseu, Fontana di Trevi, Panteão, Escadaria da Praça da Espanha e Praça Navona.",
+    prayer:"São Pedro, guarda nossa fé e fortalece nosso caminho.", places:[
+      { name:"Basílica do Perpétuo Socorro", query:"Basílica do Perpétuo Socorro Roma Santo Afonso Esquilino" },
+      { name:"Basílica de São Pedro", query:"Basílica de São Pedro Vaticano Roma wikipedia" },
+      { name:"Coliseu", query:"Coliseu de Roma Itália wikipedia" },
+      { name:"Fontana di Trevi", query:"Fontana di Trevi Roma Itália wikipedia" },
+      { name:"Panteão", query:"Panteão de Roma Itália wikipedia" },
+      { name:"Escadaria da Praça da Espanha", query:"Escadaria da Praça de Espanha Roma Itália wikipedia" },
+      { name:"Praça Navona", query:"Praça Navona Roma Itália wikipedia" },
+    ] },
+
+  { day:8, date:"2026-11-06", weekday:"Sexta-feira", location:"Roma → Assis ⛪", city:"assis", icon:"🚐",
+    morning:"Café da manhã. 11h — Check-out no hotel.",
+    afternoon:"Almoço livre (não incluso). 14h — Saída do hotel em transfer privativo rumo a Assis. Check-in e tempo livre.",
+    evening:"Jantar de boas-vindas — rodízio de pizzas (incluso).",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã" },
+      { h:"11h",    t:"Check-out no hotel" },
+      { h:"Almoço", t:"Livre (não incluso)" },
+      { h:"14h",    t:"Saída do hotel em transfer privativo rumo a Assis" },
+      { h:"",       t:"Check-in e tempo livre" },
+      { h:"Noite",  t:"Jantar de boas-vindas — rodízio de pizzas (incluso)" },
+    ],
+    lembretes:[
+      "Malas prontas antes das 11h, para o check-out",
+      "Assis é mais fria e fica em altitude: deixe o casaco à mão",
+      "O endereço do hotel em Assis será informado pela organização",
+    ],
+    sugestoes:"Para o tempo livre: caminhar pelas ruas medievais de Assis e participar de momentos de oração.",
+    prayer:"São Francisco de Assis, rogai por nós. Paz e Bem! 🕊️", places:[] },
+
+  { day:9, date:"2026-11-07", weekday:"Sábado", location:"Assis, Itália 🌿", city:"assis", icon:"🌿",
+    morning:"Café da manhã. 8h — Santa Missa na Basílica de Santa Maria dos Anjos (Porciúncula).",
+    afternoon:"Almoço livre (não incluso). 15h — Visitas à Basílica de Santa Clara, ao local de veneração de São Carlo Acutis, à Catedral de São Rufino e à Igreja de São Damião.",
+    evening:"21h15 — Rosário aux flambeaux (Santo Rosário com fiaccole/tochas).",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã" },
+      { h:"8h",     t:"Santa Missa na Basílica de Santa Maria dos Anjos (Porciúncula)" },
+      { h:"Almoço", t:"Livre (não incluso)" },
+      { h:"15h",    t:"Visitas à Basílica de Santa Clara, ao local de veneração de São Carlo Acutis, à Catedral de São Rufino e à Igreja de São Damião" },
+      { h:"21h15",  t:"Rosário aux flambeaux (Santo Rosário com tochas)" },
+    ],
+    lembretes:[
+      "As noites em Assis são frias (mínima média de 5°): casaco, cachecol e agasalho extra para o Rosário",
+      "Calçado confortável para as ruas de pedra",
+    ],
+    prayer:"Francisco e Clara, ensinai-nos a simplicidade e o amor.", places:[
+      { name:"Basílica de Santa Maria dos Anjos", query:"Basílica de Santa Maria dos Anjos Porciúncula Assis Itália wikipedia" },
+      { name:"Porciúncula", query:"Porciúncula Santa Maria degli Angeli Assis Itália wikipedia" },
+      { name:"Basílica de Santa Clara", query:"Basílica de Santa Clara Assis Itália wikipedia" },
+      { name:"São Carlo Acutis", query:"Carlo Acutis Assis santuário da Espoliação wikipedia" },
+      { name:"Catedral de São Rufino", query:"Catedral de São Rufino Assis Itália wikipedia" },
+      { name:"Igreja de São Damião", query:"San Damiano Assis Itália wikipedia" },
+    ] },
+
+  { day:10, date:"2026-11-08", weekday:"Domingo", location:"Assis, Itália ⛪", city:"assis", icon:"⛪",
+    morning:"Café da manhã. 8h — Santa Missa na Basílica de São Francisco de Assis.",
+    afternoon:"Almoço livre (não incluso). Tarde livre para atividades pessoais.",
+    evening:"Sem atividades programadas.",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã" },
+      { h:"8h",     t:"Santa Missa na Basílica de São Francisco de Assis" },
+      { h:"Almoço", t:"Livre (não incluso)" },
+      { h:"Tarde",  t:"Livre para atividades pessoais" },
+    ],
+    lembretes:[
+      "Use calçado confortável: as ruas de Assis são de pedra",
+    ],
+    sugestoes:"Para a tarde livre: visitar uma vinícola local.",
+    prayer:"São Francisco, que nossa fé floresça como a tua.", places:[
+      { name:"Basílica de São Francisco de Assis", query:"Basílica de São Francisco de Assis Itália wikipedia" },
+    ] },
+
+  { day:11, date:"2026-11-09", weekday:"Segunda-feira", location:"Assis → Vale de Rieti 🙏", city:"assis", icon:"🙏",
+    morning:"Após o café da manhã, saída em horário combinado para visita aos santuários franciscanos de Fonte Colombo, La Foresta e Poggio Bustone. 11h30 — Santa Missa em Greccio.",
+    afternoon:"Almoço (não incluso, valor: 25 €).",
+    evening:"Noite livre.",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã e saída em horário combinado" },
+      { h:"",       t:"Visita aos santuários franciscanos de Fonte Colombo, La Foresta e Poggio Bustone" },
+      { h:"11h30",  t:"Santa Missa em Greccio" },
+      { h:"Almoço", t:"Não incluso — valor: 25 €" },
+      { h:"Noite",  t:"Livre" },
+    ],
+    lembretes:[
+      "Confirme com o guia o horário combinado de saída do hotel",
+      "Tenha 25 € para o almoço (não incluso)",
+    ],
+    prayer:"Que os passos de Francisco iluminem nossa peregrinação.", places:[
+      { name:"Fonte Colombo", query:"Santuario di Fonte Colombo Rieti Itália wikipedia" },
+      { name:"La Foresta", query:"Santuario della Foresta Rieti Itália" },
+      { name:"Poggio Bustone", query:"Convento San Giacomo Poggio Bustone Rieti Itália" },
+      { name:"Greccio", query:"Greccio presépio São Francisco Itália wikipedia" },
+    ] },
+
+  { day:12, date:"2026-11-10", weekday:"Terça-feira", location:"Assis → La Verna ⛰️", city:"laverna", icon:"⛰️",
+    morning:"Após o café da manhã, peregrinação ao Santuário de La Verna, lugar sagrado onde São Francisco recebeu os estigmas.",
+    afternoon:"Almoço (não incluso, valor: 25 €). A peregrinação continua durante a tarde.",
+    evening:"Noite livre.",
+    agenda:[
+      { h:"Manhã",  t:"Café da manhã e peregrinação ao Santuário de La Verna, onde São Francisco recebeu os estigmas" },
+      { h:"Almoço", t:"Não incluso — valor: 25 €" },
+      { h:"Tarde",  t:"Continuação da peregrinação em La Verna" },
+      { h:"Noite",  t:"Livre" },
+    ],
+    lembretes:[
+      "La Verna fica em altitude e é o lugar mais frio da viagem (média de 2° a 10°): casaco pesado, luvas e cachecol",
+      "Tenha 25 € para o almoço (não incluso)",
+    ],
+    prayer:"Senhor, que recebamos as chagas do teu amor como Francisco.", places:[
+      { name:"Santuário de La Verna", query:"Santuário de La Verna Itália São Francisco estigmas wikipedia" },
+    ] },
+
+  { day:13, date:"2026-11-11", weekday:"Quarta-feira", location:"Cássia → Roma → Brasil 🏠", city:"assis", icon:"🏠",
+    morning:"Após o café da manhã, saída em horário combinado com destino a Cássia, cidade de Santa Rita de Cássia.",
+    afternoon:"Almoço livre (não incluso) e transfer para o Aeroporto de Roma.",
+    evening:"Atenção: o voo de volta (TP 839, Roma → Lisboa) sai na madrugada de 12/11, às 05h55 — o grupo deve estar no aeroporto às 03h55.",
+    agenda:[
+      { h:"Manhã",     t:"Café da manhã e saída em horário combinado para Cássia, cidade de Santa Rita de Cássia" },
+      { h:"Almoço",    t:"Livre (não incluso)" },
+      { h:"Tarde",     t:"Transfer para o Aeroporto de Roma" },
+      { h:"Madrugada", t:"Voo TP 839 Roma → Lisboa às 05h55 (12/11) — estar no aeroporto às 03h55" },
+    ],
+    lembretes:[
+      "Voo de madrugada: Roma → Lisboa às 05h55 de 12/11 — estar no aeroporto às 03h55",
+      "Confirme com o guia o plano para a noite, até a hora do voo",
+      "Malas prontas e documentos à mão",
+    ],
+    prayer:"Santa Rita, intercede por nós e por nossas famílias.", places:[
+      { name:"Cássia", query:"Cascia Itália Santa Rita wikipedia" },
+    ] },
+
+  { day:14, date:"2026-11-12", weekday:"Quinta-feira", location:"Roma → Lisboa → Brasília 🏠", city:"roma", icon:"🛫",
+    morning:"05h55 — Voo TP 839 Roma → Lisboa. Conexão em Lisboa e voo TP 57 às 09h55 rumo a Brasília.",
+    afternoon:"16h40 — Previsão de chegada em Brasília, seguida de transfer para Goiânia.",
+    evening:"Encerramento dos serviços contratados. Durante a peregrinação, os acompanhantes do grupo estarão disponíveis para orientações e apoio.",
+    agenda:[
+      { h:"05h55", t:"Voo TP 839 Roma → Lisboa" },
+      { h:"09h55", t:"Voo TP 57 Lisboa → Brasília (conexão de 1h45 em Lisboa)" },
+      { h:"16h40", t:"Previsão de chegada em Brasília, seguida de transfer para Goiânia" },
+      { h:"",      t:"Encerramento dos serviços contratados" },
+    ],
+    lembretes:[
+      "Em Lisboa, siga direto ao portão do voo TP 57",
+      "Passaporte e e-tickets à mão",
+    ],
+    prayer:"Senhor, obrigado por esta peregrinação abençoada. Paz e Bem! 🕊️", places:[] },
 ];
 
 // ═══════════════════════════════════════════════════════════
@@ -253,7 +502,19 @@ const T = {
 // ═══════════════════════════════════════════════════════════
 function getWx(c){ if(c==null)return null; return WMO[c]||WMO[Math.floor(c/10)*10]||"🌤️ Variável"; }
 function fmtDate(s){ const[,m,d]=s.split("-"); const mo=["","Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]; return `${parseInt(d)} de ${mo[parseInt(m)]}`; }
-function todayStr(){ const t=new Date(); t.setHours(0,0,0,0); return t.toISOString().split("T")[0]; }
+function dateStr(d){ const m=String(d.getMonth()+1).padStart(2,"0"), dd=String(d.getDate()).padStart(2,"0"); return `${d.getFullYear()}-${m}-${dd}`; }
+// Data de hoje no fuso do próprio aparelho (na Itália vira o dia na hora certa, sem depender de UTC)
+function todayStr(){ return dateStr(new Date()); }
+// Clima de um dia: previsão real se estiver na janela de 16 dias; senão, média histórica da cidade
+function getDayWeather(weather, city, date){
+  const cw=weather[city]; const idx=cw?.time?.indexOf(date);
+  if(cw && idx>=0 && cw.temperature_2m_max?.[idx]!=null){
+    return { max:cw.temperature_2m_max[idx], min:cw.temperature_2m_min[idx], code:cw.weathercode?.[idx], precip:cw.precipitation_probability_max?.[idx], fonte:"previsao" };
+  }
+  const h=HIST_BY_CITY[city];
+  if(h) return { max:h.maxC, min:h.minC, code:null, precip:null, fonte:"media" };
+  return null;
+}
 function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
 
 // Transforma nomes de lugares dentro de um texto em links clicáveis
@@ -323,6 +584,35 @@ function WxBadge({ code, max, min, precip, compact=false }){
   );
 }
 
+// Temperatura do dia em destaque (mínima e máxima grandes, fáceis de ler)
+function TempHero({ w }){
+  if(!w) return(
+    <div style={{ background:"rgba(255,255,255,0.12)", borderRadius:14, padding:"16px", textAlign:"center", color:"rgba(255,255,255,0.8)", fontSize:16 }}>
+      🌡️ A previsão do tempo aparece aqui assim que estiver disponível.
+    </div>
+  );
+  const label=getWx(w.code);
+  return(
+    <div style={{ background:"rgba(255,255,255,0.12)", borderRadius:14, padding:"14px 12px" }}>
+      <div style={{ textAlign:"center", color:"rgba(255,255,255,0.75)", fontSize:13, letterSpacing:2, textTransform:"uppercase", fontFamily:"'Cinzel',serif", marginBottom:8 }}>🌡️ Temperatura de hoje</div>
+      <div style={{ display:"flex", alignItems:"center" }}>
+        <div style={{ flex:1, textAlign:"center" }}>
+          <div style={{ color:"#9CCBFF", fontSize:14, fontWeight:700, letterSpacing:1.5, fontFamily:"'Cinzel',serif" }}>MÍNIMA</div>
+          <div style={{ color:"#9CCBFF", fontSize:52, fontWeight:700, fontFamily:"'Cinzel',serif", lineHeight:1.1 }}>{Math.round(w.min)}°</div>
+        </div>
+        <div style={{ width:1, alignSelf:"stretch", background:"rgba(255,255,255,0.25)" }} />
+        <div style={{ flex:1, textAlign:"center" }}>
+          <div style={{ color:"#FFC266", fontSize:14, fontWeight:700, letterSpacing:1.5, fontFamily:"'Cinzel',serif" }}>MÁXIMA</div>
+          <div style={{ color:"#FFC266", fontSize:52, fontWeight:700, fontFamily:"'Cinzel',serif", lineHeight:1.1 }}>{Math.round(w.max)}°</div>
+        </div>
+      </div>
+      {label&&<div style={{ textAlign:"center", color:C.white, fontSize:17, fontWeight:600, marginTop:8 }}>{label}</div>}
+      {w.precip>20&&<div style={{ textAlign:"center", color:"rgba(255,255,255,0.85)", fontSize:15, marginTop:4 }}>💧 {w.precip}% de chance de chuva — leve guarda-chuva</div>}
+      {w.fonte==="media"&&<div style={{ textAlign:"center", color:"rgba(255,255,255,0.6)", fontSize:13, marginTop:8 }}>Média desta época do ano — a previsão real aparece quando a data se aproxima</div>}
+    </div>
+  );
+}
+
 function DayCard({ d, expanded, onToggle }){
   return(
     <div onClick={onToggle} style={{ background:C.white, borderRadius:18, padding:"18px 16px", marginBottom:14, boxShadow:"0 3px 18px rgba(0,0,0,0.09)", border:`2px solid ${expanded?C.gold:C.creamD}`, cursor:"pointer" }}>
@@ -349,6 +639,15 @@ function DayCard({ d, expanded, onToggle }){
               {i<arr.length-1&&<Divider />}
             </div>
           ))}
+          {d.sugestoes&&(
+            <>
+              <Divider />
+              <div style={{ background:C.cream, borderRadius:12, padding:"12px 14px", border:`1px dashed ${C.creamD}` }}>
+                <div style={{ ...T.label, fontSize:12, marginBottom:6 }}>💡 Para conhecer (sugestão — fora do roteiro oficial)</div>
+                <div style={{ ...T.sub, fontSize:16 }}><LinkedText text={d.sugestoes} places={d.places} /></div>
+              </div>
+            </>
+          )}
         </>
       )}
     </div>
@@ -466,7 +765,7 @@ function BotaoHotel({ hotel, antesViagem }) {
 // ═══════════════════════════════════════════════════════════
 //  PÁGINA: HOJE
 // ═══════════════════════════════════════════════════════════
-function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggleCheck, hotelAtual }){
+function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggleCheck, preview }){
   const total   = CHECKLIST_ITEMS.length;
   const done    = CHECKLIST_ITEMS.filter(i=>checked[i.id]).length;
   const pct     = Math.round((done/total)*100);
@@ -548,9 +847,6 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
   );
 
   // Durante a viagem
-  const cw=weather[currentDay?.city]; let todayW=null;
-  if(currentDay&&cw){ const idx=cw.time?.indexOf(todayStr()); if(idx>=0) todayW={ max:cw.temperature_2m_max?.[idx], min:cw.temperature_2m_min?.[idx], code:cw.weathercode?.[idx], precip:cw.precipitation_probability_max?.[idx] }; }
-
   if(!currentDay) return(
     <div style={{ padding:"20px 16px" }}>
       <Card style={{ textAlign:"center", padding:"40px 20px" }}>
@@ -561,34 +857,108 @@ function PageHoje({ currentDay, daysUntilTrip, tripOver, weather, checked, toggl
     </div>
   );
 
+  const todayW   = getDayWeather(weather, currentDay.city, currentDay.date);
+  const nextDay  = ITINERARY.find(d=>d.day===currentDay.day+1)||null;
+  const nextW    = nextDay ? getDayWeather(weather, nextDay.city, nextDay.date) : null;
+  const levar    = currentDay.levar||[];
+  const levarKey = i=>`d${currentDay.day}_levar_${i}`;
+  const levarOk  = levar.filter((_,i)=>checked[levarKey(i)]).length;
+
   return(
     <div style={{ padding:"20px 16px" }}>
-      <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"24px 20px", border:`2px solid ${C.gold}`, marginBottom:16 }}>
-        <div style={{ textAlign:"center", marginBottom:todayW?12:0 }}>
-          <div style={{ fontSize:52, marginBottom:8 }}>{currentDay.icon}</div>
-          <div style={{ fontFamily:"'Cinzel',serif", color:"rgba(255,255,255,0.6)", fontSize:13, letterSpacing:3, textTransform:"uppercase", marginBottom:8 }}>HOJE · DIA {currentDay.day} DE 13</div>
-          <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:22, lineHeight:1.3, marginBottom:6 }}>{currentDay.location}</div>
-          <div style={{ color:"rgba(255,255,255,0.55)", fontSize:16 }}>{currentDay.weekday} · {fmtDate(currentDay.date)}</div>
+      {preview&&(
+        <div style={{ background:"#E3F2FD", border:"2px solid #1565C0", borderRadius:12, padding:"10px 14px", marginBottom:14, textAlign:"center", color:"#0D47A1", fontSize:15, fontWeight:600 }}>
+          👀 Pré-visualização do Dia {currentDay.day} — não é o dia de hoje
         </div>
-        {todayW&&<WxBadge {...todayW} />}
+      )}
+
+      {/* Cabeçalho do dia + temperatura em destaque */}
+      <div style={{ background:`linear-gradient(150deg,${C.navy},${C.navyL})`, borderRadius:20, padding:"22px 18px 18px", border:`2px solid ${C.gold}`, marginBottom:16 }}>
+        <div style={{ textAlign:"center", marginBottom:14 }}>
+          <div style={{ fontSize:48, marginBottom:6 }}>{currentDay.icon}</div>
+          <div style={{ fontFamily:"'Cinzel',serif", color:"rgba(255,255,255,0.6)", fontSize:13, letterSpacing:3, textTransform:"uppercase", marginBottom:8 }}>{preview?"DIA":"HOJE · DIA"} {currentDay.day} DE {ITINERARY.length}</div>
+          <div style={{ fontFamily:"'Cinzel',serif", color:C.goldL, fontSize:22, lineHeight:1.3, marginBottom:6 }}>{currentDay.location}</div>
+          <div style={{ color:"rgba(255,255,255,0.65)", fontSize:16 }}>{currentDay.weekday} · {fmtDate(currentDay.date)}</div>
+        </div>
+        <TempHero w={todayW} />
       </div>
+
+      {/* Cronograma do dia */}
       <Card>
-        <SectionLabel>⭐ Destaques de Hoje</SectionLabel>
-        {currentDay.highlights.map((h,i)=><div key={i} style={{ background:C.creamD, borderRadius:10, padding:"12px 14px", marginBottom:8, borderLeft:`4px solid ${C.gold}`, ...T.body, fontSize:17 }}>{h}</div>)}
-      </Card>
-      <Card>
-        <SectionLabel>📅 Programação do Dia</SectionLabel>
-        {[["Manhã","🌅",currentDay.morning],["Tarde","☀️",currentDay.afternoon],["Noite","🌙",currentDay.evening]].map(([lab,em,txt],i,arr)=>(
+        <SectionLabel>📅 Programação de Hoje</SectionLabel>
+        {(currentDay.agenda||[]).length>0 ? currentDay.agenda.map((a,i,arr)=>(
+          <div key={i} style={{ display:"flex", gap:12, padding:"11px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}>
+            <div style={{ minWidth:76, fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:a.h?C.gold:C.creamD, paddingTop:3 }}>{a.h||"•"}</div>
+            <div style={{ ...T.body, fontSize:17, lineHeight:1.5, flex:1 }}><LinkedText text={a.t} places={currentDay.places} /></div>
+          </div>
+        )) : [["Manhã","🌅",currentDay.morning],["Tarde","☀️",currentDay.afternoon],["Noite","🌙",currentDay.evening]].map(([lab,em,txt],i,arr)=>(
           <div key={i}>
             <div style={{ display:"flex", gap:12, alignItems:"flex-start", marginBottom:10 }}>
               <span style={{ ...T.label, fontSize:13, minWidth:56, paddingTop:3, display:"block" }}>{lab}</span>
-              <span style={{ ...T.body, flex:1 }}>{em} {txt}</span>
+              <span style={{ ...T.body, flex:1 }}>{em} <LinkedText text={txt} places={currentDay.places} /></span>
             </div>
             {i<arr.length-1&&<Divider />}
           </div>
         ))}
-        <PrayerBox text={currentDay.prayer} />
       </Card>
+
+      {/* Não esquecer */}
+      {(currentDay.lembretes||[]).length>0&&(
+        <div style={{ background:"#FFF4E5", borderRadius:18, padding:"18px 16px", marginBottom:16, borderLeft:`6px solid ${C.goldL}`, boxShadow:"0 3px 18px rgba(0,0,0,0.07)" }}>
+          <SectionLabel>⚠️ Não esquecer hoje</SectionLabel>
+          {currentDay.lembretes.map((l,i)=>(
+            <div key={i} style={{ display:"flex", gap:10, padding:"8px 0", alignItems:"flex-start" }}>
+              <span style={{ color:C.gold, fontSize:20, fontWeight:700, lineHeight:1.4 }}>•</span>
+              <span style={{ ...T.body, fontSize:17, lineHeight:1.5 }}>{l}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* O que levar (marcável) */}
+      {levar.length>0&&(
+        <Card>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
+            <SectionLabel>🎒 O que levar</SectionLabel>
+            <span style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:levarOk===levar.length?C.green:C.gold }}>{levarOk}/{levar.length}</span>
+          </div>
+          {levar.map((item,i)=>(
+            <div key={i} onClick={()=>toggleCheck(levarKey(i))} style={{ display:"flex", gap:14, padding:"12px 0", borderBottom:i<levar.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start", cursor:"pointer" }}>
+              <div style={{ width:28, height:28, borderRadius:8, border:`2.5px solid ${checked[levarKey(i)]?C.green:C.creamD}`, background:checked[levarKey(i)]?C.green:"transparent", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, marginTop:1 }}>
+                {checked[levarKey(i)]&&<span style={{ color:C.white, fontSize:16, fontWeight:700, lineHeight:1 }}>✓</span>}
+              </div>
+              <span style={{ ...T.body, fontSize:17, lineHeight:1.5, textDecoration:checked[levarKey(i)]?"line-through":"none", color:checked[levarKey(i)]?C.brownM:C.brown }}>{item}</span>
+            </div>
+          ))}
+          <div style={{ ...T.sub, fontSize:13, marginTop:12, textAlign:"center" }}>Toque em cada item para marcar</div>
+        </Card>
+      )}
+
+      {/* Amanhã */}
+      {nextDay&&(
+        <Card>
+          <SectionLabel>🔜 Amanhã</SectionLabel>
+          <div style={{ display:"flex", alignItems:"center", gap:12 }}>
+            <span style={{ fontSize:36, flexShrink:0 }}>{nextDay.icon}</span>
+            <div style={{ flex:1, minWidth:0 }}>
+              <div style={{ ...T.sectionTitle, fontSize:17 }}>Dia {nextDay.day} · {nextDay.location}</div>
+              <div style={{ ...T.sub, fontSize:14, marginTop:2 }}>{nextDay.weekday} · {fmtDate(nextDay.date)}</div>
+            </div>
+            {nextW&&(
+              <div style={{ textAlign:"right", flexShrink:0 }}>
+                <div style={{ fontSize:20, fontWeight:700, color:"#1565C0", fontFamily:"'Cinzel',serif" }}><span style={{ fontSize:12, fontWeight:600 }}>mín </span>{Math.round(nextW.min)}°</div>
+                <div style={{ fontSize:20, fontWeight:700, color:"#D84315", fontFamily:"'Cinzel',serif" }}><span style={{ fontSize:12, fontWeight:600 }}>máx </span>{Math.round(nextW.max)}°</div>
+              </div>
+            )}
+          </div>
+          {(nextDay.agenda||[]).slice(0,2).map((a,i)=>(
+            <div key={i} style={{ ...T.sub, fontSize:15, marginTop:8 }}><b style={{ color:C.gold }}>{a.h||"•"}</b> {a.t}</div>
+          ))}
+          {nextW&&nextW.fonte==="media"&&<div style={{ ...T.sub, fontSize:12, marginTop:8 }}>Temperaturas pela média da época</div>}
+        </Card>
+      )}
+
+      <PrayerBox text={currentDay.prayer} />
     </div>
   );
 }
@@ -601,7 +971,7 @@ function PageRoteiro({ expandedDay, setExpandedDay }){
     <div style={{ padding:"20px 16px" }}>
       <div style={{ marginBottom:18 }}>
         <div style={T.pageTitle}>Roteiro Completo</div>
-        <div style={{ ...T.sub, marginTop:4 }}>30 de Out – 12 de Nov de 2026 · 13 dias</div>
+        <div style={{ ...T.sub, marginTop:4 }}>30 de Out – 12 de Nov de 2026 · 14 dias</div>
       </div>
       {ITINERARY.map(d=>(
         <DayCard key={d.day} d={d} expanded={expandedDay===d.day} onToggle={()=>setExpandedDay(expandedDay===d.day?null:d.day)} />
@@ -702,8 +1072,8 @@ function PageClima({ weather }){
 function PagePacote(){
   const [tab,setTab]=useState("incluso");
   const TABS=[{id:"incluso",label:"✅ Incluso"},{id:"nao",label:"⚠️ Não Incluso"},{id:"voos",label:"✈️ Voos"}];
-  const INCLUSO=["Direção espiritual: Frei Edgar Manso e Frei Matheus Morais","Agente de viagem acompanhante desde o Brasil","Ônibus privativo Goiânia → Brasília → Goiânia","Passagem aérea: Brasília ↔ Lisboa / Roma ↔ Brasília","Taxa de embarque","11 noites de hospedagem com café da manhã","Taxas dos hotéis (city taxes)","Transfer aeroportos de Lisboa e Roma","Transfer chegada em Assis + Transfer Assis → Roma","City tour panorâmico em Lisboa","City tour em Fátima + Casa dos Pastorinhos + Procissão das Velas","City tour panorâmico em Roma","Catequese Papal (se o Papa estiver em Roma)","Santuários: Fonte Colombo, Della Foresta, Bustone, Greccio","City tour para La Verna e visita a Cássia","Gorjetas (maleteiro e guias)","1 mala 23kg + 1 bordo 10kg + 1 item pessoal","Reserva de convites para Catequese Papal","Guias acompanhantes em Lisboa, Fátima e Assis","Camiseta personalizada da peregrinação"];
-  const NAO=["Seguro Viagem ⚠️ — OBRIGATÓRIO no Espaço Schengen","Despesas com passaporte e documentação","Bilhete de trem Roma → Assis","Guias locais e ingressos nos monumentos","Refeições e bebidas não mencionadas no programa","Lavanderia, telefonemas e táxis","Despesas pessoais","Bagagens além das mencionadas no programa"];
+  const INCLUSO=["Direção espiritual: Frei Edgar Manso e Frei Matheus Morais","Agente de viagem acompanhante desde o Brasil","Ônibus privativo Goiânia → Brasília → Goiânia","Passagem aérea: Brasília ↔ Lisboa / Roma ↔ Brasília","Taxa de embarque","11 noites de hospedagem com café da manhã","Taxas dos hotéis (city taxes)","Transfer aeroportos de Lisboa e Roma","Transfer chegada em Assis + Transfer Assis → Roma","City tour panorâmico em Lisboa","City tour em Fátima + Casa dos Pastorinhos + Procissão das Velas","City tour panorâmico em Roma","Audiência Papal (sujeita à presença do Pontífice e à programação oficial)","Santuários: Fonte Colombo, Della Foresta, Bustone, Greccio","City tour para La Verna e visita a Cássia","Gorjetas (maleteiro e guias)","1 mala 23kg + 1 bordo 10kg + 1 item pessoal","Reserva de convites para a Audiência Papal","Guias acompanhantes em Lisboa, Fátima e Assis","Camiseta personalizada da peregrinação"];
+  const NAO=["Seguro Viagem ⚠️ — OBRIGATÓRIO no Espaço Schengen","Despesas com passaporte e documentação","Guias locais e ingressos nos monumentos","Refeições e bebidas não mencionadas no programa","Lavanderia, telefonemas e táxis","Despesas pessoais","Bagagens além das mencionadas no programa"];
   return(
     <div style={{ padding:"20px 16px" }}>
       <div style={{ marginBottom:14 }}>
@@ -716,7 +1086,7 @@ function PagePacote(){
       </div>
       {tab==="incluso"&&<Card><SectionLabel>✅ Serviços Inclusos</SectionLabel>{INCLUSO.map((item,i,arr)=><div key={i} style={{ display:"flex", gap:12, padding:"11px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}><span style={{ color:C.green, fontSize:20, flexShrink:0, fontWeight:700 }}>✓</span><span style={{ ...T.body, fontSize:17 }}>{item}</span></div>)}</Card>}
       {tab==="nao"&&<Card><SectionLabel>⚠️ Não Incluso</SectionLabel>{NAO.map((item,i,arr)=><div key={i} style={{ display:"flex", gap:12, padding:"11px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none", alignItems:"flex-start" }}><span style={{ color:C.red, fontSize:20, flexShrink:0, fontWeight:700 }}>✗</span><span style={{ ...T.body, fontSize:17 }}>{item}</span></div>)}<div style={{ background:"#FDECEA", borderRadius:12, padding:"16px 14px", marginTop:16, borderLeft:`5px solid ${C.red}` }}><div style={{ fontSize:18, color:C.red, fontWeight:700, marginBottom:6 }}>⚠️ Seguro Viagem é obrigatório!</div><div style={{ ...T.body, fontSize:17 }}>O Espaço Schengen exige comprovação de seguro. Sem ele, pode haver recusa de embarque.</div></div></Card>}
-      {tab==="voos"&&<><Card><SectionLabel>✈️ Voos Inclusos</SectionLabel>{[{rota:"Brasília → Lisboa",dia:"30/Out · Dia 1",obs:"Saída de Goiânia de ônibus privativo"},{rota:"Lisboa → Roma",dia:"03/Nov · Dia 5",obs:"Pela manhã, após café da manhã"},{rota:"Roma → Brasília",dia:"11/Nov · Dia 13",obs:"Chegada em Brasília: 12/Nov às 16h40"}].map((f,i,arr)=><div key={i} style={{ padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}><div style={{ ...T.sectionTitle, fontSize:18 }}>✈️ {f.rota}</div><div style={{ color:C.gold, fontSize:16, fontWeight:700, marginTop:4 }}>{f.dia}</div><div style={{ ...T.sub, fontSize:16, marginTop:2 }}>{f.obs}</div></div>)}</Card><Card><SectionLabel>🧳 Bagagem Inclusa</SectionLabel>{["🟢  1 mala despachada — até 23kg","🟢  1 bagagem de bordo — até 10kg","🟢  1 item pessoal — bolsa ou mochila pequena","🔴  Malas extras: não incluso"].map((t,i,arr)=><div key={i} style={{ ...T.body, fontSize:17, padding:"10px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>{t}</div>)}</Card></>}
+      {tab==="voos"&&<><Card><SectionLabel>✈️ Voos Inclusos</SectionLabel>{[{rota:"Brasília → Lisboa",dia:"30/Out · Dia 1",obs:"Saída de Goiânia de ônibus privativo"},{rota:"Lisboa → Roma",dia:"03/Nov · Dia 5",obs:"Horário de saída do hotel informado pelo guia na noite de 02/11"},{rota:"Roma → Lisboa → Brasília",dia:"12/Nov · Dia 14",obs:"Voo de madrugada (05h55). Chegada prevista em Brasília: 16h40"}].map((f,i,arr)=><div key={i} style={{ padding:"14px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}><div style={{ ...T.sectionTitle, fontSize:18 }}>✈️ {f.rota}</div><div style={{ color:C.gold, fontSize:16, fontWeight:700, marginTop:4 }}>{f.dia}</div><div style={{ ...T.sub, fontSize:16, marginTop:2 }}>{f.obs}</div></div>)}</Card><Card><SectionLabel>🧳 Bagagem Inclusa</SectionLabel>{["🟢  1 mala despachada — até 23kg","🟢  1 bagagem de bordo — até 10kg","🟢  1 item pessoal — bolsa ou mochila pequena","🔴  Malas extras: não incluso"].map((t,i,arr)=><div key={i} style={{ ...T.body, fontSize:17, padding:"10px 0", borderBottom:i<arr.length-1?`1px solid ${C.creamD}`:"none" }}>{t}</div>)}</Card></>}
     </div>
   );
 }
@@ -1842,9 +2212,13 @@ export default function App(){
   const today         = new Date(); today.setHours(0,0,0,0);
   const tripStart     = new Date("2026-10-30T00:00:00");
   const tripEnd       = new Date("2026-11-12T00:00:00");
-  const daysUntilTrip = Math.ceil((tripStart-today)/86400000);
-  const currentDay    = ITINERARY.find(d=>d.date===todayStr())||null;
-  const tripOver      = today>tripEnd;
+  // Pré-visualização: abrir o site com ?dia=1 (ou 2, 3…) mostra a página inicial daquele dia
+  let previewDay = null;
+  try{ const n=parseInt(new URLSearchParams(window.location.search).get("dia"),10); previewDay=ITINERARY.find(d=>d.day===n)||null; }catch(_){}
+  const daysReal      = Math.ceil((tripStart-today)/86400000);
+  const daysUntilTrip = previewDay ? 0 : daysReal;
+  const currentDay    = previewDay || ITINERARY.find(d=>d.date===todayStr())||null;
+  const tripOver      = !previewDay && today>tripEnd;
   const duringTrip    = today>=tripStart && today<=tripEnd;
   const hotelAtual    = duringTrip ? getCurrentHotel() : HOTELS[0];
 
@@ -1869,7 +2243,7 @@ export default function App(){
         <div style={{ color:"rgba(255,255,255,0.6)", fontSize:13, textAlign:"center" }}>Peregrinação · Portugal & Itália · 30 Out – 12 Nov</div>
       </header>
 
-      {page==="hoje"    && <PageHoje currentDay={currentDay} daysUntilTrip={daysUntilTrip} tripOver={tripOver} weather={weather} checked={checked} toggleCheck={toggleCheck} hotelAtual={hotelAtual} />}
+      {page==="hoje"    && <PageHoje currentDay={currentDay} daysUntilTrip={daysUntilTrip} tripOver={tripOver} weather={weather} checked={checked} toggleCheck={toggleCheck} preview={!!previewDay} />}
       {page==="roteiro" && <PageRoteiro expandedDay={expandedDay} setExpandedDay={setExpanded} />}
       {page==="voos"    && <PageVoos />}
       {page==="hoteis"  && <PageHoteis />}
@@ -1880,7 +2254,7 @@ export default function App(){
       {page==="contato" && <PageContato />}
 
       {/* Botão flutuante — visível sempre, em qualquer aba */}
-      <BotaoHotel hotel={hotelAtual} antesViagem={daysUntilTrip > 0} />
+      <BotaoHotel hotel={hotelAtual} antesViagem={daysReal > 0} />
 
       <nav style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:540, background:C.navy, display:"flex", flexWrap:"wrap", borderTop:`3px solid ${C.gold}`, zIndex:100 }}>
         {NAV.map(n=>(
