@@ -119,7 +119,9 @@ const HOTELS = [
 function getCurrentHotel() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  return HOTELS.find(h => {
+  // Percorre do último hotel para o primeiro: no dia da troca (saída de um = entrada do próximo)
+  // o botão aponta para o hotel novo, onde dormem naquela noite.
+  return [...HOTELS].reverse().find(h => {
     const ci = new Date(h.checkIn  + "T00:00:00");
     const co = new Date(h.checkOut + "T00:00:00");
     return today >= ci && today <= co;
