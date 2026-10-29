@@ -24,7 +24,7 @@ O PDF novo da organização (14 dias, com o dia 5 corrigido) já está no `ITINE
 - A home mostra o dia atual (data do aparelho), com temperatura mín/máx em destaque (previsão real; média histórica se fora dos 16 dias). `?dia=N` na URL pré-visualiza a home de qualquer dia.
 
 ## AINDA PENDENTE (organização / Gera)
-1. **Hotel de Assis**: sem nome nem endereço (site: "Convento de Assis / A confirmar").
+1. ~~Hotel de Assis~~ — RESOLVIDO em 29/Out/2026: Casa Madre Caterina, Via Antonio Cristofani, 15, Assis (perto do Santuário do Despojamento). Já está em `HOTELS` (botão "Voltar ao Hotel" abre o Google Maps) e nos lembretes do dia 8.
 2. **Hotel de Lisboa**: roteiro diz "Iberostar Collection"; `HOTELS` usa "Iberostar Selection" (Rua Castilho, 64). A programação diz só "Iberostar Lisboa".
 3. **Dia 13 (11/11)**: o grupo vai ao aeroporto de Roma, mas o voo sai 12/11 às 05h55. Onde o grupo fica até lá?
 4. **Dia 7**: confirmar endereço da Basílica do Perpétuo Socorro (provável Sant'Alfonso all'Esquilino).
