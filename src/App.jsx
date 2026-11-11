@@ -1561,7 +1561,7 @@ const LOUNGES = [
     code:"BSB", airport:"Brasília (BSB)", city:"Brasília, Brasil 🇧🇷",
     role:"Embarque direto para Lisboa (30/Out) — voo não passa por São Paulo",
     salas:[
-      { nome:"Aeroportos VIP Club (Internacional)", horario:"24 horas",      local:"Terminal 1 · Partidas internacionais · Lado ar · Nível do solo · Após controle de passaporte e segurança, vire à esquerda na Duty Free. Recomendada — é a sala do lado do embarque internacional, o do voo para Lisboa." },
+      { nome:"Aeroportos VIP Club (Internacional)", horario:"24 horas",      seg:"depois", local:"Terminal 1 · Partidas internacionais · Lado ar · Nível do solo · Após controle de passaporte e segurança, vire à esquerda na Duty Free. Recomendada — é a sala do lado do embarque internacional, o do voo para Lisboa." },
       { nome:"Aeroportos VIP Club (Doméstico)",     horario:"24 horas",      local:"Terminal 1 · Partidas domésticas · Lado ar · Nível 2" },
       { nome:"VIP Express Club Pier Norte",         horario:"06h00 às 22h00", local:"Terminal 1 · Embarque doméstico · Lado ar · Nível 2" },
       { nome:"VIP Express Club Pier Sul",           horario:"06h00 às 22h00", local:"Terminal 1 · Embarque doméstico" },
@@ -1586,14 +1586,14 @@ const LOUNGES = [
     salas:[
       { nome:"Plaza Premium Lounge",      horario:"04h30 às 21h30", local:"Terminal 1 · Lado ar · Mezanino" },
       { nome:"Prima Vista Lounge",        horario:"05h15 às 21h45", local:"Terminal 1 · Lado ar · Piso Mezanino" },
-      { nome:"Primeclass Lounge",         horario:"05h30 às 22h00 (diariamente)", local:"Terminal 1 · Partidas domésticas · Lado ar · Piso 1 · Depois do controle de passaporte, mas ANTES da verificação de segurança · Área de embarque A · Portões 61–83",
+      { nome:"Primeclass Lounge",         horario:"05h30 às 22h00 (diariamente)", seg:"antes", local:"Terminal 1 · Partidas domésticas · Lado ar · Piso 1 · Depois do controle de passaporte, mas ANTES da verificação de segurança · Área de embarque A · Portões 61–83",
         info:[
           "⏱️ Permanência máxima: 3 horas",
           "👶 Crianças menores de 2 anos entram grátis",
           "💵 Sem reserva: se os direitos de visita estiverem indisponíveis, a entrada custa US$ 38 por pessoa",
           "🛋️ 17 comodidades, entre elas: balcão de atendimento, área de descanso, chuveiro (pago), trocador de bebê, bebidas e impressora",
         ] },
-      { nome:"Plaza Premium Lounge",      horario:"05h00 às 22h30", local:"Terminal 3 · Partidas internacionais · Lado ar · Depois do controle de passaportes e da segurança, siga as placas para os portões E1 a E44 (área extra Schengen). Passe pela loja duty free e suba um andar pela escada rolante ou elevador perto dos portões E1 a E4. A entrada fica ao lado da sala da British Airways.",
+      { nome:"Plaza Premium Lounge",      horario:"05h00 às 22h30", seg:"depois", local:"Terminal 3 · Partidas internacionais · Lado ar · Depois do controle de passaportes e da segurança, siga as placas para os portões E1 a E44 (área extra Schengen). Passe pela loja duty free e suba um andar pela escada rolante ou elevador perto dos portões E1 a E4. A entrada fica ao lado da sala da British Airways.",
         info:[
           "⏱️ Permanência máxima: 2 horas",
           "🕒 Entrada permitida somente nas 3 horas antes da partida do voo",
@@ -1721,6 +1721,9 @@ function PageSalasVip(){
                   <div>
                     <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.navy }}>{sala.nome}</div>
                     <div style={{ fontSize:14, color:C.brownM, marginTop:3 }}>🕐 {sala.horario}</div>
+                    <div style={{ display:"inline-block", marginTop:5, padding:"2px 8px", borderRadius:6, fontSize:12, fontWeight:700, background: sala.seg==="antes" ? "#FFF3E0" : "#E8F5E9", color: sala.seg==="antes" ? "#E65100" : C.green }}>
+                      ✈️ Lado ar{sala.seg==="antes" ? " · ANTES da segurança" : sala.seg==="depois" ? " · DEPOIS da segurança" : ""}
+                    </div>
                   </div>
                   <span style={{ color:C.gold, fontSize:18, fontWeight:700, flexShrink:0 }}>{open?"▲":"▼"}</span>
                 </div>
