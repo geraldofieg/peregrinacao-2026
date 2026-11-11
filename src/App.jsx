@@ -1586,8 +1586,23 @@ const LOUNGES = [
     salas:[
       { nome:"Plaza Premium Lounge",      horario:"04h30 às 21h30", local:"Terminal 1 · Lado ar · Mezanino" },
       { nome:"Prima Vista Lounge",        horario:"05h15 às 21h45", local:"Terminal 1 · Lado ar · Piso Mezanino" },
-      { nome:"Primeclass Lounge",         horario:"05h30 às 22h00", local:"Terminal 1 · Lado ar · Piso 1 · Área de embarque A · Portões 61–83" },
-      { nome:"Plaza Premium Lounge",      horario:"05h00 às 22h30", local:"Terminal 3 · Lado ar · Próximo portões E1–E44 · Subir 1 andar pela escada rolante perto de E1–E4 · Ao lado da British Airways" },
+      { nome:"Primeclass Lounge",         horario:"05h30 às 22h00 (diariamente)", local:"Terminal 1 · Partidas domésticas · Lado ar · Piso 1 · Depois do controle de passaporte, mas ANTES da verificação de segurança · Área de embarque A · Portões 61–83",
+        info:[
+          "⏱️ Permanência máxima: 3 horas",
+          "👶 Crianças menores de 2 anos entram grátis",
+          "💵 Sem reserva: se os direitos de visita estiverem indisponíveis, a entrada custa US$ 38 por pessoa",
+          "🛋️ 17 comodidades, entre elas: balcão de atendimento, área de descanso, chuveiro (pago), trocador de bebê, bebidas e impressora",
+        ] },
+      { nome:"Plaza Premium Lounge",      horario:"05h00 às 22h30", local:"Terminal 3 · Partidas internacionais · Lado ar · Depois do controle de passaportes e da segurança, siga as placas para os portões E1 a E44 (área extra Schengen). Passe pela loja duty free e suba um andar pela escada rolante ou elevador perto dos portões E1 a E4. A entrada fica ao lado da sala da British Airways.",
+        info:[
+          "⏱️ Permanência máxima: 2 horas",
+          "🕒 Entrada permitida somente nas 3 horas antes da partida do voo",
+          "🎫 É preciso apresentar o cartão de embarque de um voo para fora do Espaço Schengen (o voo para o Brasil vale)",
+          "👶 Crianças menores de 2 anos entram grátis",
+          "💵 Com reserva: taxa de US$ 5 por pessoa (recomendado, garante o lugar). Se os direitos de visita estiverem indisponíveis, US$ 43 por pessoa",
+          "💵 Sem reserva: se os direitos de visita estiverem indisponíveis, US$ 38 por pessoa",
+          "🛋️ 11 comodidades, entre elas: balcão de atendimento, bebidas (alcoólicas pagas), impressora (paga), bebidas e lanches e TV",
+        ] },
       { nome:"Prima Vista Lounge Portus", horario:"05h45 às 22h45", local:"Terminal 3 · Lado ar · Level 1 · Área de trânsito perto dos portões E51–E61" },
     ],
     restaurantes:[],
@@ -1699,6 +1714,14 @@ function PageSalasVip(){
                   <div style={{ padding:"12px 14px", background:"#FFFDF8", borderTop:`1px solid ${C.creamD}` }}>
                     <div style={{ fontSize:13, fontWeight:700, color:C.gold, letterSpacing:1, textTransform:"uppercase", marginBottom:6 }}>📍 Localização</div>
                     <div style={{ ...T.body, fontSize:16, lineHeight:1.75 }}>{sala.local}</div>
+                    {sala.info && (
+                      <div style={{ marginTop:12 }}>
+                        <div style={{ fontSize:13, fontWeight:700, color:C.gold, letterSpacing:1, textTransform:"uppercase", marginBottom:6 }}>ℹ️ Regras e informações</div>
+                        {sala.info.map((linha, li) => (
+                          <div key={li} style={{ ...T.body, fontSize:16, lineHeight:1.75, marginBottom:4 }}>{linha}</div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
