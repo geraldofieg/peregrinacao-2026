@@ -1584,7 +1584,15 @@ const LOUNGES = [
     code:"FCO", airport:"Roma Fiumicino (FCO)", city:"Roma, Itália 🇮🇹",
     role:"Chegada (03/Nov) · Partida para o Brasil (11/Nov)",
     salas:[
-      { nome:"Plaza Premium Lounge",      horario:"04h30 às 21h30", local:"Terminal 1 · Lado ar · Mezanino" },
+      { nome:"Plaza Premium Lounge",      horario:"04h30 às 21h30 (diariamente)", seg:"depois", local:"Terminal 1 · Partidas domésticas e internacionais · Lado ar · Mezanino · Depois do controle de passaportes e da verificação de segurança",
+        info:[
+          "⏱️ Permanência máxima: 2 horas",
+          "👶 Crianças menores de 2 anos entram grátis",
+          "🍷 Bebidas alcoólicas limitadas a vinho branco e tinto locais, chope e espumante Brut Millesimato",
+          "💵 Com reserva: taxa de US$ 5 por pessoa (recomendado, garante o lugar). Se os direitos de visita estiverem indisponíveis, US$ 43 por pessoa",
+          "💵 Sem reserva: se os direitos de visita estiverem indisponíveis, US$ 38 por pessoa",
+          "🛋️ 12 comodidades, entre elas: Wi-Fi, bebidas e lanches, bebidas alcoólicas, acessibilidade para cadeirantes e chuveiro (pago)",
+        ] },
       { nome:"Prima Vista Lounge",        horario:"05h15 às 21h45", local:"Terminal 1 · Lado ar · Piso Mezanino" },
       { nome:"Primeclass Lounge",         horario:"05h30 às 22h00 (diariamente)", seg:"antes", local:"Terminal 1 · Partidas domésticas · Lado ar · Piso 1 · Depois do controle de passaporte, mas ANTES da verificação de segurança · Área de embarque A · Portões 61–83",
         info:[
