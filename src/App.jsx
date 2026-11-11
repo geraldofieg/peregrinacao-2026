@@ -1637,8 +1637,15 @@ function PageSalasVip(){
             Programa: <strong style={{ color:C.goldL }}>Visa Airport Companion</strong> (DragonPass)
           </div>
           <div style={{ marginTop:10, background:"rgba(232,168,32,0.2)", borderRadius:10, padding:"12px 14px", border:`1px solid ${C.gold}` }}>
-            <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:17, fontWeight:700 }}>🎟️ 4 acessos gratuitos por ano</div>
-            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:15, marginTop:4 }}>Nunca utilizados — 4 acessos disponíveis</div>
+            <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:17, fontWeight:700 }}>🎟️ 3 acessos restantes (Visa)</div>
+            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:15, marginTop:4 }}>Eram 4 por ano — 1 já foi usado em Brasília</div>
+          </div>
+          <div style={{ marginTop:10, background:"rgba(232,168,32,0.2)", borderRadius:10, padding:"12px 14px", border:`1px solid ${C.gold}` }}>
+            <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:17, fontWeight:700 }}>🎟️ +2 acessos do cartão Itaú Azul</div>
+            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:15, marginTop:4 }}>Cartão Visa do Itaú — 2 créditos extras de sala VIP, ainda não usados</div>
+          </div>
+          <div style={{ marginTop:10, background:"rgba(255,255,255,0.15)", borderRadius:10, padding:"12px 14px" }}>
+            <div style={{ color:C.white, fontSize:16, fontWeight:700 }}>Total disponível: 5 acessos (3 Visa + 2 Itaú Azul)</div>
           </div>
           <div style={{ marginTop:10, background:"rgba(255,255,255,0.08)", borderRadius:10, padding:"12px 14px" }}>
             <div style={{ color:"rgba(255,255,255,0.8)", fontSize:15, lineHeight:1.7 }}>
@@ -1659,8 +1666,15 @@ function PageSalasVip(){
             Mesmo programa: <strong style={{ color:C.goldL }}>Visa Airport Companion</strong> (DragonPass)
           </div>
           <div style={{ marginTop:10, background:"rgba(232,168,32,0.2)", borderRadius:10, padding:"12px 14px", border:`1px solid ${C.gold}` }}>
-            <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:17, fontWeight:700 }}>🎟️ 4 acessos gratuitos por ano</div>
-            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:15, marginTop:4 }}>Próprios do cartão adicional — não dividem os acessos da Mary</div>
+            <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:17, fontWeight:700 }}>🎟️ 3 acessos restantes (Visa)</div>
+            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:15, marginTop:4 }}>Eram 4 por ano, próprios do cartão adicional — 1 já foi usado em Brasília. Não dividem os acessos da Mary</div>
+          </div>
+          <div style={{ marginTop:10, background:"rgba(232,168,32,0.2)", borderRadius:10, padding:"12px 14px", border:`1px solid ${C.gold}` }}>
+            <div style={{ color:C.goldL, fontFamily:"'Cinzel',serif", fontSize:17, fontWeight:700 }}>🎟️ +2 acessos do cartão Itaú Azul</div>
+            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:15, marginTop:4 }}>Cartão Visa do Itaú — 2 créditos extras de sala VIP, ainda não usados</div>
+          </div>
+          <div style={{ marginTop:10, background:"rgba(255,255,255,0.15)", borderRadius:10, padding:"12px 14px" }}>
+            <div style={{ color:C.white, fontSize:16, fontWeight:700 }}>Total disponível: 5 acessos (3 Visa + 2 Itaú Azul)</div>
           </div>
           <div style={{ marginTop:10, background:"rgba(255,255,255,0.08)", borderRadius:10, padding:"12px 14px" }}>
             <div style={{ color:"rgba(255,255,255,0.8)", fontSize:15, lineHeight:1.7 }}>
@@ -1672,9 +1686,9 @@ function PageSalasVip(){
 
       {/* Dica */}
       <Card style={{ background:"#E8F5E9", border:`1px solid #A5D6A7` }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.green, marginBottom:8 }}>💡 Como aproveitar os 8 acessos (4 + 4)</div>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.green, marginBottom:8 }}>💡 Como aproveitar os 10 acessos (5 + 5)</div>
         <div style={{ ...T.body, fontSize:16, lineHeight:1.75 }}>
-          Mary e Jason têm 4 acessos cada um, no total 8 entre os dois. Com 3 aeroportos na rota (BSB, LIS, FCO), dá para usar algumas entradas em <strong>Brasília</strong> antes do voo de ida e o restante em <strong>Roma</strong> na volta — onde há 5 opções de sala.
+          Mary e Jason já usaram 1 acesso cada um em Brasília. Agora cada um tem 5 acessos (3 do cartão Visa + 2 do Itaú Azul), no total 10 entre os dois. Sobram acessos de sobra para <strong>Lisboa</strong> e <strong>Roma</strong> — em Roma há 5 opções de sala, então dá para usar na ida e na volta.
         </div>
       </Card>
 
