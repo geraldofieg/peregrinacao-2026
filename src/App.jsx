@@ -1722,7 +1722,7 @@ function PageSalasVip(){
                     <div style={{ fontFamily:"'Cinzel',serif", fontSize:15, fontWeight:700, color:C.navy }}>{sala.nome}</div>
                     <div style={{ fontSize:14, color:C.brownM, marginTop:3 }}>🕐 {sala.horario}</div>
                     <div style={{ display:"inline-block", marginTop:5, padding:"2px 8px", borderRadius:6, fontSize:12, fontWeight:700, background: sala.seg==="antes" ? "#FFF3E0" : "#E8F5E9", color: sala.seg==="antes" ? "#E65100" : C.green }}>
-                      ✈️ Lado ar{sala.seg==="antes" ? " · ANTES da segurança" : sala.seg==="depois" ? " · DEPOIS da segurança" : ""}
+                      ✈️ {(sala.local.match(/Terminal \d/)||[""])[0]}{sala.local.match(/Terminal \d/) ? " · " : ""}Lado ar{sala.seg==="antes" ? " · ANTES da segurança" : sala.seg==="depois" ? " · DEPOIS da segurança" : ""}
                     </div>
                   </div>
                   <span style={{ color:C.gold, fontSize:18, fontWeight:700, flexShrink:0 }}>{open?"▲":"▼"}</span>
